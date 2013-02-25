@@ -1,0 +1,34 @@
+{
+    "login": {
+        "title": "Inicio de sesión",
+        "username": "Nombre de usuario:",
+        "password": "Contraseña:",
+        "rememberme": "Recordarme",
+        "submit": "Enviar",
+        "reset": "Claro"
+    },
+
+    "header": {
+       "logo": "LOGO",
+        "buttons": {
+            "crud": "CRUD",
+            "sockets": "Web Zócalo",
+            "maps": "Mapas"
+        }
+    },
+
+    "crud": {
+        "title": "Ejemplo CRUD",
+        "buttons": {
+            "new": "Nuevo",
+            "edit": "Editar",
+            "delete": "Eliminar"
+        },
+        "grid": {
+            "name": "Nombre",
+            "phone": "Teléfono",
+            "email": "Correo electrónico",
+            "notes": "Notas"
+        }
+    }
+}

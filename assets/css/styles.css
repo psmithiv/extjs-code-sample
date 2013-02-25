@@ -1,0 +1,16 @@
+/* global */
+label, button {
+    font-family: arial;
+    font-size: 12px;
+}
+
+/* font */
+.arial14 {
+    font-family: arial;
+    font-size: 14px;
+}
+
+/* component */
+.view {
+    padding: 0px 10px 10px 10px;
+}

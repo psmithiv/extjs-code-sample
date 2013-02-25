@@ -1,0 +1,34 @@
+{
+    "login": {
+        "title": "Login",
+        "username": "User Name:",
+        "password": "Password:",
+        "rememberme": "Remember Me",
+        "submit": "Submit",
+        "reset": "Clear"
+    },
+
+    "header": {
+       "logo": "LOGO",
+        "buttons": {
+            "crud": "CRUD",
+            "sockets": "Web Sockets",
+            "maps": "Maps"
+        }
+    },
+
+    "crud": {
+        "title": "CRUD Example",
+        "buttons": {
+            "new": "New",
+            "edit": "Edit",
+            "delete": "Delete"
+        },
+        "grid": {
+            "name": "Name",
+            "phone": "Phone",
+            "email": "Email",
+            "notes": "Notes"
+        }
+    }
+}
