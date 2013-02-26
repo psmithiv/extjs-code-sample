@@ -1,5 +1,6 @@
 extjs-code-sample
 =================
+extjs-code-sample
 
 This project is meant to act as a starting point for developing large scale enterprise class applications using the ExtJS framework.
 
@@ -13,5 +14,3 @@ The goals of this project are to demonstrate the following:
 - Custom Components
 - TBD
 Note: This project is a work in progress and not all points above have yet been realized.
-
-extjs-code-sample
