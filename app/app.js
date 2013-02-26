@@ -19,7 +19,7 @@ Ext.application({
         'ExtJSCodeSample.controller.view.LoginViewController',
         'ExtJSCodeSample.controller.view.MainViewController',
         'ExtJSCodeSample.controller.view.HeaderViewController',
-        'ExtJSCodeSample.controller.view.CRUDViewController',
+        'ExtJSCodeSample.controller.view.CRUDViewContron ller',
         'ExtJSCodeSample.controller.view.SocketViewController'
     ],
 
