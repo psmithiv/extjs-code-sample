@@ -26,7 +26,7 @@ Ext.define('plugins.locale.LocaleManager', function() {
 
         updateClients();
 
-        Ext.util.Cookies.set('locale', _locale);
+        Ext.util.Cookies.set('locale', _locale, new Date(new Date().getTime()+(1000*60*60*24*365)));
 
         this.fireEvent(plugins.locale.event.LocaleEvent.LOCALE_CHANGED, {});
 
