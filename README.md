@@ -1,6 +1,5 @@
 extjs-code-sample
 =================
-extjs-code-sample
 
 This project is meant to act as a starting point for developing large scale enterprise class applications using the ExtJS framework.
 
