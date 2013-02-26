@@ -13,4 +13,5 @@ The goals of this project are to demonstrate the following:
 - 3rd Party API consumption (via Google maps)
 - Custom Components
 - TBD
+
 Note: This project is a work in progress and not all points above have yet been realized.
