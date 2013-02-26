@@ -66,18 +66,21 @@ Ext.define('ExtJSCodeSample.view.crud.CRUDView', {
 
         columns: [{
             dataIndex: 'name',
+            width: 150,
             hideable: false,
             plugins: [
                 { ptype: 'localization', method: 'setText', key: 'crud.grid.name' }
             ]
         },{
             dataIndex: 'phone',
+            width: 150,
             hideable: false,
             plugins: [
                 { ptype: 'localization', method: 'setText', key: 'crud.grid.phone' }
             ]
         },{
             dataIndex: 'email',
+            width: 250,
             hideable: false,
             plugins: [
                 { ptype: 'localization', method: 'setText', key: 'crud.grid.email' }

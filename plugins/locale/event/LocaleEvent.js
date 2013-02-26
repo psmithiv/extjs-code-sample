@@ -1,7 +1,7 @@
 Ext.define('plugins.locale.event.LocaleEvent', function() {
     return {
         statics: {
-            LOCALE_MANAGER_READY: 'plugins.locale.event.LocaleEvent.LOCALE_MANAGER_READY',
+            INITIALIZED: 'plugins.locale.event.LocaleEvent.INITIALIZED',
             LOCALES_CHANGED: 'plugins.locale.event.LocaleEvent.LOCALES_CHANGED',
             LOCALE_CHANGED: 'plugins.locale.event.LocaleEvent.LOCALE_CHANGED'
         }

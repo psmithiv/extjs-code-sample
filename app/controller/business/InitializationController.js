@@ -5,7 +5,7 @@ Ext.define('ExtJSCodeSample.controller.business.InitializationController', funct
 
     function initLocaleManager() {
         var lm = plugins.locale.LocaleManager;
-        lm.addListener(plugins.locale.event.LocaleEvent.LOCALE_MANAGER_READY, localeManagerReadyHandler, this);
+        lm.addListener(plugins.locale.event.LocaleEvent.INITIALIZED, localeManagerReadyHandler, this);
 
         var locales = new plugins.locale.store.LocalesStore({
             data: [

@@ -32,7 +32,7 @@ Ext.define('plugins.locale.LocaleManager', function() {
         if(!initialized)
         {
             initialized = true;
-            this.fireEvent(plugins.locale.event.LocaleEvent.LOCALE_MANAGER_READY, {});
+            this.fireEvent(plugins.locale.event.LocaleEvent.INITIALIZED, {});
         }
     }
 
