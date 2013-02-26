@@ -30,5 +30,12 @@
             "email": "Correo electrónico",
             "notes": "Notas"
         }
+    },
+
+    "dialogs": {
+        "logout" : {
+            "title": "Cerrar sesión",
+            "message": "Estás a punto de iniciar sesión de la aplicación. ¿Desea continuar?"
+        }
     }
 }

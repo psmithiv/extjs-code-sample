@@ -30,5 +30,12 @@
             "email": "Email",
             "notes": "Notes"
         }
+    },
+
+    "dialogs": {
+        "logout" : {
+            "title": "Logout",
+            "message": "You are about to be logged out of the application. Continue?"
+        }
     }
 }

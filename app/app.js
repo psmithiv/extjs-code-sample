@@ -16,6 +16,7 @@ Ext.application({
         'ExtJSCodeSample.controller.business.SessionController',
         'ExtJSCodeSample.controller.business.UserDirectoryController',
         'ExtJSCodeSample.controller.business.PersistenceController',
+        'ExtJSCodeSample.controller.business.DialogController',
         'ExtJSCodeSample.controller.view.LoginViewController',
         'ExtJSCodeSample.controller.view.MainViewController',
         'ExtJSCodeSample.controller.view.HeaderViewController',

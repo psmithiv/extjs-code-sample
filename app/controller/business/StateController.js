@@ -17,17 +17,17 @@ Ext.define('ExtJSCodeSample.controller.business.StateController', function() {
 
         var e = new ExtJSCodeSample.event.StateEvent(ExtJSCodeSample.model.constants.Views.CRUD, {});
         this.application.fireEvent(ExtJSCodeSample.event.StateEvent.SET_STATE, e);
-    };
+    }
 
     /**
      * Event handler to update the browser hash and in turn update the application state
      *
-     * @param event:StateEvent
+     * @param event:ExtJSCodeSample.event.StateEvent
      */
     function setStateEventHandler(event) {
         var hash = Ext.JSON.encode({view: event.getView(), data: event.getData()});
         Ext.History.setHash(hash);
-    };
+    }
 
     /**
      * Event handler to update application state when browser hash changes
@@ -35,16 +35,19 @@ Ext.define('ExtJSCodeSample.controller.business.StateController', function() {
      * @param hash:String
      */
     function urlHistoryChangeHandler(hash) {
-        var obj = {};
+        var authenticated = ExtJSCodeSample.model.ModelLocator.get('session').get('authenticated');
+        if(!authenticated)
+            return;
 
-        if(hash)
-            obj = Ext.JSON.decode(unescape(hash));
-        else
-            obj = {view: ExtJSCodeSample.model.constants.Views.LOGIN, data:{}};
+        if(hash) {
+            var obj = Ext.JSON.decode(unescape(hash));
 
-        var e = new ExtJSCodeSample.event.StateEvent(obj.view, obj.data);
-        this.application.fireEvent(ExtJSCodeSample.event.StateEvent.STATE_CHANGED, e);
-    };
+            var e = new ExtJSCodeSample.event.StateEvent(obj.view, obj.data);
+            this.application.fireEvent(ExtJSCodeSample.event.StateEvent.STATE_CHANGED, e);
+        } else {
+            this.application.fireEvent(ExtJSCodeSample.event.DialogEvent.SHOW_LOGOUT_DIALOG, {});
+        }
+    }
 
     return {
         extend: 'Ext.app.Controller',
@@ -52,7 +55,9 @@ Ext.define('ExtJSCodeSample.controller.business.StateController', function() {
         requires: [
             'Ext.util.History',
             'ExtJSCodeSample.event.StateEvent',
-            'ExtJSCodeSample.model.constants.Views'
+            'ExtJSCodeSample.event.DialogEvent',
+            'ExtJSCodeSample.model.constants.Views',
+            'ExtJSCodeSample.model.ModelLocator'
         ],
 
         init: function() {
