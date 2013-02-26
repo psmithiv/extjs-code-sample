@@ -1,10 +1,11 @@
 Ext.define('plugins.locale.LocaleManager', function() {
-    var clients = [];
+    var initialized = false;
 
     var _locales = {};
     var _locale = '';
     var _properties = {};
 
+    var clients = [];
     /**
      * Load properties file for localizing components
      */
@@ -20,8 +21,6 @@ Ext.define('plugins.locale.LocaleManager', function() {
      * @param result:Object
      */
     function loadPropertiesFileResultHandler(result) {
-        var initialLoad = _properties.length ? false : true;
-
         _properties = result;
 
         updateClients();
@@ -30,8 +29,11 @@ Ext.define('plugins.locale.LocaleManager', function() {
 
         this.fireEvent(plugins.locale.event.LocaleEvent.LOCALE_CHANGED, {});
 
-        if(initialLoad)
+        if(!initialized)
+        {
+            initialized = true;
             this.fireEvent(plugins.locale.event.LocaleEvent.LOCALE_MANAGER_READY, {});
+        }
     }
 
     /**
