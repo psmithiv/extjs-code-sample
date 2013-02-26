@@ -2,11 +2,11 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', functi
     /**
      * Event handler to persist newly created user to server
      *
-     * @param event:UserDirectoryEvent
+     * @param event:ExtJSCodeSample.event.UserDirectoryEvent
      */
     function createUserEventHandler(event) {
 
-    };
+    }
 
     /**
      * Create user success handler
@@ -15,11 +15,11 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', functi
      */
     function createUserSuccessHandler(user) {
 
-    };
+    }
 
     function createUserFailureHandler() {
 
-    };
+    }
 
     /**
      * Event handler to load users list from server
@@ -29,7 +29,7 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', functi
     function readUsersEventHandler(event) {
         var userDelegate = new ExtJSCodeSample.delegate.mock.UserDirectoryDelegate(readUsersSuccessHandler, readUsersFailureHandler, this);
         userDelegate.readUsers();
-    };
+    }
 
     /**
      * Read users success handler
@@ -37,15 +37,15 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', functi
      * @param users:Array<UserDTO>
      */
     function readUsersSuccessHandler(users) {
-        //console.log('users: ' + users);
-    };
+        ExtJSCodeSample.model.ModelLocator.set('users', users);
+    }
 
     /**
      * Read users failure handler
      */
     function readUsersFailureHandler() {
 
-    };
+    }
 
     /**
      * Event handler to persist updated user to server
@@ -54,7 +54,7 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', functi
      */
     function updateUserEventHandler(event) {
 
-    };
+    }
 
     /**
      * Event handler to delete user and persist to server

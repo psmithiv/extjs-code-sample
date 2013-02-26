@@ -5,7 +5,7 @@ Ext.define('ExtJSCodeSample.delegate.mock.UserDirectoryDelegate', function() {
 
     return {
         requires: [
-            'Ext.Ajax'
+            'ExtJSCodeSample.store.UserDirectoryStore'
         ],
 
         constructor: function(successFunc, failureFunc, callerScope) {
@@ -14,6 +14,11 @@ Ext.define('ExtJSCodeSample.delegate.mock.UserDirectoryDelegate', function() {
             scope = callerScope;
         },
 
+        /**
+         * Save user to server
+         *
+         * @param user:UserDTO
+         */
         createUser: function(user) {
 
         },
@@ -21,20 +26,33 @@ Ext.define('ExtJSCodeSample.delegate.mock.UserDirectoryDelegate', function() {
         readUsers: function() {
             var response = "{" +
                                 "'success': true, " +
-                                "'users': [" +
-                                    "{'username': 'psmithiv', 'name': 'Paul C. Smith IV', 'phone': '917-674-9375', 'email': 'paul.smith.iv@ninthavenuemedia.com', 'notes': ''}," +
-                                    "{'username': 'psmithiv', 'name': 'Paul C. Smith IV', 'phone': '917-674-9375', 'email': 'paul.smith.iv@ninthavenuemedia.com', 'notes': ''}," +
-                                    "{'username': 'psmithiv', 'name': 'Paul C. Smith IV', 'phone': '917-674-9375', 'email': 'paul.smith.iv@ninthavenuemedia.com', 'notes': ''}," +
-                                    "{'username': 'psmithiv', 'name': 'Paul C. Smith IV', 'phone': '917-674-9375', 'email': 'paul.smith.iv@ninthavenuemedia.com', 'notes': ''}," +
-                                    "{'username': 'psmithiv', 'name': 'Paul C. Smith IV', 'phone': '917-674-9375', 'email': 'paul.smith.iv@ninthavenuemedia.com', 'notes': ''}" +
-                                "]" +
+                                "'users': [{" +
+                                    "'username': 'psmithiv', " +
+                                    "'name': 'Paul Smith', " +
+                                    "'phone': '917-674-9375', " +
+                                    "'email': 'paul.smith.iv@ninthavenuemedia.com', " +
+                                    "'notes': ''" +
+                                "},{" +
+                                    "'username': 'psmithiv', " +
+                                    "'name': 'Paul Smith', " +
+                                    "'phone': '917-674-9375', " +
+                                    "'email': 'paul.smith.iv@ninthavenuemedia.com', " +
+                                    "'notes': ''" +
+                                "},{" +
+                                    "'username': 'psmithiv', " +
+                                    "'name': 'Paul Smith', " +
+                                    "'phone': '917-674-9375', " +
+                                    "'email': 'paul.smith.iv@ninthavenuemedia.com', " +
+                                    "'notes': ''" +
+                                "}]" +
                             "}";
 
             if(!success || !scope)
                 return;
 
-            response = Ext.JSON.decode(response);
-            success.apply(scope, response.users);
+            var r = Ext.JSON.decode(response);
+            var us = new ExtJSCodeSample.store.UserDirectoryStore({data: r});
+            success.call(scope, us);
         },
 
         updateUser: function(user) {

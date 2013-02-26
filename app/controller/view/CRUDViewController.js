@@ -1,18 +1,29 @@
 Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', function() {
+    /**
+     *
+     * @param event:ExtJSCodeSample.data.event.ModelChangeEvent
+     */
+    function userDirectoryStoreChangeHandler(event) {
+        if(event.getFieldName() != 'users')
+            return;
+
+        this.getUserGrid().bindStore(event.getNewValue());
+    }
+
     function newUserClickHandler() {
         //fireEvent to open blank users dialog
         //console.log('newUserClickHandler');
-    };
+    }
 
     function editUserClickHandler() {
         //fireEvent to open users dialog with selected user
         //console.log('editUserClickHandler');
-    };
+    }
 
     function deleteUserClickHandler() {
         //fireEvent to show are you sure dialog box (yes|no)
         //console.log('deleteUserClickHandler');
-    };
+    }
 
     return {
         extend: 'ExtJSCodeSample.controller.view.AbstractViewController',
@@ -25,6 +36,9 @@ Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', function() {
         refs: [{
             selector: 'crudView',
             ref: 'crudView'
+        },{
+            selector: 'crudView grid[name=usersGrid]',
+            ref: 'userGrid'
         }],
 
         init: function() {
@@ -43,6 +57,8 @@ Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', function() {
                     click: deleteUserClickHandler
                 }
             });
+
+            ExtJSCodeSample.model.ModelLocator.addListener(ExtJSCodeSample.data.event.ModelChangeEvent.CHANGED, userDirectoryStoreChangeHandler, this);
         },
 
         /**
