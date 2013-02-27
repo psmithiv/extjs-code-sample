@@ -6,6 +6,16 @@ Ext.define('ExtJSCodeSample.data.ObservableModel', function() {
            'ExtJSCodeSample.data.event.ModelChangeEvent'
        ],
 
+       /**
+        * When setting field on model, if property has changed and not suppressing
+        * change event, dispatch ModelChangeEvent
+        *
+        * @override
+        * @param fieldName:String
+        * @param newValue:Object
+        * @param suppressChangeEvent:Object
+        * @return {*}
+        */
        set: function (fieldName, newValue, suppressChangeEvent) {
            var previousValue = this.get(fieldName);
            var returnValue = this.callParent([fieldName, newValue]);

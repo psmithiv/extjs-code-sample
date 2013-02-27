@@ -24,6 +24,12 @@ Ext.define('ExtJSCodeSample.controller.view.HeaderViewController', function() {
         this.application.fireEvent(ExtJSCodeSample.event.StateEvent.SET_STATE, se);
     }
 
+    /**
+     * Locales combobox selection change handler
+     *
+     * @param target:ComboBox
+     * @param record:plugins.locale.model.LocaleModel
+     */
     function localesSelectHandler(target, record) {
         plugins.locale.LocaleManager.setLocale(record[0].data.id);
     }
@@ -44,12 +50,17 @@ Ext.define('ExtJSCodeSample.controller.view.HeaderViewController', function() {
     /**
      * Locales changed event handler
      *
-     * @param event:LocaleEvent
+     * @param event:ExtJSCodeSample.event.LocaleEvent
      */
     function localesChangedEventHandler(event) {
         this.getLocalesComboBox().bindStore(plugins.locale.LocaleManager.getLocales(), true);
     }
 
+    /**
+     * Selected locale changed event handler
+     *
+     * @param event:ExtJSCodeSample.event.LocaleEvent
+     */
     function localeChangedEventHandler(event) {
         this.getLocalesComboBox().setValue(plugins.locale.LocaleManager.getLocale());
     }

@@ -1,5 +1,6 @@
 Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', function() {
     /**
+     * ModelLocater change event handler for setting store on CRUDView.grid
      *
      * @param event:ExtJSCodeSample.data.event.ModelChangeEvent
      */
@@ -10,16 +11,25 @@ Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', function() {
         this.getUserGrid().bindStore(event.getNewValue());
     }
 
+    /**
+     * New user button click handler
+     */
     function newUserClickHandler() {
         //fireEvent to open blank users dialog
         //console.log('newUserClickHandler');
     }
 
+    /**
+     * Edit user button click handler
+     */
     function editUserClickHandler() {
         //fireEvent to open users dialog with selected user
         //console.log('editUserClickHandler');
     }
 
+    /**
+     * Delete user button click handler
+     */
     function deleteUserClickHandler() {
         //fireEvent to show are you sure dialog box (yes|no)
         //console.log('deleteUserClickHandler');

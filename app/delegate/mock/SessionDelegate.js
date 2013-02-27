@@ -15,6 +15,12 @@ Ext.define('ExtJSCodeSample.delegate.mock.SessionDelegate', function() {
             _scope = scope;
         },
 
+        /**
+         * Login to server
+         *
+         * @param username:String
+         * @param password:String
+         */
         login: function(username, password) {
             var response = "{" +
                                 "'success': true, " +

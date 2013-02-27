@@ -32,11 +32,6 @@ Ext.define('ExtJSCodeSample.controller.business.SessionController', function() {
             var user = new ExtJSCodeSample.model.UserCredentialsModel({username:un, password:pw});
             ExtJSCodeSample.controller.business.PersistenceController.setCredentials(user);
         }
-        /*
-       if(rm) {
-
-       }
-       */
 
         this.application.fireEvent(ExtJSCodeSample.event.StateEvent.SET_INITIAL_STATE);
     }

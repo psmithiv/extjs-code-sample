@@ -1,4 +1,7 @@
 Ext.define('ExtJSCodeSample.controller.business.DialogController', function() {
+    /**
+     * Show logout dialog event handler method
+     */
     function showLogoutDialogEventHandler() {
         var lm = plugins.locale.LocaleManager.getProperties().dialogs.logout;
 
@@ -7,11 +10,16 @@ Ext.define('ExtJSCodeSample.controller.business.DialogController', function() {
             msg: lm.message,
             buttons: Ext.Msg.OKCANCEL,
             icon: Ext.Msg.QUESTION,
-            fn: showLogoutDialogButtonHandler
+            fn: showLogoutDialogButtonClickHandler
         });
     }
 
-    function showLogoutDialogButtonHandler(buttonId) {
+    /**
+     * Show logout button click handler
+     *
+     * @param buttonId:String
+     */
+    function showLogoutDialogButtonClickHandler(buttonId) {
         if(buttonId == 'ok')
             location.reload();
     }

@@ -31,6 +31,12 @@ Ext.define('ExtJSCodeSample.controller.view.LoginViewController', function() {
         this.getRememberMeCheckBox().setValue(true);
     }
 
+    /**
+     * Remember me checkbox click handler.
+     *
+     * @param target:CheckBox
+     * @param value:Boolean
+     */
     function rememberMeChangeHandler(target, value) {
         if(value)
             return;

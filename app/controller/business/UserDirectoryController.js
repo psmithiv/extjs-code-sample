@@ -17,6 +17,9 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', functi
 
     }
 
+    /**
+     * Create user failure handler
+     */
     function createUserFailureHandler() {
 
     }
@@ -34,7 +37,7 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', functi
     /**
      * Read users success handler
      *
-     * @param users:Array<UserDTO>
+     * @param users:ExtJSCodeSample.store.UserDirectoryStore
      */
     function readUsersSuccessHandler(users) {
         ExtJSCodeSample.model.ModelLocator.set('users', users);

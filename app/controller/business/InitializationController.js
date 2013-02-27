@@ -1,11 +1,17 @@
 Ext.define('ExtJSCodeSample.controller.business.InitializationController', function() {
-    function initApplication() {
+    /**
+     * Initialize application event handler
+     */
+    function initApplicationEventHandler() {
         initLocaleManager();
     }
 
+    /**
+     * Initialize LocaleManager by setting locales and selected locale
+     */
     function initLocaleManager() {
         var lm = plugins.locale.LocaleManager;
-        lm.addListener(plugins.locale.event.LocaleEvent.INITIALIZED, localeManagerReadyHandler, this);
+        lm.addListener(plugins.locale.event.LocaleEvent.INITIALIZED, localeManagerInitializedEventHandler, this);
 
         var locales = new plugins.locale.store.LocalesStore({
             data: [
@@ -20,7 +26,10 @@ Ext.define('ExtJSCodeSample.controller.business.InitializationController', funct
         lm.setLocale(locale);
     }
 
-    function localeManagerReadyHandler() {
+    /**
+     * LocaleManager initialized event handler
+     */
+    function localeManagerInitializedEventHandler() {
         Ext.getBody().unmask();
     }
 
@@ -35,7 +44,7 @@ Ext.define('ExtJSCodeSample.controller.business.InitializationController', funct
         ],
 
         init: function() {
-            this.application.addListener(ExtJSCodeSample.event.InitializationEvent.APP_READY, initApplication, this)
+            this.application.addListener(ExtJSCodeSample.event.InitializationEvent.APP_READY, initApplicationEventHandler, this)
         }
     }
 });

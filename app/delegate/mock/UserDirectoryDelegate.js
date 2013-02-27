@@ -1,28 +1,31 @@
 Ext.define('ExtJSCodeSample.delegate.mock.UserDirectoryDelegate', function() {
-    var success;
-    var failure;
-    var scope;
+    var _success;
+    var _failure;
+    var _scope;
 
     return {
         requires: [
             'ExtJSCodeSample.store.UserDirectoryStore'
         ],
 
-        constructor: function(successFunc, failureFunc, callerScope) {
-            success = successFunc;
-            failure = failureFunc;
-            scope = callerScope;
+        constructor: function(success, failure, scope) {
+            _success = success;
+            _failure = failure;
+            _scope = scope;
         },
 
         /**
-         * Save user to server
+         * Save new user to server
          *
-         * @param user:UserDTO
+         * @param user:ExtJSCodeSample.model.dto.UserDTO
          */
         createUser: function(user) {
 
         },
 
+        /**
+         * Get list of users from server
+         */
         readUsers: function() {
             var response = "{" +
                                 "'success': true, " +
@@ -47,18 +50,28 @@ Ext.define('ExtJSCodeSample.delegate.mock.UserDirectoryDelegate', function() {
                                 "}]" +
                             "}";
 
-            if(!success || !scope)
+            if(!_success || !_scope)
                 return;
 
             var r = Ext.JSON.decode(response);
             var us = new ExtJSCodeSample.store.UserDirectoryStore({data: r});
-            success.call(scope, us);
+            _success.call(_scope, us);
         },
 
+        /**
+         * Save user to server
+         *
+         * @param user:ExtJSCodeSample.model.dto.UserDTO
+         */
         updateUser: function(user) {
 
         },
 
+        /**
+         * Notify server to delete user
+         *
+         * @param user:ExtJSCodeSample.model.dto.UserDTO
+         */
         deleteUser: function(user) {
 
         }
