@@ -7,7 +7,10 @@ Ext.define('ExtJSCodeSample.event.StateEvent', function() {
             SET_INITIAL_STATE: 'ExtJSCodeSample.event.StateEvent.SET_INITIAL_STATE',
             SET_STATE: 'ExtJSCodeSample.event.StateEvent.SET_STATE',
             STATE_CHANGED: 'ExtJSCodeSample.event.StateEvent.STATE_CHANGED',
-            STATE_CHANGE_COMPLETE: 'ExtJSCodeSample.event.StateEvent.STATE_CHANGE_COMPLETE'
+
+            BROWSER_FORWARD: 'ExtJSCodeSample.event.StateEvent.BROWSER_FORWARD',
+            BROWSER_BACK: 'ExtJSCodeSample.event.StateEvent.BROWSER_BACK',
+            BROWSER_REFRESH: 'ExtJSCodeSample.event.StateEvent.BROWSER_REFRESH'
         },
 
         getView: function() {
