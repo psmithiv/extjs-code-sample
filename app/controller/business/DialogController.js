@@ -7,7 +7,7 @@ Ext.define('ExtJSCodeSample.controller.business.DialogController', function() {
      * @param event:ExtJSCodeSample.event.DialogEvent
      */
     function showLogoutDialogEventHandler(event) {
-        var lm = plugins.locale.LocaleManager.getProperties().dialogs.logout;
+        var lm = nineam.locale.LocaleManager.getProperties().dialogs.logout;
 
         var dialog = Ext.Msg.show({
                         title: lm.title,
@@ -49,7 +49,7 @@ Ext.define('ExtJSCodeSample.controller.business.DialogController', function() {
             'Ext.History',
             'ExtJSCodeSample.event.DialogEvent',
             'ExtJSCodeSample.event.StateEvent',
-            'plugins.locale.LocaleManager'
+            'nineam.locale.LocaleManager'
         ],
 
         init: function() {

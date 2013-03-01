@@ -1,4 +1,4 @@
-Ext.define('plugins.locale.LocaleManager', function() {
+Ext.define('nineam.locale.LocaleManager', function() {
     var initialized = false;
 
     var _locales = {};
@@ -10,7 +10,7 @@ Ext.define('plugins.locale.LocaleManager', function() {
      * Load properties file for localizing components
      */
     function loadPropertiesFile() {
-        var d = new plugins.locale.delegate.LocaleDelegate(loadPropertiesFileResultHandler, loadPropertiesFileFaultHandler, this);
+        var d = new nineam.locale.delegate.LocaleDelegate(loadPropertiesFileResultHandler, loadPropertiesFileFaultHandler, this);
         var rec = _locales.findRecord('id', _locale);
         d.loadPropertiesFile(rec.get('url'));
     }
@@ -27,12 +27,12 @@ Ext.define('plugins.locale.LocaleManager', function() {
 
         Ext.util.Cookies.set('locale', _locale, new Date(new Date().getTime()+(1000*60*60*24*365)));
 
-        this.fireEvent(plugins.locale.event.LocaleEvent.LOCALE_CHANGED, {});
+        this.fireEvent(nineam.locale.event.LocaleEvent.LOCALE_CHANGED, {});
 
         if(!initialized)
         {
             initialized = true;
-            this.fireEvent(plugins.locale.event.LocaleEvent.INITIALIZED, {});
+            this.fireEvent(nineam.locale.event.LocaleEvent.INITIALIZED, {});
         }
     }
 
@@ -65,14 +65,14 @@ Ext.define('plugins.locale.LocaleManager', function() {
         singleton: true,
 
         requires: [
-            'plugins.locale.event.LocaleEvent',
-            'plugins.locale.delegate.LocaleDelegate'
+            'nineam.locale.event.LocaleEvent',
+            'nineam.locale.delegate.LocaleDelegate'
         ],
 
         /**
          * Get store of available locales
          *
-         * @return {plugins.locale.store.LocalesStore}
+         * @return {nineam.locale.store.LocalesStore}
          */
         getLocales: function() {
             return _locales;
@@ -81,12 +81,12 @@ Ext.define('plugins.locale.LocaleManager', function() {
         /**
          * Set store of available locales
          *
-         * @param value:plugins.locale.store.LocalesStore
+         * @param value:nineam.locale.store.LocalesStore
          */
         setLocales: function(value) {
             _locales = value;
 
-            this.fireEvent(plugins.locale.event.LocaleEvent.LOCALES_CHANGED, {});
+            this.fireEvent(nineam.locale.event.LocaleEvent.LOCALES_CHANGED, {});
         },
 
         /**
@@ -129,7 +129,7 @@ Ext.define('plugins.locale.LocaleManager', function() {
         /**
          * Register a client component for localization
          *
-         * @param client:plugins.model.ClientModel
+         * @param client:nineam.model.ClientModel
          */
         registerClient: function(client) {
             clients.push(client);

@@ -28,10 +28,10 @@ Ext.define('ExtJSCodeSample.controller.view.HeaderViewController', function() {
      * Locales combobox selection change handler
      *
      * @param target:ComboBox
-     * @param record:plugins.locale.model.LocaleModel
+     * @param record:nineam.locale.model.LocaleModel
      */
     function localesSelectHandler(target, record) {
-        plugins.locale.LocaleManager.setLocale(record[0].data.id);
+        nineam.locale.LocaleManager.setLocale(record[0].data.id);
     }
 
     /**
@@ -53,7 +53,7 @@ Ext.define('ExtJSCodeSample.controller.view.HeaderViewController', function() {
      * @param event:ExtJSCodeSample.event.LocaleEvent
      */
     function localesChangedEventHandler(event) {
-        this.getLocalesComboBox().bindStore(plugins.locale.LocaleManager.getLocales(), true);
+        this.getLocalesComboBox().bindStore(nineam.locale.LocaleManager.getLocales(), true);
     }
 
     /**
@@ -62,7 +62,7 @@ Ext.define('ExtJSCodeSample.controller.view.HeaderViewController', function() {
      * @param event:ExtJSCodeSample.event.LocaleEvent
      */
     function localeChangedEventHandler(event) {
-        this.getLocalesComboBox().setValue(plugins.locale.LocaleManager.getLocale());
+        this.getLocalesComboBox().setValue(nineam.locale.LocaleManager.getLocale());
     }
 
     return {
@@ -73,8 +73,8 @@ Ext.define('ExtJSCodeSample.controller.view.HeaderViewController', function() {
             'ExtJSCodeSample.event.StateEvent',
             'ExtJSCodeSample.data.event.ModelChangeEvent',
             'ExtJSCodeSample.model.ModelLocator',
-            'plugins.locale.LocaleManager',
-            'plugins.locale.event.LocaleEvent'
+            'nineam.locale.LocaleManager',
+            'nineam.locale.event.LocaleEvent'
         ],
 
         refs: [{
@@ -113,8 +113,8 @@ Ext.define('ExtJSCodeSample.controller.view.HeaderViewController', function() {
             var sm = ExtJSCodeSample.model.ModelLocator.get('session');
             sm.addListener(ExtJSCodeSample.data.event.ModelChangeEvent.CHANGED, sessionModelChangedHandler, this);
 
-            plugins.locale.LocaleManager.addListener(plugins.locale.event.LocaleEvent.LOCALES_CHANGED, localesChangedEventHandler, this);
-            plugins.locale.LocaleManager.addListener(plugins.locale.event.LocaleEvent.LOCALE_CHANGED, localeChangedEventHandler, this);
+            nineam.locale.LocaleManager.addListener(nineam.locale.event.LocaleEvent.LOCALES_CHANGED, localesChangedEventHandler, this);
+            nineam.locale.LocaleManager.addListener(nineam.locale.event.LocaleEvent.LOCALE_CHANGED, localeChangedEventHandler, this);
         },
 
         /**

@@ -1,4 +1,4 @@
-Ext.define('plugins.locale.model.ClientModel', function() {
+Ext.define('nineam.locale.model.ClientModel', function() {
    return {
        extend: 'Ext.data.Model',
 

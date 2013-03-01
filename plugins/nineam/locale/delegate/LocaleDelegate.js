@@ -1,4 +1,4 @@
-Ext.define('plugins.locale.delegate.LocaleDelegate', function() {
+Ext.define('nineam.locale.delegate.LocaleDelegate', function() {
     var _success = null;
     var _failure = null;
     var _scope = null;

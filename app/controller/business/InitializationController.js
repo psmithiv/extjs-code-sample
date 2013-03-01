@@ -10,10 +10,10 @@ Ext.define('ExtJSCodeSample.controller.business.InitializationController', funct
      * Initialize LocaleManager by setting locales and selected locale
      */
     function initLocaleManager() {
-        var lm = plugins.locale.LocaleManager;
-        lm.addListener(plugins.locale.event.LocaleEvent.INITIALIZED, localeManagerInitializedEventHandler, this);
+        var lm = nineam.locale.LocaleManager;
+        lm.addListener(nineam.locale.event.LocaleEvent.INITIALIZED, localeManagerInitializedEventHandler, this);
 
-        var locales = new plugins.locale.store.LocalesStore({
+        var locales = new nineam.locale.store.LocalesStore({
             data: [
                 {id: 'en_us', label: 'English', url: '/locales/en_us.json'},
                 {id: 'es_us', label: 'Spanish', url: '/locales/es_us.json'}
@@ -37,8 +37,8 @@ Ext.define('ExtJSCodeSample.controller.business.InitializationController', funct
         extend: 'Ext.app.Controller',
 
         requires: [
-            'plugins.locale.store.LocalesStore',
-            'plugins.locale.event.LocaleEvent',
+            'nineam.locale.store.LocalesStore',
+            'nineam.locale.event.LocaleEvent',
             'ExtJSCodeSample.event.InitializationEvent',
             'ExtJSCodeSample.controller.business.PersistenceController'
         ],

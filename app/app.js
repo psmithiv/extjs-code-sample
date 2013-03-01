@@ -5,7 +5,7 @@ Ext.onReady(function() {
 Ext.Loader.setConfig({
     enabled: true,
     paths: {
-        plugins: '/plugins'
+        nineam: '/plugins/nineam'
     }
 });
 
@@ -35,8 +35,8 @@ Ext.application({
     name: 'ExtJSCodeSample',
 
     requires: [
-        'plugins.locale.LocaleManager',
-        'plugins.locale.LocalePlugin',
+        'nineam.locale.LocaleManager',
+        'nineam.locale.LocalePlugin',
         'Ext.form.field.ComboBox',
         'Ext.form.field.Checkbox',
         'Ext.form.Label',

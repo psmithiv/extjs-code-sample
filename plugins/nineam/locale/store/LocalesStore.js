@@ -1,12 +1,12 @@
-Ext.define('plugins.locale.store.LocalesStore', function() {
+Ext.define('nineam.locale.store.LocalesStore', function() {
     return {
         extend: 'Ext.data.Store',
 
         requires: [
-            'plugins.locale.model.LocaleModel'
+            'nineam.locale.model.LocaleModel'
         ],
 
-        model: 'plugins.locale.model.LocaleModel',
+        model: 'nineam.locale.model.LocaleModel',
 
         proxy: {
             type: 'memory',
