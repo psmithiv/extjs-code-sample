@@ -40,11 +40,13 @@ Ext.define('ExtJSCodeSample.controller.view.HeaderViewController', function() {
      * @param event:ModelChangeEvent
      */
     function sessionModelChangedHandler(event) {
-        if(event.getFieldName() != 'authenticatedUser')
-            return;
+        var session = ExtJSCodeSample.model.ModelLocator.get('session');
+        this.getNavigationContainer().setVisible(session.get('authenticated'));
 
-        var user = ExtJSCodeSample.model.ModelLocator.get('session').get('authenticatedUser');
-        this.getUserInfoLabel().setText([user.get('username'), user.get('email')]);
+        if(event.getFieldName() == 'authenticatedUser') {
+            var user = session.get('authenticatedUser');
+            this.getUserInfoLabel().setText([user.get('username'), user.get('email')]);
+        }
     }
 
     /**
@@ -80,6 +82,9 @@ Ext.define('ExtJSCodeSample.controller.view.HeaderViewController', function() {
         refs: [{
             selector: 'headerView',
             ref: 'headerView'
+        },{
+            selector: 'headerView container[name=navigationContainer]',
+            ref: 'navigationContainer'
         },{
             selector: 'headerView button[name=crud]',
             ref: 'crudButton'

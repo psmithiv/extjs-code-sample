@@ -51,7 +51,7 @@ Ext.define('ExtJSCodeSample.controller.view.LoginViewController', function() {
             'ExtJSCodeSample.event.StateEvent',
             'ExtJSCodeSample.model.constants.Views',
             'ExtJSCodeSample.controller.business.PersistenceController',
-            'ExtJSCodeSample.model.UserCredentialsModel'
+            'ExtJSCodeSample.model.UserCredentialsModel',
         ],
 
         refs: [{

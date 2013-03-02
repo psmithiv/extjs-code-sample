@@ -31,8 +31,10 @@ Ext.define("ExtJSCodeSample.view.header.HeaderView", {
         width: 10
     },{
         xtype: 'container',
+        name: 'navigationContainer',
         flex: 1,
         height: '100%',
+        hidden: true,
         padding: '18 0 0 0',
         items: [{
             xtype: 'button',
@@ -65,6 +67,9 @@ Ext.define("ExtJSCodeSample.view.header.HeaderView", {
                 { ptype: 'localization', method: 'setText', key: 'header.buttons.maps' }
             ]
         }]
+    },{
+        xtype: 'container',
+        flex: 1
     },{
         xtype: 'marquee',
         name: 'userInfo',

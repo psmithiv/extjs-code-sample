@@ -13,10 +13,6 @@ Ext.define("ExtJSCodeSample.view.Main", {
     },
 
     items: [{
-            xtype: 'headerView',
-            width: '100%',
-            height: 60
-        },{
             xtype: 'container',
             width: '100%',
             flex: 1,
