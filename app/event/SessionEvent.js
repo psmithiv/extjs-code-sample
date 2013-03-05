@@ -21,6 +21,12 @@ Ext.define('ExtJSCodeSample.event.SessionEvent', function() {
             return _rememberMe;
         },
 
+        /**
+         *
+         * @param {String} username
+         * @param {String} password
+         * @param {Boolean} rememberMe
+         */
         constructor: function(username, password, rememberMe)
         {
             _username = username;

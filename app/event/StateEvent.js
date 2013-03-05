@@ -21,6 +21,11 @@ Ext.define('ExtJSCodeSample.event.StateEvent', function() {
             return _data;
         },
 
+        /**
+         *
+         * @param {String} view
+         * @param {Array} data
+         */
         constructor: function(view, data)
         {
             _view = view;

@@ -3,6 +3,7 @@ Ext.define('ExtJSCodeSample.model.dto.UserDTO', function() {
         extend: 'ExtJSCodeSample.data.ObservableModel',
 
         fields: [
+            {name: 'id', type: 'int'},
             {name: 'username', type: 'string'},
             {name: 'name', type: 'string'},
             {name: 'phone', type: 'string'},

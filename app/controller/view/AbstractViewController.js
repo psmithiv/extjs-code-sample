@@ -13,7 +13,7 @@ Ext.define('ExtJSCodeSample.controller.view.AbstractViewController', function() 
         /**
          * Event handler for changes in application state (should be overridden by child class')
          *
-         * @param event:StateEvent
+         * @param {ExtJSCodeSample.event.StateEvent} event
          */
         applicationStateChangedHandler: function(event) {
 

@@ -6,7 +6,7 @@ Ext.define('ExtJSCodeSample.controller.business.SessionController', function() {
     /**
      * Establish session with backend
      *
-     * @param event:SessionEvent
+     * @param {ExtJSCodeSample.event.SessionEvent} event
      */
     function loginEventHandler(event) {
         un = event.getUserName();
@@ -20,7 +20,7 @@ Ext.define('ExtJSCodeSample.controller.business.SessionController', function() {
     /**
      * Success event handler for establishing session with backend
      *
-     * @param user:UserDTO
+     * @param {ExtJSCodeSample.model.dto.UserDTO} user
      */
     function loginSuccessHandler(user) {
         var sm = ExtJSCodeSample.model.ModelLocator.get('session');
@@ -39,7 +39,7 @@ Ext.define('ExtJSCodeSample.controller.business.SessionController', function() {
     /**
      * Fault event handler for establishing session with backend
      *
-     * @param fault:Object
+     * @param {Object} fault
      */
     function loginFaultHandler(fault) {
         //Stub method for when backend is in place
@@ -48,7 +48,7 @@ Ext.define('ExtJSCodeSample.controller.business.SessionController', function() {
     /**
      * Terminate session with backend
      *
-     * @param event:SessionEvent
+     * @param {ExtJSCodeSample.event.SessionEvent} event
      */
     function logoutEventHandler(event) {
         //Stub method for when backend is in place
@@ -65,7 +65,7 @@ Ext.define('ExtJSCodeSample.controller.business.SessionController', function() {
     /**
      * Fault event handler for terminating session with backend
      *
-     * @param fault:Object
+     * @param {Object} fault
      */
     function logoutFaultHandler(fault) {
         //Stub method for when backend is in place

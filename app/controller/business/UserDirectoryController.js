@@ -2,7 +2,7 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', functi
     /**
      * Event handler to persist newly created user to server
      *
-     * @param event:ExtJSCodeSample.event.UserDirectoryEvent
+     * @param {ExtJSCodeSample.event.UserDirectoryEvent} event
      */
     function createUserEventHandler(event) {
 
@@ -11,7 +11,7 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', functi
     /**
      * Create user success handler
      *
-     * @param user:UserDTO
+     * @param {ExtJSCodeSample.model.dto.UserDTO} user
      */
     function createUserSuccessHandler(user) {
 
@@ -27,7 +27,7 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', functi
     /**
      * Event handler to load users list from server
      *
-     * @param event:UserDirectoryEvent
+     * @param {ExtJSCodeSample.event.UserDirectoryEvent} event
      */
     function readUsersEventHandler(event) {
         var userDelegate = new ExtJSCodeSample.delegate.mock.UserDirectoryDelegate(readUsersSuccessHandler, readUsersFailureHandler, this);
@@ -37,7 +37,7 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', functi
     /**
      * Read users success handler
      *
-     * @param users:ExtJSCodeSample.store.UserDirectoryStore
+     * @param {ExtJSCodeSample.store.UserDirectoryStore} users
      */
     function readUsersSuccessHandler(users) {
         ExtJSCodeSample.model.ModelLocator.set('users', users);
@@ -53,7 +53,7 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', functi
     /**
      * Event handler to persist updated user to server
      *
-     * @param event:UserDirectoryEvent
+     * @param {ExtJSCodeSample.event.UserDirectoryEvent} event
      */
     function updateUserEventHandler(event) {
 
@@ -62,7 +62,7 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', functi
     /**
      * Event handler to delete user and persist to server
      *
-     * @param event:UserDirectoryEvent
+     * @param {ExtJSCodeSample.event.UserDirectoryEvent} event
      */
     function deleteUserEventHandler(event) {
 

@@ -16,6 +16,9 @@ Ext.define('ExtJSCodeSample.event.DialogEvent', function() {
             return _data;
         },
 
+        /**
+         * @param data
+         */
         constructor: function(data) {
             _data = data;
         }

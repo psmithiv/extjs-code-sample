@@ -1,8 +1,8 @@
 Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', function() {
     /**
-     * ModelLocater change event handler for setting store on CRUDView.grid
+     * ModelLocator change event handler for setting store on CRUDView.grid
      *
-     * @param event:ExtJSCodeSample.data.event.ModelChangeEvent
+     * @param {ExtJSCodeSample.data.event.ModelChangeEvent} event
      */
     function userDirectoryStoreChangeHandler(event) {
         if(event.getFieldName() != 'users')
@@ -31,8 +31,9 @@ Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', function() {
      * Delete user button click handler
      */
     function deleteUserClickHandler() {
-        //fireEvent to show are you sure dialog box (yes|no)
-        //console.log('deleteUserClickHandler');
+        console.log('deleteUserClickHandler');
+        var e = new ExtJSCodeSample.event.UserDirectoryEvent('USER')
+        this.application.fireEvent(ExtJSCodeSample.event.UserDirectoryEvent.DELETE_USER, e);
     }
 
     return {
@@ -78,10 +79,8 @@ Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', function() {
             var view = this.getCrudView();
             view.setVisible(event.getView() == ExtJSCodeSample.model.constants.Views.CRUD);
 
-            if(view.hidden)
-                return;
-
-            this.application.fireEvent(ExtJSCodeSample.event.UserDirectoryEvent.READ_USERS, {});
+            if(!view.hidden)
+                this.application.fireEvent(ExtJSCodeSample.event.UserDirectoryEvent.READ_USERS, {});
         }
     }
 });

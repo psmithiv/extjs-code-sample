@@ -37,6 +37,7 @@ Ext.application({
     requires: [
         'nineam.locale.LocaleManager',
         'nineam.locale.LocalePlugin',
+        'ExtJSCodeSample.controls.Grid',
         'Ext.form.field.ComboBox',
         'Ext.form.field.Checkbox',
         'Ext.form.Label',

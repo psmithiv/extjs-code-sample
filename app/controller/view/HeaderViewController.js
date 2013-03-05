@@ -2,10 +2,9 @@ Ext.define('ExtJSCodeSample.controller.view.HeaderViewController', function() {
     /**
      * Click event handler for headerView.buttons
      *
-     * @param target:Button
-     * @param event:Event
+     * @param {Ext.Button} target
      */
-    function navigationClickHandler(target, event) {
+    function navigationClickHandler(target) {
         var se;
         switch(target) {
             case this.getCrudButton():
@@ -27,8 +26,8 @@ Ext.define('ExtJSCodeSample.controller.view.HeaderViewController', function() {
     /**
      * Locales combobox selection change handler
      *
-     * @param target:ComboBox
-     * @param record:nineam.locale.model.LocaleModel
+     * @param {Ext.ComboBox} target
+     * @param {nineam.locale.model.LocaleModel} record
      */
     function localesSelectHandler(target, record) {
         nineam.locale.LocaleManager.setLocale(record[0].data.id);
@@ -37,7 +36,7 @@ Ext.define('ExtJSCodeSample.controller.view.HeaderViewController', function() {
     /**
      * Session Model changed event handler
      *
-     * @param event:ModelChangeEvent
+     * @param {ExtJSCodeSample.data.event.ModelChangeEvent} event
      */
     function sessionModelChangedHandler(event) {
         var session = ExtJSCodeSample.model.ModelLocator.get('session');
@@ -52,7 +51,7 @@ Ext.define('ExtJSCodeSample.controller.view.HeaderViewController', function() {
     /**
      * Locales changed event handler
      *
-     * @param event:ExtJSCodeSample.event.LocaleEvent
+     * @param {ExtJSCodeSample.event.LocaleEvent} event
      */
     function localesChangedEventHandler(event) {
         this.getLocalesComboBox().bindStore(nineam.locale.LocaleManager.getLocales(), true);
@@ -61,7 +60,7 @@ Ext.define('ExtJSCodeSample.controller.view.HeaderViewController', function() {
     /**
      * Selected locale changed event handler
      *
-     * @param event:ExtJSCodeSample.event.LocaleEvent
+     * @param {ExtJSCodeSample.event.LocaleEvent} event
      */
     function localeChangedEventHandler(event) {
         this.getLocalesComboBox().setValue(nineam.locale.LocaleManager.getLocale());

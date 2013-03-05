@@ -63,6 +63,7 @@ Ext.define('ExtJSCodeSample.view.crud.CRUDView', {
         width: '100%',
         name: 'usersGrid',
         flex: 1,
+        maintainSelection: true,
 
         columns: [{
             dataIndex: 'name',

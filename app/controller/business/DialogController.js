@@ -4,7 +4,7 @@ Ext.define('ExtJSCodeSample.controller.business.DialogController', function() {
     /**
      * Show logout dialog event handler method
      *
-     * @param event:ExtJSCodeSample.event.DialogEvent
+     * @param {ExtJSCodeSample.event.DialogEvent} event
      */
     function showLogoutDialogEventHandler(event) {
         var lm = nineam.locale.LocaleManager.getProperties().dialogs.logout;
@@ -24,7 +24,7 @@ Ext.define('ExtJSCodeSample.controller.business.DialogController', function() {
     /**
      * Show logout button click handler
      *
-     * @param buttonId:String
+     * @param {String} buttonId
      */
     function showLogoutDialogButtonClickHandler(buttonId) {
         console.log('showLogoutDialogButtonClickHandler');

@@ -18,8 +18,8 @@ Ext.define('ExtJSCodeSample.delegate.mock.SessionDelegate', function() {
         /**
          * Login to server
          *
-         * @param username:String
-         * @param password:String
+         * @param {String} username
+         * @param {String} password
          */
         login: function(username, password) {
             var response = "{" +

@@ -22,7 +22,7 @@ Ext.define('ExtJSCodeSample.controller.business.StateController', function() {
     /**
      * Event handler to update the browser hash and in turn update the application state
      *
-     * @param event:ExtJSCodeSample.event.StateEvent
+     * @param {ExtJSCodeSample.event.StateEvent} event
      */
     function setStateEventHandler(event) {
         var hash = Ext.JSON.encode({view: event.getView(), data: event.getData()});
@@ -55,7 +55,7 @@ Ext.define('ExtJSCodeSample.controller.business.StateController', function() {
     /**
      * Event handler to update application state when browser hash changes
      *
-     * @param hash:String
+     * @param {String} hash
      */
     function urlHistoryChangeHandler(hash) {
         var authenticated = ExtJSCodeSample.model.ModelLocator.get('session').get('authenticated');

@@ -11,7 +11,7 @@ Ext.define('ExtJSCodeSample.controller.business.PersistenceController', function
            /**
             * Encrypt un/pw and persist to cookie
             *
-            * @param user:ExtJSCodeSample.model.UserCredentialsModel
+            * @param {ExtJSCodeSample.model.UserCredentialsModel} user
             */
            setCredentials: function(user) {
                var d = new Date(new Date().getTime()+(1000*60*60*24*365)); //365days
@@ -23,7 +23,7 @@ Ext.define('ExtJSCodeSample.controller.business.PersistenceController', function
            /**
             * Pull un/pw from cookie, decrypt and return
             *
-            * @return ExtJSCodeSample.model.UserCredentialsModel
+            * @return {ExtJSCodeSample.model.UserCredentialsModel}
             */
            getCredentials: function() {
                var un = Ext.util.Cookies.get('un');

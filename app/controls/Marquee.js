@@ -12,7 +12,9 @@ Ext.define('ExtJSCodeSample.controls.Marquee', function() {
             'Ext.fx.Anim'
         ],
 
-        changeInterval: 11000, //11sec
+        config: {
+            changeInterval: 11000 //11sec
+        },
 
         constructor: function() {
             this.callParent(arguments);
@@ -25,7 +27,7 @@ Ext.define('ExtJSCodeSample.controls.Marquee', function() {
          * If typeof value == 'string: display value
          * If value instanceof Array: rotate displaying values on set interval
          *
-         * @param value:String|Array
+         * @param {String|Array} value
          */
         setText: function(value) {
             if(typeof value == 'string') {
@@ -44,7 +46,16 @@ Ext.define('ExtJSCodeSample.controls.Marquee', function() {
          * Method to change marquee text every n milliseconds
          */
         changeMessage: function() {
-            new Ext.fx.Anim({target: this, duration: 1000, from: {opacity: 0}, to: {opacity: 1}});
+            new Ext.fx.Anim({
+                                target: this,
+                                duration: 1000,
+                                from: {
+                                    opacity: 0
+                                },
+                                to: {
+                                    opacity: 1
+                                }
+                            });
 
             currentIndex = currentIndex + 1 == messages.length ? 0 : currentIndex + 1;
             this.setText(messages[currentIndex]);

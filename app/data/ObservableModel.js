@@ -11,10 +11,11 @@ Ext.define('ExtJSCodeSample.data.ObservableModel', function() {
         * change event, dispatch ModelChangeEvent
         *
         * @override
-        * @param fieldName:String
-        * @param newValue:Object
-        * @param suppressChangeEvent:Object
-        * @return {*}
+        * @param {String} fieldName
+        * @param {Object} newValue
+        * @param {Boolean} suppressChangeEvent
+        *
+        * @return {{}}
         */
        set: function (fieldName, newValue, suppressChangeEvent) {
            var previousValue = this.get(fieldName);

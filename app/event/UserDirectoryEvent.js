@@ -15,6 +15,9 @@ Ext.define('ExtJSCodeSample.event.UserDirectoryEvent', function() {
             return this.user
         },
 
+        /**
+         * @param {ExtJSCodeSample.model.dto.UserDTO} user
+         */
         constructor: function(user)
         {
             this.user = user;

@@ -17,7 +17,7 @@ Ext.define('ExtJSCodeSample.delegate.mock.UserDirectoryDelegate', function() {
         /**
          * Save new user to server
          *
-         * @param user:ExtJSCodeSample.model.dto.UserDTO
+         * @param {ExtJSCodeSample.model.dto.UserDTO} user
          */
         createUser: function(user) {
 
@@ -30,18 +30,21 @@ Ext.define('ExtJSCodeSample.delegate.mock.UserDirectoryDelegate', function() {
             var response = "{" +
                                 "'success': true, " +
                                 "'users': [{" +
+                                    "'id': 0, " +
                                     "'username': 'psmithiv', " +
                                     "'name': 'Paul Smith', " +
                                     "'phone': '917-674-9375', " +
                                     "'email': 'paul.smith.iv@ninthavenuemedia.com', " +
                                     "'notes': ''" +
                                 "},{" +
+                                    "'id': 1, " +
                                     "'username': 'psmithiv', " +
                                     "'name': 'Paul Smith', " +
                                     "'phone': '917-674-9375', " +
                                     "'email': 'paul.smith.iv@ninthavenuemedia.com', " +
                                     "'notes': ''" +
                                 "},{" +
+                                    "'id': 2, " +
                                     "'username': 'psmithiv', " +
                                     "'name': 'Paul Smith', " +
                                     "'phone': '917-674-9375', " +
@@ -61,7 +64,7 @@ Ext.define('ExtJSCodeSample.delegate.mock.UserDirectoryDelegate', function() {
         /**
          * Save user to server
          *
-         * @param user:ExtJSCodeSample.model.dto.UserDTO
+         * @param {ExtJSCodeSample.model.dto.UserDTO} user
          */
         updateUser: function(user) {
 
@@ -70,10 +73,13 @@ Ext.define('ExtJSCodeSample.delegate.mock.UserDirectoryDelegate', function() {
         /**
          * Notify server to delete user
          *
-         * @param user:ExtJSCodeSample.model.dto.UserDTO
+         * @param {ExtJSCodeSample.model.dto.UserDTO} user
          */
         deleteUser: function(user) {
+            if(!_success || !_scope)
+                return;
 
+            _success.call(_scope)
         }
     }
 });
