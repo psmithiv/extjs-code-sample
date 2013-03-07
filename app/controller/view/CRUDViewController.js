@@ -1,4 +1,6 @@
 Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', function() {
+    var userFormWindow
+
     /**
      * ModelLocator change event handler for setting store on CRUDView.grid
      *
@@ -15,8 +17,15 @@ Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', function() {
      * New user button click handler
      */
     function newUserClickHandler() {
-        //fireEvent to open blank users dialog
-        //console.log('newUserClickHandler');
+        console.log('newUserClickHandler');
+        var selectedUser = this.getUserGrid().getSelectionModel().getSelection()[0];
+
+        userFormWindow = new ExtJSCodeSample.view.crud.UserFormWindow({existingUser: false});
+        userFormWindow.show();
+    }
+
+    function saveNewUser(user) {
+        //dispatch event to save new user
     }
 
     /**
@@ -27,12 +36,16 @@ Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', function() {
         //console.log('editUserClickHandler');
     }
 
+    function saveEditedUser(user) {
+        //dispatch event to save edited user
+    }
+
     /**
      * Delete user button click handler
      */
     function deleteUserClickHandler() {
-        console.log('deleteUserClickHandler');
-        var e = new ExtJSCodeSample.event.UserDirectoryEvent('USER')
+        var selectedUser = this.getUserGrid().getSelectionModel().getSelection()[0];
+        var e = new ExtJSCodeSample.event.UserDirectoryEvent(selectedUser);
         this.application.fireEvent(ExtJSCodeSample.event.UserDirectoryEvent.DELETE_USER, e);
     }
 
@@ -41,7 +54,8 @@ Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', function() {
 
         requires: [
             'ExtJSCodeSample.model.constants.Views',
-            'ExtJSCodeSample.event.UserDirectoryEvent'
+            'ExtJSCodeSample.event.UserDirectoryEvent',
+            'ExtJSCodeSample.view.crud.UserFormWindow'
         ],
 
         refs: [{
@@ -53,6 +67,8 @@ Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', function() {
         }],
 
         init: function() {
+            console.log('init');
+
             this.callParent(arguments);
 
             this.control({
@@ -79,7 +95,10 @@ Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', function() {
             var view = this.getCrudView();
             view.setVisible(event.getView() == ExtJSCodeSample.model.constants.Views.CRUD);
 
-            if(!view.hidden)
+            if(userFormWindow && view.isHidden())
+                userFormWindow.hide();
+
+            if(!view.isHidden())
                 this.application.fireEvent(ExtJSCodeSample.event.UserDirectoryEvent.READ_USERS, {});
         }
     }

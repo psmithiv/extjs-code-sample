@@ -1,4 +1,15 @@
 Ext.define('ExtJSCodeSample.controls.Grid', function() {
+    function storeDataChangedEventHandler(item) {
+        var selectedItem = this.getSelectionModel().getSelection()[0];
+        setSelection.call(this, selectedItem);
+    }
+
+    function setSelection(item) {
+        var selectionField = this.getMaintainSelectionField();
+        var selectedIndex = item ? this.getStore().find(selectionField, item.get(selectionField)) : 0;
+        this.getSelectionModel().select(selectedIndex);
+    }
+
     return {
         extend: 'Ext.grid.Panel',
         alias: 'widget.grid',
@@ -16,9 +27,8 @@ Ext.define('ExtJSCodeSample.controls.Grid', function() {
             if(!this.getMaintainSelection())
                 return;
 
-            var selectionField = this.getMaintainSelectionField();
-            var selectedIndex = selectedItem ? store.find(selectionField, selectedItem.get(selectionField)) : 0;
-            this.getSelectionModel().select(selectedIndex);
+            store.addListener('datachanged', storeDataChangedEventHandler, this);
+            setSelection.call(this, selectedItem);
         }
     }
 });

@@ -40,7 +40,6 @@ Ext.define('ExtJSCodeSample.controller.business.StateController', function() {
      * Event handler to navigate one item forward in browser history
      */
     function browserForwardEventHandler() {
-        console.log('forward')
         Ext.History.forward();
     }
 
@@ -48,7 +47,6 @@ Ext.define('ExtJSCodeSample.controller.business.StateController', function() {
      * Event handler to refresh web browser
      */
     function browserRefreshEventHandler() {
-        console.log('refresh');
         location.reload();
     }
 

@@ -27,7 +27,6 @@ Ext.define('ExtJSCodeSample.controller.business.DialogController', function() {
      * @param {String} buttonId
      */
     function showLogoutDialogButtonClickHandler(buttonId) {
-        console.log('showLogoutDialogButtonClickHandler');
         if(buttonId == 'ok')
             this.application.fireEvent(ExtJSCodeSample.event.StateEvent.BROWSER_REFRESH, {});
         else if(buttonId == 'cancel' && logoutDialog.navForward)

@@ -18,7 +18,7 @@ Ext.define('ExtJSCodeSample.view.login.LoginPanel', {
         items: [{
             xtype: 'label',
             width: 120,
-            padding: '4px 0px 0px 0px',
+            padding: '2px 0px 0px 0px',
             plugins: [
                 { ptype: 'localization', method: 'setText', key: 'login.username' }
             ]
@@ -39,7 +39,7 @@ Ext.define('ExtJSCodeSample.view.login.LoginPanel', {
         items: [{
             xtype: 'label',
             width: 120,
-            padding: '5pm 0px 0px 0px',
+            padding: '3pm 0px 0px 0px',
             plugins: [
                 { ptype: 'localization', method: 'setText', key: 'login.password' }
             ]

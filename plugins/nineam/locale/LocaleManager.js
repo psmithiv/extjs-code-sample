@@ -1,9 +1,9 @@
 Ext.define('nineam.locale.LocaleManager', function() {
     var initialized = false;
 
-    var _locales = {};
-    var _locale = '';
-    var _properties = {};
+    var _locales = null;
+    var _locale = null;
+    var _properties = null;
 
     var clients = [];
     /**
@@ -49,15 +49,19 @@ Ext.define('nineam.locale.LocaleManager', function() {
     function updateClients() {
         var len = clients.length;
         for(var i=0; i<len; i++) {
-            var c = clients[i];
-
-            try {
-                //c.getClient()[c.getMethod()].call(c.getClient(), eval('_properties.' + c.getKey()));
-                c.client[c.method].call(c.client, eval('_properties.' + c.key));
-            } catch(e) {
-                continue;
-            }
+            setClient(clients[i]);
         }
+    }
+
+    /**
+     * Call specify method on client object and pass value from _properties based on key
+     *
+     * @param {Object} clientModel
+     */
+    function setClient(clientModel) {
+        try {
+            clientModel.client[clientModel.method].call(clientModel.client, eval('_properties.' + clientModel.key));
+        } catch(e) {}
     }
 
     return {
@@ -129,10 +133,14 @@ Ext.define('nineam.locale.LocaleManager', function() {
         /**
          * Register a client component for localization
          *
-         * @param client:nineam.model.ClientModel
+         * @param {Object} clientModel
          */
-        registerClient: function(client) {
-            clients.push(client);
+        //TODO: Create nineam.model.ClientModel
+        registerClient: function(clientModel) {
+            clients.push(clientModel);
+
+            if(_properties)
+                setClient(clientModel);
         }
     }
 });

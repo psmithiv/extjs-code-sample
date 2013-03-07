@@ -65,8 +65,27 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', functi
      * @param {ExtJSCodeSample.event.UserDirectoryEvent} event
      */
     function deleteUserEventHandler(event) {
+        var userDelegate = new ExtJSCodeSample.delegate.mock.UserDirectoryDelegate(deleteUsersSuccessHandler, deleteUsersFailureHandler, this);
+        userDelegate.deleteUser(event.getUser());
+    }
 
-    };
+    /**
+     * Delete user success handler
+     *
+     * @param {ExtJSCodeSample.model.dto.UserDTO} user
+     */
+    function deleteUsersSuccessHandler(user) {
+        var users = ExtJSCodeSample.model.ModelLocator.get('users');
+        if(!users)
+            return;
+
+        var index = users.find('id', user.get('id'));
+        users.removeAt(index);
+    }
+
+    function deleteUsersFailureHandler() {
+
+    }
 
     return {
         extend: 'Ext.app.Controller',
