@@ -1,6 +1,4 @@
 Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', function() {
-    var userFormWindow
-
     /**
      * ModelLocator change event handler for setting store on CRUDView.grid
      *
@@ -17,27 +15,24 @@ Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', function() {
      * New user button click handler
      */
     function newUserClickHandler() {
-        console.log('newUserClickHandler');
-        var selectedUser = this.getUserGrid().getSelectionModel().getSelection()[0];
+        resetUserFormClickHandler.call(this);
+        this.getUserForm().loadRecord(new ExtJSCodeSample.model.dto.UserDTO());
 
-        userFormWindow = new ExtJSCodeSample.view.crud.UserFormWindow({existingUser: false});
-        userFormWindow.show();
-    }
+        setUserFormWindowTitle.call(this, true);
 
-    function saveNewUser(user) {
-        //dispatch event to save new user
+        this.getUserFormWindow().show();
     }
 
     /**
      * Edit user button click handler
      */
     function editUserClickHandler() {
-        //fireEvent to open users dialog with selected user
-        //console.log('editUserClickHandler');
-    }
+        var selectedUser = this.getUserGrid().getSelectionModel().getSelection()[0];
+        this.getUserForm().loadRecord(selectedUser);
 
-    function saveEditedUser(user) {
-        //dispatch event to save edited user
+        setUserFormWindowTitle.call(this, false);
+
+        this.getUserFormWindow().show();
     }
 
     /**
@@ -47,6 +42,32 @@ Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', function() {
         var selectedUser = this.getUserGrid().getSelectionModel().getSelection()[0];
         var e = new ExtJSCodeSample.event.UserDirectoryEvent(selectedUser);
         this.application.fireEvent(ExtJSCodeSample.event.UserDirectoryEvent.DELETE_USER, e);
+    }
+
+    /**
+     * Set the form window title
+     *
+     * @param {Boolean} newUser
+     */
+    function setUserFormWindowTitle(newUser) {
+        var lm = nineam.locale.LocaleManager.getProperties();
+        var title = newUser ?  lm.crud.window.title.new : lm.crud.window.title.edit;
+        this.getUserFormWindow().setTitle(title);
+    }
+
+    /**
+     * Clear out the user form
+     */
+    function resetUserFormClickHandler() {
+        this.getUserForm().getForm().reset();
+    }
+
+    function submitUserFormClickHandler() {
+        var record = new ExtJSCodeSample.model.dto.UserDTO(this.getUserForm().getValues());
+
+        var en = record.get('id') ? ExtJSCodeSample.event.UserDirectoryEvent.UPDATE_USER : ExtJSCodeSample.event.UserDirectoryEvent.CREATE_USER;
+        var e = new ExtJSCodeSample.event.UserDirectoryEvent(record);
+        this.application.fireEvent(en, e);
     }
 
     return {
@@ -64,11 +85,15 @@ Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', function() {
         },{
             selector: 'crudView grid[name=usersGrid]',
             ref: 'userGrid'
+        },{
+            selector: 'userWindow',
+            ref: 'userFormWindow'
+        },{
+            selector: 'userWindow form',
+            ref: 'userForm'
         }],
 
         init: function() {
-            console.log('init');
-
             this.callParent(arguments);
 
             this.control({
@@ -82,6 +107,14 @@ Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', function() {
 
                 'crudView button[action=deleteUser]' : {
                     click: deleteUserClickHandler
+                },
+
+                'userWindow button[action=reset]' : {
+                    click: resetUserFormClickHandler
+                },
+
+                'userWindow button[action=submit]' : {
+                    click: submitUserFormClickHandler
                 }
             });
 
@@ -95,8 +128,8 @@ Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', function() {
             var view = this.getCrudView();
             view.setVisible(event.getView() == ExtJSCodeSample.model.constants.Views.CRUD);
 
-            if(userFormWindow && view.isHidden())
-                userFormWindow.hide();
+            if(this.getUserFormWindow() && view.isHidden())
+                this.getUserFormWindow().hide();
 
             if(!view.isHidden())
                 this.application.fireEvent(ExtJSCodeSample.event.UserDirectoryEvent.READ_USERS, {});

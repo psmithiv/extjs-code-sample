@@ -16,8 +16,8 @@ Ext.define('ExtJSCodeSample.controller.business.PersistenceController', function
            setCredentials: function(user) {
                var d = new Date(new Date().getTime()+(1000*60*60*24*365)); //365days
                Ext.util.Cookies.set('un', user.get('username'), d);
-               //TODO: Encrypt password
-               Ext.util.Cookies.set('pw', user.get('password'), d);
+               Ext.util.Cookies.set('pw', user.get('password'), d); //TODO: Encrypt password
+               Ext.util.Cookies.set('rm', user.get('rememberme'), d);
            },
 
            /**
@@ -27,10 +27,10 @@ Ext.define('ExtJSCodeSample.controller.business.PersistenceController', function
             */
            getCredentials: function() {
                var un = Ext.util.Cookies.get('un');
-               //TODO: Decrypt password
-               var pw = Ext.util.Cookies.get('pw');
+               var pw = Ext.util.Cookies.get('pw'); //TODO: Decrypt password
+               var rm = Ext.util.Cookies.get('rm');
 
-               return new ExtJSCodeSample.model.UserCredentialsModel({username: un, password: pw});
+               return new ExtJSCodeSample.model.UserCredentialsModel({username: un, password: pw, rememberme: rm});
            },
 
            /**
@@ -39,6 +39,7 @@ Ext.define('ExtJSCodeSample.controller.business.PersistenceController', function
            clearCredentials: function() {
                Ext.util.Cookies.clear('un');
                Ext.util.Cookies.clear('pw');
+               Ext.util.Cookies.clear('rm');
            }
        }
    }

@@ -5,7 +5,7 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', functi
      * @param {ExtJSCodeSample.event.UserDirectoryEvent} event
      */
     function createUserEventHandler(event) {
-
+        console.log('createUserEventHandler');
     }
 
     /**
@@ -56,7 +56,7 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', functi
      * @param {ExtJSCodeSample.event.UserDirectoryEvent} event
      */
     function updateUserEventHandler(event) {
-
+        console.log('updateUserEventHandler');
     }
 
     /**

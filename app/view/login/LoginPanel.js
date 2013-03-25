@@ -18,7 +18,6 @@ Ext.define('ExtJSCodeSample.view.login.LoginPanel', {
         items: [{
             xtype: 'label',
             width: 120,
-            padding: '2px 0px 0px 0px',
             plugins: [
                 { ptype: 'localization', method: 'setText', key: 'login.username' }
             ]
@@ -30,16 +29,17 @@ Ext.define('ExtJSCodeSample.view.login.LoginPanel', {
         }]
     },{
         xtype: 'container',
+        height: 5
+    },{
+        xtype: 'container',
         layout: {
             type: 'hbox',
-            align: 'middle',
-            padding: '4px 0px 0px 0px'
+            align: 'middle'
         },
 
         items: [{
             xtype: 'label',
             width: 120,
-            padding: '3pm 0px 0px 0px',
             plugins: [
                 { ptype: 'localization', method: 'setText', key: 'login.password' }
             ]

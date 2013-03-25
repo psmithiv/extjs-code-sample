@@ -94,5 +94,9 @@ Ext.define('ExtJSCodeSample.view.crud.CRUDView', {
                 { ptype: 'localization', method: 'setText', key: 'crud.grid.notes' }
             ]
         }]
+    },{
+        xtype: 'userWindow',
+        renderTo: document.body,
+        closeAction: 'hide'
     }]
 });

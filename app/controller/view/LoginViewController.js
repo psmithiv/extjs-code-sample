@@ -11,7 +11,10 @@ Ext.define('ExtJSCodeSample.controller.view.LoginViewController', function() {
      */
     function loginClickHandler() {
         var values = this.getLoginForm().getValues();
-        var e = new ExtJSCodeSample.event.SessionEvent(values.username, values.password, this.getRememberMeCheckBox().getValue());
+        values.rememberme = values.rememberme == 'on'; //convert 'on' to true else false
+
+        var record = new ExtJSCodeSample.model.UserCredentialsModel(values);
+        var e = new ExtJSCodeSample.event.SessionEvent(record);
         this.application.fireEvent(ExtJSCodeSample.event.SessionEvent.LOGIN, e);
     };
 
@@ -20,15 +23,8 @@ Ext.define('ExtJSCodeSample.controller.view.LoginViewController', function() {
      */
     function setFormValues() {
         var u = ExtJSCodeSample.controller.business.PersistenceController.getCredentials();
-        var un = u.get('username');
-        var pw = u.get('password');
-
-        if(!un || !pw)
-            return;
-
-        this.getUserNameField().setValue(un);
-        this.getPasswordField().setValue(pw);
-        this.getRememberMeCheckBox().setValue(true);
+        u = u.get('rememberme') ? u : new ExtJSCodeSample.model.UserCredentialsModel();
+        this.getLoginForm().loadRecord(u);
     }
 
     /**
@@ -38,10 +34,8 @@ Ext.define('ExtJSCodeSample.controller.view.LoginViewController', function() {
      * @param {Boolean} value
      */
     function rememberMeChangeHandler(target, value) {
-        if(value)
-            return;
-
-        ExtJSCodeSample.controller.business.PersistenceController.clearCredentials();
+        if(!value)
+            ExtJSCodeSample.controller.business.PersistenceController.clearCredentials();
     }
 
     return {
@@ -51,7 +45,7 @@ Ext.define('ExtJSCodeSample.controller.view.LoginViewController', function() {
             'ExtJSCodeSample.event.StateEvent',
             'ExtJSCodeSample.model.constants.Views',
             'ExtJSCodeSample.controller.business.PersistenceController',
-            'ExtJSCodeSample.model.UserCredentialsModel',
+            'ExtJSCodeSample.model.UserCredentialsModel'
         ],
 
         refs: [{
@@ -60,12 +54,6 @@ Ext.define('ExtJSCodeSample.controller.view.LoginViewController', function() {
         },{
             selector: 'loginPanel.form',
             ref: 'loginForm'
-        },{
-            selector: 'loginPanel textfield[name=username]',
-            ref: 'userNameField'
-        },{
-            selector: 'loginPanel textfield[name=password]',
-            ref: 'passwordField'
         },{
             selector: 'loginPanel checkbox[name=rememberme]',
             ref: 'rememberMeCheckBox'

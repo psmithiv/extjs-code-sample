@@ -29,6 +29,17 @@
             "phone": "Teléfono",
             "email": "Correo electrónico",
             "notes": "Notas"
+        },
+        "window": {
+            "title": {
+                "new": "Nuevo usuario",
+                "edit": "Editar usuario"
+            },
+
+            "name": "Nombre:",
+            "phone": "Teléfono:",
+            "email": "Correo electrónico:",
+            "notes": "Notas:"
         }
     },
 

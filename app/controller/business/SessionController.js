@@ -1,7 +1,5 @@
 Ext.define('ExtJSCodeSample.controller.business.SessionController', function() {
-    var un = '';
-    var pw = '';
-    var rm = '';
+    var userCredentials;
 
     /**
      * Establish session with backend
@@ -9,12 +7,11 @@ Ext.define('ExtJSCodeSample.controller.business.SessionController', function() {
      * @param {ExtJSCodeSample.event.SessionEvent} event
      */
     function loginEventHandler(event) {
-        un = event.getUserName();
-        pw = event.getPassword();
-        rm = event.getRememberMe();
+        userCredentials = event.getUserCredentials();
+        console.log('userCredentials.username: ' + userCredentials.get('username'));
 
         var authDelegate = new ExtJSCodeSample.delegate.mock.SessionDelegate(loginSuccessHandler, loginFaultHandler, this);
-        authDelegate.login(un, pw);
+        authDelegate.login(userCredentials.get('username'), userCredentials.get('password'));
    }
 
     /**
@@ -27,10 +24,9 @@ Ext.define('ExtJSCodeSample.controller.business.SessionController', function() {
         sm.set('authenticated', true);
         sm.set('authenticatedUser', user);
 
-        if(rm)
+        if(userCredentials.get('rememberme'))
         {
-            var user = new ExtJSCodeSample.model.UserCredentialsModel({username:un, password:pw});
-            ExtJSCodeSample.controller.business.PersistenceController.setCredentials(user);
+            ExtJSCodeSample.controller.business.PersistenceController.setCredentials(userCredentials);
         }
 
         this.application.fireEvent(ExtJSCodeSample.event.StateEvent.SET_INITIAL_STATE);

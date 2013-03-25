@@ -29,6 +29,17 @@
             "phone": "Phone",
             "email": "Email",
             "notes": "Notes"
+        },
+        "window": {
+            "title": {
+                "new": "New User",
+                "edit": "Edit User"
+            },
+
+            "name": "Name:",
+            "phone": "Phone:",
+            "email": "Email:",
+            "notes": "Notes:"
         }
     },
 

@@ -6,28 +6,28 @@ Ext.define('ExtJSCodeSample.delegate.mock.UserDirectoryDelegate', function() {
     var readUsersResponse = "{" +
                                 "'success': true, " +
                                 "'users': [{" +
-                                    "'id': 0, " +
+                                    "'id': 100, " +
                                     "'username': 'psmithiv', " +
                                     "'name': 'Paul Smith', " +
                                     "'phone': '555-555-555', " +
                                     "'email': 'email@ninthavenuemedia.com', " +
                                     "'notes': 'Daddy'" +
                                 "},{" +
-                                    "'id': 1, " +
+                                    "'id': 101, " +
                                     "'username': 'ksmithiv', " +
                                     "'name': 'Karla Smith', " +
                                     "'phone': '555-555-555', " +
                                     "'email': 'email@ninthavenuemedia.com', " +
                                     "'notes': 'Mommy'" +
                                 "},{" +
-                                    "'id': 2, " +
+                                    "'id': 102, " +
                                     "'username': 'ajsmith', " +
                                     "'name': 'Alana Smith', " +
                                     "'phone': '555-555-555', " +
                                     "'email': 'email@ninthavenuemedia.com', " +
                                     "'notes': 'Daughter'" +
                                 "},{" +
-                                    "'id': 3, " +
+                                    "'id': 103, " +
                                     "'username': 'atsmith', " +
                                     "'name': 'Aiden Smith', " +
                                     "'phone': '555-555-555', " +

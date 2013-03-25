@@ -1,7 +1,5 @@
 Ext.define('ExtJSCodeSample.event.SessionEvent', function() {
-    var _username = '';
-    var _password = '';
-    var _rememberMe = false;
+    var _userCredentials;
 
     return {
         statics: {
@@ -9,29 +7,16 @@ Ext.define('ExtJSCodeSample.event.SessionEvent', function() {
             LOGOUT: 'ExtJSCodeSample.event.SessionEvent.LOGOUT'
         },
 
-        getUserName: function() {
-            return _username;
-        },
-
-        getPassword: function() {
-            return _password;
-        },
-
-        getRememberMe: function() {
-            return _rememberMe;
+        getUserCredentials: function() {
+            return _userCredentials;
         },
 
         /**
-         *
-         * @param {String} username
-         * @param {String} password
-         * @param {Boolean} rememberMe
+         * @param {ExtJSCodeSample.model.UserCredentialsModel} userCredentials
          */
-        constructor: function(username, password, rememberMe)
+        constructor: function(userCredentials)
         {
-            _username = username;
-            _password = password;
-            _rememberMe = rememberMe;
+            _userCredentials = userCredentials;
         }
     }
 })
