@@ -63,9 +63,12 @@ Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', function() {
     }
 
     function submitUserFormClickHandler() {
-        var record = new ExtJSCodeSample.model.dto.UserDTO(this.getUserForm().getValues());
+        this.getUserFormWindow().hide();
 
-        var en = record.get('id') ? ExtJSCodeSample.event.UserDirectoryEvent.UPDATE_USER : ExtJSCodeSample.event.UserDirectoryEvent.CREATE_USER;
+        var record = new ExtJSCodeSample.model.dto.UserDTO(this.getUserForm().getValues());
+        record.set('id', this.getUserForm().getRecord().get('id'));
+
+        var en = record.get('id') > 0 ? ExtJSCodeSample.event.UserDirectoryEvent.UPDATE_USER : ExtJSCodeSample.event.UserDirectoryEvent.CREATE_USER;
         var e = new ExtJSCodeSample.event.UserDirectoryEvent(record);
         this.application.fireEvent(en, e);
     }

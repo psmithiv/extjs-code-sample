@@ -53,7 +53,11 @@ Ext.define('ExtJSCodeSample.delegate.mock.UserDirectoryDelegate', function() {
          * @param {ExtJSCodeSample.model.dto.UserDTO} user
          */
         createUser: function(user) {
+            if(!_success || !_scope)
+                return;
 
+            user.set('id', Math.floor(Math.random() * 1000 + 1));
+            _success.call(_scope, user);
         },
 
         /**
@@ -73,7 +77,10 @@ Ext.define('ExtJSCodeSample.delegate.mock.UserDirectoryDelegate', function() {
          * @param {ExtJSCodeSample.model.dto.UserDTO} user
          */
         updateUser: function(user) {
+            if(!_success || !_scope)
+                return;
 
+            _success.call(_scope, user);
         },
 
         /**

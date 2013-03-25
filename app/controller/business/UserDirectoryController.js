@@ -5,7 +5,8 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', functi
      * @param {ExtJSCodeSample.event.UserDirectoryEvent} event
      */
     function createUserEventHandler(event) {
-        console.log('createUserEventHandler');
+        var userDelegate = new ExtJSCodeSample.delegate.mock.UserDirectoryDelegate(createUserSuccessHandler, createUserFailureHandler, this);
+        userDelegate.createUser(event.getUser());
     }
 
     /**
@@ -14,14 +15,15 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', functi
      * @param {ExtJSCodeSample.model.dto.UserDTO} user
      */
     function createUserSuccessHandler(user) {
-
+        ExtJSCodeSample.model.ModelLocator.get('users').add(user);
     }
 
     /**
      * Create user failure handler
      */
     function createUserFailureHandler() {
-
+        var userDelegate = new ExtJSCodeSample.delegate.mock.UserDirectoryDelegate(createUserSuccessHandler, createUserFailureHandler, this);
+        userDelegate.createUser(event.getUser());
     }
 
     /**

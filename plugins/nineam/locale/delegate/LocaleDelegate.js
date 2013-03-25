@@ -14,8 +14,7 @@ Ext.define('nineam.locale.delegate.LocaleDelegate', function() {
 
     return {
         requires: [
-            'Ext.Ajax',
-            'ExtJSCodeSample.model.dto.UserDTO'
+            'Ext.Ajax'
         ],
 
         constructor: function(success, failure, scope) {

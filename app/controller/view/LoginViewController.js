@@ -54,9 +54,6 @@ Ext.define('ExtJSCodeSample.controller.view.LoginViewController', function() {
         },{
             selector: 'loginPanel.form',
             ref: 'loginForm'
-        },{
-            selector: 'loginPanel checkbox[name=rememberMe]',
-            ref: 'rememberMeCheckBox'
         }],
 
         init: function() {
