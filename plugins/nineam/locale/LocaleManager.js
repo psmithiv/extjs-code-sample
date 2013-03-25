@@ -69,6 +69,7 @@ Ext.define('nineam.locale.LocaleManager', function() {
         singleton: true,
 
         requires: [
+            'Ext.util.Cookies',
             'nineam.locale.event.LocaleEvent',
             'nineam.locale.delegate.LocaleDelegate'
         ],
