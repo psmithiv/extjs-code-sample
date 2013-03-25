@@ -3,7 +3,7 @@
         "title": "Login",
         "username": "User Name:",
         "password": "Password:",
-        "rememberme": "Remember Me",
+        "rememberMe": "Remember Me",
         "submit": "Submit",
         "reset": "Clear"
     },

@@ -17,7 +17,7 @@ Ext.define('ExtJSCodeSample.controller.business.PersistenceController', function
                var d = new Date(new Date().getTime()+(1000*60*60*24*365)); //365days
                Ext.util.Cookies.set('un', user.get('username'), d);
                Ext.util.Cookies.set('pw', user.get('password'), d); //TODO: Encrypt password
-               Ext.util.Cookies.set('rm', user.get('rememberme'), d);
+               Ext.util.Cookies.set('rm', user.get('rememberMe'), d);
            },
 
            /**
@@ -30,7 +30,7 @@ Ext.define('ExtJSCodeSample.controller.business.PersistenceController', function
                var pw = Ext.util.Cookies.get('pw'); //TODO: Decrypt password
                var rm = Ext.util.Cookies.get('rm');
 
-               return new ExtJSCodeSample.model.UserCredentialsModel({username: un, password: pw, rememberme: rm});
+               return new ExtJSCodeSample.model.UserCredentialsModel({username: un, password: pw, rememberMe: rm});
            },
 
            /**

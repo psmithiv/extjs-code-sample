@@ -3,7 +3,7 @@
         "title": "Inicio de sesión",
         "username": "Nombre de usuario:",
         "password": "Contraseña:",
-        "rememberme": "Recordarme",
+        "rememberMe": "Recordarme",
         "submit": "Enviar",
         "reset": "Claro"
     },

@@ -11,7 +11,7 @@ Ext.define('ExtJSCodeSample.controller.view.LoginViewController', function() {
      */
     function loginClickHandler() {
         var values = this.getLoginForm().getValues();
-        values.rememberme = values.rememberme == 'on'; //convert 'on' to true else false
+        values.rememberMe = values.rememberMe == 'on'; //convert 'on' to true else false
 
         var record = new ExtJSCodeSample.model.UserCredentialsModel(values);
         var e = new ExtJSCodeSample.event.SessionEvent(record);
@@ -23,7 +23,7 @@ Ext.define('ExtJSCodeSample.controller.view.LoginViewController', function() {
      */
     function setFormValues() {
         var u = ExtJSCodeSample.controller.business.PersistenceController.getCredentials();
-        u = u.get('rememberme') ? u : new ExtJSCodeSample.model.UserCredentialsModel();
+        u = u.get('rememberMe') ? u : new ExtJSCodeSample.model.UserCredentialsModel();
         this.getLoginForm().loadRecord(u);
     }
 
@@ -55,7 +55,7 @@ Ext.define('ExtJSCodeSample.controller.view.LoginViewController', function() {
             selector: 'loginPanel.form',
             ref: 'loginForm'
         },{
-            selector: 'loginPanel checkbox[name=rememberme]',
+            selector: 'loginPanel checkbox[name=rememberMe]',
             ref: 'rememberMeCheckBox'
         }],
 
@@ -72,7 +72,7 @@ Ext.define('ExtJSCodeSample.controller.view.LoginViewController', function() {
                     render: setFormValues
                 },
 
-                'loginPanel checkbox[name=rememberme]': {
+                'loginPanel checkbox[name=rememberMe]': {
                     change: rememberMeChangeHandler
                 }
             });

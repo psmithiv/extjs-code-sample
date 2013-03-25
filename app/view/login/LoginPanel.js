@@ -62,7 +62,7 @@ Ext.define('ExtJSCodeSample.view.login.LoginPanel', {
 
         items: [{
             xtype: 'checkbox',
-            name: 'rememberme'
+            name: 'rememberMe'
         },{
             xtype: 'container',
             width: 5
@@ -71,7 +71,7 @@ Ext.define('ExtJSCodeSample.view.login.LoginPanel', {
             width: 162,
             padding: '4px 0px 10px 0px',
             plugins: [
-                { ptype: 'localization', method: 'setText', key: 'login.rememberme' }
+                { ptype: 'localization', method: 'setText', key: 'login.rememberMe' }
             ]
         }]
     },{

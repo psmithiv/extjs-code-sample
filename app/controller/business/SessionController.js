@@ -24,7 +24,7 @@ Ext.define('ExtJSCodeSample.controller.business.SessionController', function() {
         sm.set('authenticated', true);
         sm.set('authenticatedUser', user);
 
-        if(userCredentials.get('rememberme'))
+        if(userCredentials.get('rememberMe'))
         {
             ExtJSCodeSample.controller.business.PersistenceController.setCredentials(userCredentials);
         }

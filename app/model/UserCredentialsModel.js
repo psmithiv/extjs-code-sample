@@ -5,7 +5,7 @@ Ext.define('ExtJSCodeSample.model.UserCredentialsModel', function() {
        fields: [
            {name: 'username', type: 'string'},
            {name: 'password', type: 'string'},
-           {name: 'rememberme', type: 'boolean'}
+           {name: 'rememberMe', type: 'boolean'}
        ]
    }
 });
