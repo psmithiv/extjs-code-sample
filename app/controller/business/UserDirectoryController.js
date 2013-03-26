@@ -73,13 +73,11 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', functi
      * @param {ExtJSCodeSample.event.UserDirectoryEvent} event
      */
     function updateUserEventHandler(event) {
-        console.log('updateUserEventHandler');
         var userDelegate = new ExtJSCodeSample.delegate.mock.UserDirectoryDelegate(updateUserSuccessHandler, updateUserFailureHandler, this);
         userDelegate.updateUser(event.getUser());
     }
 
     function updateUserSuccessHandler(user) {
-        console.log('updateUserSuccessHandler');
         var users = ExtJSCodeSample.model.ModelLocator.get('users');
         users.update(user);
     }
