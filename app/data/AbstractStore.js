@@ -14,18 +14,29 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
-Ext.define('ExtJSCodeSample.store.UserDirectoryStore', function() {
+Ext.define('ExtJSCodeSample.data.AbstractStore', function() {
     return {
-        extend: 'ExtJSCodeSample.data.AbstractStore',
+        extend: 'Ext.data.Store',
 
-        model: 'ExtJSCodeSample.model.dto.UserDTO',
+        /**
+         * Update a model object on the store by replacing it with a new model
+         *
+         * @param {Object} model - model to replace existing model in store
+         * @param {String} property - property to use to find model to be replaced
+         */
+        update: function(model, property) {
+            property = property ? property : 'id';
 
-        proxy: {
-            type: 'memory',
-            reader: {
-                type: 'json',
-                root: 'users'
-            }
+            var index = this.find(property, model.get(property));
+
+            if(index < 0)
+                return;
+
+            var records = this.getRange();
+            records.splice(index, 1, model);
+
+            this.removeAll();
+            this.add(records);
         }
     }
-});
+})

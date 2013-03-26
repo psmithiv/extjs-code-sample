@@ -21,7 +21,7 @@ Ext.define('ExtJSCodeSample.controls.Grid', function() {
     }
 
     function setSelection(item) {
-        var selectionField = this.getMaintainSelectionField();
+        var selectionField = this.getMaintainSelectionProperty();
         var selectedIndex = item ? this.getStore().find(selectionField, item.get(selectionField)) : 0;
         this.getSelectionModel().select(selectedIndex);
     }
@@ -32,7 +32,7 @@ Ext.define('ExtJSCodeSample.controls.Grid', function() {
 
         config: {
             maintainSelection: false,
-            maintainSelectionField: 'id'
+            maintainSelectionProperty: 'id'
         },
 
         bindStore: function(store) {

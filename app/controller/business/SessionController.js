@@ -24,11 +24,10 @@ Ext.define('ExtJSCodeSample.controller.business.SessionController', function() {
      */
     function loginEventHandler(event) {
         userCredentials = event.getUserCredentials();
-        console.log('userCredentials.username: ' + userCredentials.get('username'));
 
         var authDelegate = new ExtJSCodeSample.delegate.mock.SessionDelegate(loginSuccessHandler, loginFaultHandler, this);
         authDelegate.login(userCredentials.get('username'), userCredentials.get('password'));
-   }
+    }
 
     /**
      * Success event handler for establishing session with backend

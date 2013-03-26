@@ -81,7 +81,7 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', functi
     function updateUserSuccessHandler(user) {
         console.log('updateUserSuccessHandler');
         var users = ExtJSCodeSample.model.ModelLocator.get('users');
-        var index = users.findIndex('id', user.get(id));
+        users.update(user);
     }
 
     function updateUserFailureHandler(user) {
@@ -94,7 +94,7 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', functi
      * @param {ExtJSCodeSample.event.UserDirectoryEvent} event
      */
     function deleteUserEventHandler(event) {
-        var userDelegate = new ExtJSCodeSample.delegate.mock.UserDirectoryDelegate(deleteUsersSuccessHandler, deleteUsersFailureHandler, this);
+        var userDelegate = new ExtJSCodeSample.delegate.mock.UserDirectoryDelegate(deleteUserSuccessHandler, deleteUserFailureHandler, this);
         userDelegate.deleteUser(event.getUser());
     }
 
@@ -103,7 +103,7 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', functi
      *
      * @param {ExtJSCodeSample.model.dto.UserDTO} user
      */
-    function deleteUsersSuccessHandler(user) {
+    function deleteUserSuccessHandler(user) {
         var users = ExtJSCodeSample.model.ModelLocator.get('users');
         if(!users)
             return;
@@ -112,7 +112,7 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', functi
         users.removeAt(index);
     }
 
-    function deleteUsersFailureHandler() {
+    function deleteUserFailureHandler() {
 
     }
 
