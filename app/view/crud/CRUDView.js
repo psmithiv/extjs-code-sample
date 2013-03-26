@@ -103,7 +103,7 @@ Ext.define('ExtJSCodeSample.view.crud.CRUDView', {
                 { ptype: 'localization', method: 'setText', key: 'crud.grid.email' }
             ]
         },{
-            dataIndex: 'note',
+            dataIndex: 'notes',
             flex: 1,
             hideable: false,
             plugins: [
