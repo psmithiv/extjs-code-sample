@@ -15,15 +15,36 @@
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
 Ext.define('ExtJSCodeSample.controls.Grid', function() {
-    function storeDataChangedEventHandler(item) {
-        var selectedItem = this.getSelectionModel().getSelection()[0];
-        setSelection.call(this, selectedItem);
+    var _selectedItem;
+
+    /**
+     * Grid selection change event handler to persist selected item so that it can
+     * later be reset when the sore dispatches a data change event
+     *
+     * @param {ExtJSCodeSample.controls.Grid} scope
+     * @param {Ext.data.Model[]} selectedItem
+     */
+    function selectionChangedEventHandler(scope, selectedItem) {
+        _selectedItem = selectedItem[0];
     }
 
+    /**
+     * Resets the selected item when the Store dispatches the data changed event
+     */
+    function storeDataChangedEventHandler() {
+        setSelection.call(this, _selectedItem);
+    }
+
+    /**
+     * Sets the selected record
+     *
+     * @param {Ext.data.Model} item
+     */
     function setSelection(item) {
         var selectionField = this.getMaintainSelectionProperty();
-        var selectedIndex = item ? this.getStore().find(selectionField, item.get(selectionField)) : 0;
-        this.getSelectionModel().select(selectedIndex);
+
+        var itemIndex = item ? this.getStore().find(selectionField, item.get(selectionField)) : 0;
+        this.getSelectionModel().select(itemIndex);
     }
 
     return {
@@ -35,16 +56,23 @@ Ext.define('ExtJSCodeSample.controls.Grid', function() {
             maintainSelectionProperty: 'id'
         },
 
+        /**
+         * Adds selection change and data change listeners when setting store so that
+         * selected item can be reset on data change event
+         *
+         * @Override
+         * @param {Ext.data.Store} store
+         */
         bindStore: function(store) {
-            var selectedItem = this.getSelectionModel().getSelection()[0];
-
             this.callParent([store]);
 
             if(!this.getMaintainSelection())
                 return;
 
+            this.addListener('selectionchange', selectionChangedEventHandler, this);
+
             store.addListener('datachanged', storeDataChangedEventHandler, this);
-            setSelection.call(this, selectedItem);
+            setSelection.call(this, _selectedItem);
         }
     }
 });

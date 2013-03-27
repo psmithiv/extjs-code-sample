@@ -32,11 +32,8 @@ Ext.define('ExtJSCodeSample.data.AbstractStore', function() {
             if(index < 0)
                 return;
 
-            var records = this.getRange();
-            records.splice(index, 1, model);
-
-            this.removeAll();
-            this.add(records);
+            this.insert(index, model);
+            this.removeAt(index+1);
         }
     }
 })

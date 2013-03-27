@@ -45,7 +45,6 @@ Ext.define('nineam.locale.delegate.LocaleDelegate', function() {
 
             var req = Ext.Ajax.request({
                 url: url,
-                method: "post",
 
                 success: ajaxSuccess,
                 failure: ajaxFailure

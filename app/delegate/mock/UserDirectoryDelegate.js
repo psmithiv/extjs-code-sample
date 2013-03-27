@@ -83,8 +83,11 @@ Ext.define('ExtJSCodeSample.delegate.mock.UserDirectoryDelegate', function() {
             if(!_success || !_scope)
                 return;
 
-            var us = new ExtJSCodeSample.store.UserDirectoryStore({data: Ext.JSON.decode(readUsersResponse)});
-            _success.call(_scope, us);
+            var data = ExtJSCodeSample.model.ModelLocator.get('users');
+            if(!data)
+                data = new ExtJSCodeSample.store.UserDirectoryStore({data: Ext.JSON.decode(readUsersResponse)});
+
+            _success.call(_scope, data);
         },
 
         /**
