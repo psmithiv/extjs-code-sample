@@ -1,5 +1,5 @@
-extjs-code-sample
-=================
+ExtJS 4 Enterprise Application Starter Kit
+==========================================
 
 This project is meant to act as a starting point for developing large scale enterprise class applications using the ExtJS framework.
 
