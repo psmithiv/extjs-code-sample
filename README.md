@@ -1,7 +1,7 @@
 ExtJS 4 Enterprise Application Starter Kit
 ==========================================
 
-This project is meant to act as a starting point for developing large scale enterprise class applications using the ExtJS framework.
+This project is meant to act as a starting point for developing large scale, enterprise class, mvvm applications using the ExtJS framework.
 
 The goals of this project are to demonstrate the following:
 
