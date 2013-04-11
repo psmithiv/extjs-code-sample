@@ -14,6 +14,10 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * ModelLocator class for managing all Models/Stores throughout the application
+ */
 Ext.define('ExtJSCodeSample.model.ModelLocator', {
     extend: 'ExtJSCodeSample.data.ObservableModel',
 
@@ -28,6 +32,9 @@ Ext.define('ExtJSCodeSample.model.ModelLocator', {
         {name: 'usersList', type: 'Ext.Store'}
     ],
 
+    /**
+     * Creates a SessionModel and other complex objects on construction
+     */
     constructor: function() {
         this.callParent(arguments);
 

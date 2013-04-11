@@ -14,6 +14,13 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * Business controller responsible for maintaining state of the application by listening
+ * for various state events(StateEvent.SET_INITIAL_STATE, StateEvent.SET_STATE), updating
+ * the browser url, and in turn dispatching the state changed event (StateEvent.STATE_CHANGED).
+ * Also watches browser hash to determine if LogoutDialog should be shown/hidden.
+ */
 Ext.define('ExtJSCodeSample.controller.business.StateController', {
     extend: 'Ext.app.Controller',
 
@@ -25,6 +32,11 @@ Ext.define('ExtJSCodeSample.controller.business.StateController', {
         'ExtJSCodeSample.model.ModelLocator'
     ],
 
+    /**
+     * Adds event listeners for StateEvent and Ext.History.CHANGE events
+     *
+     * @override
+     */
     init: function() {
         this.application.addListener(ExtJSCodeSample.event.StateEvent.SET_INITIAL_STATE, this.setInitialStateEventHandler, this);
         this.application.addListener(ExtJSCodeSample.event.StateEvent.SET_STATE, this.setStateEventHandler, this);
@@ -63,7 +75,7 @@ Ext.define('ExtJSCodeSample.controller.business.StateController', {
      * Event handler to update the browser hash and in turn update the application state
      *
      * @private
-     * @param {ExtJSCodeSample.event.StateEvent} event
+     * @param {ExtJSCodeSample.event.StateEvent} event - StateEvent containing data to use when updating browser hash
      */
     setStateEventHandler: function(event) {
         var hash = Ext.JSON.encode({view: event.getView(), data: event.getData()});

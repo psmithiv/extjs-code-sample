@@ -14,6 +14,10 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * User form window for editing/creating new UserDTO's
+ */
 Ext.define('ExtJSCodeSample.view.crud.UserFormWindow', function() {
     return {
         extend: 'Ext.window.Window',

@@ -14,6 +14,10 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * Event for initializing application
+ */
 Ext.define('ExtJSCodeSample.event.InitializationEvent', {
     statics: {
         /**

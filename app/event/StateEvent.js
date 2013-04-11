@@ -14,6 +14,10 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * Event for changing appliation state
+ */
 Ext.define('ExtJSCodeSample.event.StateEvent', {
     statics: {
         SET_INITIAL_STATE: 'ExtJSCodeSample.event.StateEvent.SET_INITIAL_STATE',
@@ -27,11 +31,12 @@ Ext.define('ExtJSCodeSample.event.StateEvent', {
 
     /**
      * @private
-     * {String} view
+     * {String} view - The current application view
      */
     view: '',
 
     /**
+     * Getter method for view
      *
      * @return {String}
      */
@@ -41,11 +46,12 @@ Ext.define('ExtJSCodeSample.event.StateEvent', {
 
     /**
      * @private
-     * {Array} data
+     * {Array} data - Data to use for current view
      */
     data: [],
 
     /**
+     * Getter method for data
      *
      * @return {Array}
      */
@@ -54,9 +60,8 @@ Ext.define('ExtJSCodeSample.event.StateEvent', {
     },
 
     /**
-     *
-     * @param {String} view
-     * @param {Array} data
+     * @param {String} view - The current application view
+     * @param {Array} data - Data to use for current view
      */
     constructor: function(view, data)
     {

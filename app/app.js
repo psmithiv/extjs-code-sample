@@ -14,6 +14,11 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * Application Entry Point
+ */
+
 Ext.onReady(function() {
     Ext.getBody().mask('Loading application', 'splashscreen');
 });
@@ -63,6 +68,9 @@ Ext.application({
 
     autoCreateViewport: true,
 
+    /**
+     * Event handler for application launch that dispatches InitializationEvent.APP_READY
+     */
     launch: function() {
         this.fireEvent(ExtJSCodeSample.event.InitializationEvent.APP_READY, {});
     }

@@ -14,6 +14,10 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * Business controller for all crud functionality surrounding the UserDirectory
+ */
 Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', {
     extend: 'Ext.app.Controller',
 
@@ -23,7 +27,9 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', {
     ],
 
     /**
-     * Controller initialization method
+     * Adds event listeners for UserDirectoryEvent
+     *
+     * @override
      */
     init: function() {
         this.application.addListener(ExtJSCodeSample.event.UserDirectoryEvent.CREATE_USER, this.createUserEventHandler, this);
@@ -36,7 +42,7 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', {
      * Event handler to persist newly created user to server
      *
      * @private
-     * @param {ExtJSCodeSample.event.UserDirectoryEvent} event
+     * @param {ExtJSCodeSample.event.UserDirectoryEvent} event - UserDirectoryEvent of type CREATE_USER
      */
     createUserEventHandler: function(event) {
         var userDelegate = new ExtJSCodeSample.delegate.mock.UserDirectoryDelegate(this.createUserSuccessHandler, this.createUserFailureHandler, this);
@@ -44,10 +50,10 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', {
     },
 
     /**
-     * Create user success handler
+     * Create user success handler to sett UserDTO on ModelLocator.users
      *
      * @private
-     * @param {ExtJSCodeSample.model.dto.UserDTO} user
+     * @param {ExtJSCodeSample.model.dto.UserDTO} user - UserDTO returned by server after successful create Ajax call
      */
     createUserSuccessHandler: function(user) {
         ExtJSCodeSample.model.ModelLocator.get('users').add(user);
@@ -66,7 +72,7 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', {
      * Event handler to load users list from server
      *
      * @private
-     * @param {ExtJSCodeSample.event.UserDirectoryEvent} event
+     * @param {ExtJSCodeSample.event.UserDirectoryEvent} event - UserDirectoryEvent of type READ_USERS
      */
     readUsersEventHandler: function(event) {
         var userDelegate = new ExtJSCodeSample.delegate.mock.UserDirectoryDelegate(this.readUsersSuccessHandler, this.readUsersFailureHandler, this);
@@ -74,10 +80,10 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', {
     },
 
     /**
-     * Read users success handler
+     * Read users success handler to set UserDirectoryStore on ModelLocator
      *
      * @private
-     * @param {ExtJSCodeSample.store.UserDirectoryStore} users
+     * @param {ExtJSCodeSample.store.UserDirectoryStore} users - UserDirectoryStore returned by server after successful Ajax read users call
      */
     readUsersSuccessHandler: function(users) {
         ExtJSCodeSample.model.ModelLocator.set('users', users);
@@ -96,7 +102,7 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', {
      * Event handler to persist updated user to server
      *
      * @private
-     * @param {ExtJSCodeSample.event.UserDirectoryEvent} event
+     * @param {ExtJSCodeSample.event.UserDirectoryEvent} event UserDirectoryEvent of type UPDATE_USER
      */
     updateUserEventHandler: function(event) {
         var userDelegate = new ExtJSCodeSample.delegate.mock.UserDirectoryDelegate(this.updateUserSuccessHandler, this.updateUserFailureHandler, this);
@@ -104,10 +110,10 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', {
     },
 
     /**
-     * Update user success handler
+     * Update user success handler to update a specific user on ModelLocator.users
      *
      * @private
-     * @param user
+     * @param {ExtJSCodeSample.model.dto.UserDTO} user - UserDTO returned by server after a successful update Ajax call
      */
     updateUserSuccessHandler: function(user) {
         var users = ExtJSCodeSample.model.ModelLocator.get('users');
@@ -118,9 +124,9 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', {
      * Update user fault handler
      *
      * @private
-     * @param user
+     * @param {Object} fault - Fault Object
      */
-    updateUserFailureHandler: function(user) {
+    updateUserFailureHandler: function(fault) {
 
     },
 
@@ -128,7 +134,7 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', {
      * Event handler to delete user and persist to server
      *
      * @private
-     * @param {ExtJSCodeSample.event.UserDirectoryEvent} event
+     * @param {ExtJSCodeSample.event.UserDirectoryEvent} event - UserDirectoryEvent of type DELETE_USER
      */
     deleteUserEventHandler: function(event) {
         var userDelegate = new ExtJSCodeSample.delegate.mock.UserDirectoryDelegate(this.deleteUserSuccessHandler, this.deleteUserFailureHandler, this);
@@ -136,10 +142,10 @@ Ext.define('ExtJSCodeSample.controller.business.UserDirectoryController', {
     },
 
     /**
-     * Delete user success handler
+     * Delete user success handler to delete user from ModelLocator.users
      *
      * @private
-     * @param {ExtJSCodeSample.model.dto.UserDTO} user
+     * @param {ExtJSCodeSample.model.dto.UserDTO} user - UserDTO returned by server after a successful delete Ajax call
      */
     deleteUserSuccessHandler: function(user) {
         var users = ExtJSCodeSample.model.ModelLocator.get('users');

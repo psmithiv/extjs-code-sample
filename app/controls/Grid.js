@@ -14,12 +14,23 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * Custom Grid control that allows for easily maintaining the selectedItem when calling bindStore
+ */
 Ext.define('ExtJSCodeSample.controls.Grid', {
     extend: 'Ext.grid.Panel',
     alias: 'widget.grid',
 
     config: {
+        /**
+         * @cfg {Boolean} maintainSelection - Wither or not the grid should maintain the selectedItem when calling bindStore
+         */
         maintainSelection: false,
+
+        /**
+         * @cfg {String} maintainSelectionProperty - The object property to use when 'resetting' the selectedItem
+         */
         maintainSelectionProperty: 'id'
     },
 
@@ -34,7 +45,7 @@ Ext.define('ExtJSCodeSample.controls.Grid', {
      * selected item can be reset on data change event
      *
      * @Override
-     * @param {Ext.data.Store} store
+     * @param {Ext.data.Store} store - Store to use to populate grid
      */
     bindStore: function(store) {
         this.callParent([store]);

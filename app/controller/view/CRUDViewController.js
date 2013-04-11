@@ -14,6 +14,10 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * View controller responsible for managing CRUDView
+ */
 Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', {
     extend: 'ExtJSCodeSample.controller.view.AbstractViewController',
 
@@ -37,6 +41,11 @@ Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', {
         ref: 'userForm'
     }],
 
+    /**
+     * Adds listeners for view sub component events, as well as ModelChangeEvent
+     *
+     * @override
+     */
     init: function() {
         this.callParent(arguments);
 
@@ -83,7 +92,7 @@ Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', {
      * ModelLocator change event handler for setting store on CRUDView.grid
      *
      * @private
-     * @param {ExtJSCodeSample.data.event.ModelChangeEvent} event
+     * @param {ExtJSCodeSample.data.event.ModelChangeEvent} event - ModelChangeEvent of type CHANGED
      */
     userDirectoryStoreChangeHandler: function(event) {
         if(event.getFieldName() == 'users')
@@ -91,7 +100,7 @@ Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', {
     },
 
     /**
-     * New user button click handler
+     * New user button click handler that shows the UserFormWindow
      *
      * @private
      */
@@ -106,7 +115,7 @@ Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', {
     },
 
     /**
-     * Edit user button click handler
+     * Edit user button click handler that shows the UserFormWindow
      *
      * @private
      */
@@ -120,7 +129,7 @@ Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', {
     },
 
     /**
-     * Delete user button click handler
+     * Delete user button click handler that dispatches a UserDirectoryEvent.DELETE_USER event
      *
      * @private
      */
@@ -134,7 +143,7 @@ Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', {
      * Set the form window title
      *
      * @private
-     * @param {Boolean} newUser
+     * @param {Boolean} newUser - Wither or not the user being displayed in the form window is new or being edited
      */
     setUserFormWindowTitle: function(newUser) {
         var lm = nineam.locale.LocaleManager.getProperties();
@@ -152,7 +161,8 @@ Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', {
     },
 
     /**
-     * User form submit button click handler
+     * User form submit button click handler that dispatches UserDirectoryEvent.UPDATE_USER in the case of editing an existing user
+     * and UserDirectoryEvent.CREATE_USER in the case of creating a new user
      *
      * @private
      */

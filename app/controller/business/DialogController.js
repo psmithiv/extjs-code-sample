@@ -14,6 +14,11 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * Business controller responsible for listening for DialogEvent(s)
+ * to show/hide specific dialogs (ie. LogoutDialog)
+ */
 Ext.define('ExtJSCodeSample.controller.business.DialogController', {
     extend: 'Ext.app.Controller',
 
@@ -25,15 +30,15 @@ Ext.define('ExtJSCodeSample.controller.business.DialogController', {
     ],
 
     /**
-     * Object literal representing a dialog instance
-     *
      * @private
-     * {{{Object} dialog, {Boolean} navForward}} - logoutDialog
+     * {{{Ext.Msg} dialog, {Boolean} navForward}} logoutDialog - Object literal representing a dialog instance
      */
     logoutDialog: {},
 
     /**
-     * Controller initialization method
+     * Adds event listeners for DialogEvent's
+     *
+     * @override
      */
     init: function() {
         this.application.addListener(ExtJSCodeSample.event.DialogEvent.SHOW_LOGOUT_DIALOG, this.showLogoutDialogEventHandler, this);
@@ -41,10 +46,10 @@ Ext.define('ExtJSCodeSample.controller.business.DialogController', {
     },
 
     /**
-     * Show logout dialog event handler method
+     * Event handler to create/show a Ext.Msg instance and sets logoutDialog
      *
      * @private
-     * @param {ExtJSCodeSample.event.DialogEvent} event
+     * @param {ExtJSCodeSample.event.DialogEvent} event - Event object containing necessary data for displaying the logout dialog
      */
     showLogoutDialogEventHandler: function(event) {
         var lm = nineam.locale.LocaleManager.getProperties().dialogs.logout;
@@ -54,7 +59,7 @@ Ext.define('ExtJSCodeSample.controller.business.DialogController', {
             msg: lm.message,
             buttons: Ext.Msg.OKCANCEL,
             icon: Ext.Msg.QUESTION,
-            fn: this.showLogoutDialogButtonClickHandler,
+            fn: this.logoutDialogButtonClickHandler,
             scope: this
         });
 
@@ -62,12 +67,12 @@ Ext.define('ExtJSCodeSample.controller.business.DialogController', {
     },
 
     /**
-     * Show logout button click handler
+     * Click handler to dispatch BROWSER_REFRESH when OK button is pressed or BROWSER_FORWARD when Cancel button is pressed
      *
      * @private
-     * @param {String} buttonId
+     * @param {String} buttonId - Id of the button being clicked
      */
-    showLogoutDialogButtonClickHandler: function(buttonId) {
+    logoutDialogButtonClickHandler: function(buttonId) {
         if(buttonId == 'ok')
             this.application.fireEvent(ExtJSCodeSample.event.StateEvent.BROWSER_REFRESH, {});
         else if(buttonId == 'cancel' && this.logoutDialog.navForward)
@@ -75,7 +80,7 @@ Ext.define('ExtJSCodeSample.controller.business.DialogController', {
     },
 
     /**
-     * Hide any dialogs that may be open
+     * Event handler to hide logout dialog if one exists/is visible
      *
      * @private
      */

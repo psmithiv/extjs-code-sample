@@ -14,6 +14,10 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * View controller responsible for managing the HeaderView
+ */
 Ext.define('ExtJSCodeSample.controller.view.HeaderViewController', {
     extend: 'ExtJSCodeSample.controller.view.AbstractViewController',
 
@@ -50,7 +54,9 @@ Ext.define('ExtJSCodeSample.controller.view.HeaderViewController', {
     }],
 
     /**
-     * Controller initialization method
+     * Adds listeners for view sub component events, ModelChangeEvent, as well as LocaleEvent
+     *
+     * @override
      */
     init: function() {
         this.callParent(arguments);
@@ -98,10 +104,10 @@ Ext.define('ExtJSCodeSample.controller.view.HeaderViewController', {
     },
 
     /**
-     * Click event handler for headerView.buttons
+     * Click event handler for headerView.buttons that in turn dispatches a corresponding StateEvent
      *
      * @private
-     * @param {Ext.Button} target
+     * @param {Ext.Button} target - Ext.Button generating the event
      */
     navigationClickHandler: function(target) {
         var se;
@@ -123,21 +129,22 @@ Ext.define('ExtJSCodeSample.controller.view.HeaderViewController', {
     },
 
     /**
-     * Locales combobox selection change handler
+     * Locales ComboBox selection change handler that sets the selected locale on teh LocaleManager
      *
      * @private
-     * @param {Ext.ComboBox} target
-     * @param {nineam.locale.model.LocaleModel} record
+     * @param {Ext.ComboBox} target - Teh ComboBox that generated the event
+     * @param {nineam.locale.model.LocaleModel} record - The currently selected LocaleModel
      */
     localesSelectHandler: function(target, record) {
         nineam.locale.LocaleManager.setLocale(record[0].data.id);
     },
 
     /**
-     * Session Model changed event handler
+     * Session Model changed event handler that sets the navigation buttons to visible and sets the text on the
+     * UserInfoLabel upon ModelLocator.session.authenticated changing to true
      *
      * @private
-     * @param {ExtJSCodeSample.data.event.ModelChangeEvent} event
+     * @param {ExtJSCodeSample.data.event.ModelChangeEvent} event - ModelChangeEvent of type CHANGED
      */
     sessionModelChangedHandler: function(event) {
         var session = ExtJSCodeSample.model.ModelLocator.get('session');
@@ -150,20 +157,20 @@ Ext.define('ExtJSCodeSample.controller.view.HeaderViewController', {
     },
 
     /**
-     * Locales changed event handler
+     * Locales changed event handler that sets the LocalesComboBox store to LocaleManager.locales
      *
      * @private
-     * @param {ExtJSCodeSample.event.LocaleEvent} event
+     * @param {ExtJSCodeSample.event.LocaleEvent} event - LocaleEvent of type LOCALES_CHANGED
      */
     localesChangedEventHandler: function(event) {
         this.getLocalesComboBox().bindStore(nineam.locale.LocaleManager.getLocales(), true);
     },
 
     /**
-     * Selected locale changed event handler
+     * Selected locale changed event handler that sets the correct item in the locales ComboBox
      *
      * @private
-     * @param {ExtJSCodeSample.event.LocaleEvent} event
+     * @param {ExtJSCodeSample.event.LocaleEvent} event - LocaleEvent of type LOCALE_CHANGED
      */
     localeChangedEventHandler: function(event) {
         this.getLocalesComboBox().setValue(nineam.locale.LocaleManager.getLocale());

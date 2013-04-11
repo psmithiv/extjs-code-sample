@@ -14,6 +14,10 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * Abstract interface for all application ViewControllers.
+ */
 Ext.define('ExtJSCodeSample.controller.view.AbstractViewController', {
     extend: 'Ext.app.Controller',
 
@@ -21,6 +25,11 @@ Ext.define('ExtJSCodeSample.controller.view.AbstractViewController', {
         'ExtJSCodeSample.event.StateEvent'
     ],
 
+    /**
+     * Adds event listeners for StateEvent
+     *
+     * @override
+     */
     init: function() {
         this.application.addListener(ExtJSCodeSample.event.StateEvent.STATE_CHANGED, this.applicationStateChangedHandler, this);
     },
@@ -28,8 +37,7 @@ Ext.define('ExtJSCodeSample.controller.view.AbstractViewController', {
     /**
      * Event handler for changes in application state (should be overridden by child class')
      *
-     * @override
-     * @param {ExtJSCodeSample.event.StateEvent} event
+     * @param {ExtJSCodeSample.event.StateEvent} event - StateEvent of type STATE_CHANGED
      */
     applicationStateChangedHandler: function(event) {
 

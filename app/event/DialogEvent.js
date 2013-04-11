@@ -14,6 +14,10 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * Event for showing/hiding dialogs
+ */
 Ext.define('ExtJSCodeSample.event.DialogEvent', {
     statics: {
         /**
@@ -29,6 +33,7 @@ Ext.define('ExtJSCodeSample.event.DialogEvent', {
 
     /**
      * @private
+     * {Object} data - Generic event data
      */
     data: {},
 
@@ -42,7 +47,7 @@ Ext.define('ExtJSCodeSample.event.DialogEvent', {
     },
 
     /**
-     * @param data
+     * @param {Object} data - Generic data to be used along with this event
      */
     constructor: function(data) {
         this.data = data;

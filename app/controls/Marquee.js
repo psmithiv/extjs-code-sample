@@ -14,6 +14,10 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * Custom Marquee control to display rotating text
+ */
 Ext.define('ExtJSCodeSample.controls.Marquee', {
     extend: 'Ext.form.Label',
     alias: 'widget.marquee',
@@ -24,13 +28,13 @@ Ext.define('ExtJSCodeSample.controls.Marquee', {
     ],
 
     /**
-     * How fast the display should update
+     * {int} changeInterval - How fast the display should update
      */
     changeInterval: 11000, //11sec
 
     /**
      * @private
-     * {Ext.util.DelayedTask} tasks -
+     * {Ext.util.DelayedTask} task - DelayedTask to execute on each changeInterval
      */
     task: {},
 
@@ -47,7 +51,7 @@ Ext.define('ExtJSCodeSample.controls.Marquee', {
     messages: [],
 
     /**
-     * @constructor
+     * Creates new DelayedTas to execute every n milliseconds
      */
     constructor: function() {
         this.callParent(arguments);

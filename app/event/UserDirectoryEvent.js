@@ -14,6 +14,10 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * Event to perform various UserDirectory CRUD operations
+ */
 Ext.define('ExtJSCodeSample.event.UserDirectoryEvent', {
     requires: 'ExtJSCodeSample.model.dto.UserDTO',
 
@@ -26,11 +30,12 @@ Ext.define('ExtJSCodeSample.event.UserDirectoryEvent', {
 
     /**
      * @private
-     * {ExtJSCodeSample.model.dto.UserDTO} user
+     * {ExtJSCodeSample.model.dto.UserDTO} user - User to use for said CRUD operation
      */
     user: {},
 
     /**
+     * Getter method for user
      *
      * @return {ExtJSCodeSample.model.dto.UserDTO}
      */

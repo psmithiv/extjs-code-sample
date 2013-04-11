@@ -14,14 +14,18 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * Base class for all Stores in the application allowing for easy update of specific records on the store.
+ */
 Ext.define('ExtJSCodeSample.data.AbstractStore', {
     extend: 'Ext.data.Store',
 
     /**
      * Update a model object on the store by replacing it with a new model
      *
-     * @param {Object} model - model to replace existing model in store
-     * @param {String} property - property to use to find model to be replaced
+     * @param {Object} model - Model to replace existing model in store
+     * @param {String} property - Property to use to find model to be replaced
      */
     update: function(model, property) {
         property = property ? property : 'id';

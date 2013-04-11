@@ -14,6 +14,11 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * Base class for all Model's within the application. Allows objects to listen to ModelChangeEvent that fires
+ * whenever the models set method is called and the value being passed is different then the current value.
+ */
 Ext.define('ExtJSCodeSample.data.ObservableModel', {
    extend: 'Ext.data.Model',
 
@@ -26,9 +31,9 @@ Ext.define('ExtJSCodeSample.data.ObservableModel', {
     * change event, dispatch ModelChangeEvent
     *
     * @override
-    * @param {String} fieldName
-    * @param {Object} newValue
-    * @param {Boolean} suppressChangeEvent
+    * @param {String} fieldName - The name of the field to set
+    * @param {Object} newValue - The value to place on the field
+    * @param {Boolean} suppressChangeEvent - Wither or not to suppress the ModelChangeEvent
     *
     * @return {{}}
     */

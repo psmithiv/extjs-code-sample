@@ -14,6 +14,11 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * Business controller responsible for writing model objects to a
+ * cookie as well as reading cookie values back to models.
+ */
 Ext.define('ExtJSCodeSample.controller.business.PersistenceController', {
    extend: 'Ext.app.Controller',
 
@@ -26,7 +31,7 @@ Ext.define('ExtJSCodeSample.controller.business.PersistenceController', {
        /**
         * Encrypt un/pw and persist to cookie
         *
-        * @param {ExtJSCodeSample.model.UserCredentialsModel} user
+        * @param {ExtJSCodeSample.model.UserCredentialsModel} user - UserCredentialsModel containing the necessary information to authenticate a user
         */
        setCredentials: function(user) {
            var d = new Date(new Date().getTime()+(1000*60*60*24*365)); //365days
@@ -38,7 +43,7 @@ Ext.define('ExtJSCodeSample.controller.business.PersistenceController', {
        /**
         * Pull un/pw from cookie, decrypt and return
         *
-        * @return {ExtJSCodeSample.model.UserCredentialsModel}
+        * @return {ExtJSCodeSample.model.UserCredentialsModel} - UserCredentialsModel containing the necessary information to authenticate a user
         */
        getCredentials: function() {
            var un = Ext.util.Cookies.get('un');

@@ -14,6 +14,10 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * Mock delegate for authenticating user with the server
+ */
 Ext.define('ExtJSCodeSample.delegate.mock.SessionDelegate', {
     requires: [
         'Ext.Ajax',
@@ -22,16 +26,19 @@ Ext.define('ExtJSCodeSample.delegate.mock.SessionDelegate', {
 
     /**
      * @private
+     * {Function} success - Method to call on successful login
      */
     success: null,
 
     /**
      * @private
+     * {Function} failure - Method to call on failed login
      */
     failure: null,
 
     /**
      * @private
+     * {Object} scope - Scope to execute success/failure methods within
      */
     scope: null,
 
@@ -50,8 +57,8 @@ Ext.define('ExtJSCodeSample.delegate.mock.SessionDelegate', {
     /**
      * Login to server
      *
-     * @param {String} username
-     * @param {String} password
+     * @param {String} username - User name to use to login
+     * @param {String} password - Password to use to login
      */
     login: function(username, password) {
         var response = "{" +

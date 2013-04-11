@@ -14,6 +14,10 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * View controller responsible for managing MainView
+ */
 Ext.define('ExtJSCodeSample.controller.view.MainViewController', {
     extend: 'ExtJSCodeSample.controller.view.AbstractViewController',
 
@@ -25,10 +29,6 @@ Ext.define('ExtJSCodeSample.controller.view.MainViewController', {
         selector: 'mainView',
         ref: 'mainView'
     }],
-
-    init: function() {
-        this.callParent(arguments);
-    },
 
     /**
      * @override

@@ -14,6 +14,10 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * Model class for representing a users credentials
+ */
 Ext.define('ExtJSCodeSample.model.UserCredentialsModel', {
    extend: 'Ext.data.Model',
 

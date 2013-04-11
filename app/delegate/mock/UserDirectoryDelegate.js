@@ -14,6 +14,10 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * Mock delegate for making user directory CRUD calls
+ */
 Ext.define('ExtJSCodeSample.delegate.mock.UserDirectoryDelegate', {
     requires: [
         'ExtJSCodeSample.store.UserDirectoryStore'
@@ -21,21 +25,25 @@ Ext.define('ExtJSCodeSample.delegate.mock.UserDirectoryDelegate', {
 
     /**
      * @private
+     * {Function} success - Function to call after successful Ajax call
      */
     success: {},
 
     /**
      * @private
+     * {Function} failure - Function to call after failed Ajax call
      */
     failure: {},
 
     /**
      * @private
+     * {Object} scope - Scope to execute success/failure methods within
      */
     scope: {},
 
     /**
      * @private
+     * {String} readUsersResponse - Mock read users response data
      */
     readUsersResponse: "{" +
                             "'success': true, " +
@@ -84,7 +92,7 @@ Ext.define('ExtJSCodeSample.delegate.mock.UserDirectoryDelegate', {
     /**
      * Save new user to server
      *
-     * @param {ExtJSCodeSample.model.dto.UserDTO} user
+     * @param {ExtJSCodeSample.model.dto.UserDTO} user - UserDTO to be saved
      */
     createUser: function(user) {
         if(!this.success || !this.scope)
@@ -109,9 +117,9 @@ Ext.define('ExtJSCodeSample.delegate.mock.UserDirectoryDelegate', {
     },
 
     /**
-     * Save user to server
+     * Call server to update user
      *
-     * @param {ExtJSCodeSample.model.dto.UserDTO} user
+     * @param {ExtJSCodeSample.model.dto.UserDTO} user - UserDTO to update server side
      */
     updateUser: function(user) {
         if(!this.success || !this.scope)
@@ -123,7 +131,7 @@ Ext.define('ExtJSCodeSample.delegate.mock.UserDirectoryDelegate', {
     /**
      * Notify server to delete user
      *
-     * @param {ExtJSCodeSample.model.dto.UserDTO} user
+     * @param {ExtJSCodeSample.model.dto.UserDTO} user - UserDTO to be deleted server side
      */
     deleteUser: function(user) {
         if(!this.success || !this.scope)

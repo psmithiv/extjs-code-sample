@@ -14,6 +14,10 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * View controller responsible for managing LoginView
+ */
 Ext.define('ExtJSCodeSample.controller.view.LoginViewController', {
     extend: 'ExtJSCodeSample.controller.view.AbstractViewController',
 
@@ -33,7 +37,9 @@ Ext.define('ExtJSCodeSample.controller.view.LoginViewController', {
     }],
 
     /**
-     * Controller initialization method
+     * Adds listeners to view child components
+     *
+     * @override
      */
     init: function() {
         this.callParent(arguments);
@@ -62,7 +68,7 @@ Ext.define('ExtJSCodeSample.controller.view.LoginViewController', {
     },
 
     /**
-     * Reset form by clearing out input fields
+     * Click handler to reset login form fields
      *
      * @private
      */
@@ -71,7 +77,7 @@ Ext.define('ExtJSCodeSample.controller.view.LoginViewController', {
     },
 
     /**
-     * Collect input from loginPanel.form and dispatch SessionEvent.LOGIN
+     * Click handler to collect input from loginPanel.form and dispatch SessionEvent.LOGIN
      *
      * @private
      */
@@ -96,11 +102,11 @@ Ext.define('ExtJSCodeSample.controller.view.LoginViewController', {
     },
 
     /**
-     * Remember me checkbox click handler.
+     * Remember me checkbox click handler that clears the user credentials from the browser cookie
      *
      * @private
-     * @param {Ext.CheckBox} target
-     * @param {Boolean} value
+     * @param {Ext.CheckBox} target - CheckBox generating the event
+     * @param {Boolean} value - The value of the CheckBox
      */
     rememberMeChangeHandler: function(target, value) {
         if(!value)

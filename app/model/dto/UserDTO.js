@@ -14,6 +14,10 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * User model for passing data back and froth to the server
+ */
 Ext.define('ExtJSCodeSample.model.dto.UserDTO', {
     extend: 'ExtJSCodeSample.data.ObservableModel',
 

@@ -14,6 +14,10 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * Login panel/form to authenticating user
+ */
 Ext.define('ExtJSCodeSample.view.login.LoginPanel', {
     extend: 'Ext.form.Panel',
     alias: 'widget.loginPanel',

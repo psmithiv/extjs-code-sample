@@ -14,6 +14,10 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * Application header view containing company logo, main navigation, use marquee, and localization ComboBox
+ */
 Ext.define("ExtJSCodeSample.view.header.HeaderView", {
     extend: 'Ext.Container',
     alias: 'widget.headerView',

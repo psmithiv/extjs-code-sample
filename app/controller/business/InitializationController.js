@@ -14,6 +14,11 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * Business controller responsible for application startup by configuring the
+ * LocalizationManager and hiding the splash screen.
+ */
 Ext.define('ExtJSCodeSample.controller.business.InitializationController', {
     extend: 'Ext.app.Controller',
 
@@ -25,14 +30,16 @@ Ext.define('ExtJSCodeSample.controller.business.InitializationController', {
     ],
 
     /**
-     * Controller initialization method
+     * Adds event listener for InitializationEvent
+     *
+     * @override
      */
     init: function() {
         this.application.addListener(ExtJSCodeSample.event.InitializationEvent.APP_READY, this.initApplicationEventHandler, this);
     },
 
     /**
-     * Initialize application event handler
+     * Event handler to initialize application
      *
      * @private
      */
@@ -41,7 +48,7 @@ Ext.define('ExtJSCodeSample.controller.business.InitializationController', {
     },
 
     /**
-     * Initialize LocaleManager by setting locales and selected locale
+     * Initialize LocaleManager by setting available locales and selected locale
      *
      * @private
      */
@@ -63,7 +70,7 @@ Ext.define('ExtJSCodeSample.controller.business.InitializationController', {
     },
 
     /**
-     * LocaleManager initialized event handler
+     * Event handler to hide splash screen
      *
      * @private
      */

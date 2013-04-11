@@ -14,6 +14,10 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * Event for creating/destroying session with the server
+ */
 Ext.define('ExtJSCodeSample.event.SessionEvent', {
     statics: {
         LOGIN: 'ExtJSCodeSample.event.SessionEvent.LOGIN',
@@ -22,11 +26,13 @@ Ext.define('ExtJSCodeSample.event.SessionEvent', {
 
     /**
      * @private
-     * {ExtJSCodeSample.model.UserCredentialsModel} userCredentials
+     * {ExtJSCodeSample.model.UserCredentialsModel} userCredentials - Credentials used to establish user session
      */
     userCredentials: {},
 
     /**
+     * Getter method for userCredentials
+     *
      * @return {ExtJSCodeSample.model.UserCredentialsModel}
      */
     getUserCredentials: function() {
@@ -34,7 +40,7 @@ Ext.define('ExtJSCodeSample.event.SessionEvent', {
     },
 
     /**
-     * @param {ExtJSCodeSample.model.UserCredentialsModel} userCredentials
+     * @param {ExtJSCodeSample.model.UserCredentialsModel} userCredentials - Credentials used to establish user session
      */
     constructor: function(userCredentials)
     {

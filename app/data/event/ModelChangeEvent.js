@@ -14,33 +14,40 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * Event dispatched by ObservableModel any time the set method is called and the value being passed has changed
+ */
 Ext.define('ExtJSCodeSample.data.event.ModelChangeEvent', {
     statics: {
+        /**
+         * @event
+         */
         CHANGED: 'ExtJSCodeSample.event.ModelChangeEvent.CHANGED'
     },
 
     /**
      * @private
-     * {String} fieldName
+     * {String} fieldName - The name of the field that has changed
      */
     fieldName: '',
 
     /**
      * @private
-     * {Object} newValue
+     * {Object} newValue - The new value of the field that has changed
      */
     newValue: {},
 
     /**
      * @private
-     * {Object} oldValue
+     * {Object} oldValue - The old value of the field that has chagned
      */
     oldValue: {},
 
     /**
      * Get the name of the field that has changed
      *
-     * @return {string}
+     * @return {String}
      */
     getFieldName: function() {
         return this.fieldName;
@@ -49,22 +56,21 @@ Ext.define('ExtJSCodeSample.data.event.ModelChangeEvent', {
     /**
      * Get the new value for the field that has changed
      *
-     * @return {{}}
+     * @return {Object}
      */
     getNewValue: function() {
         return this.newValue;
     },
 
     /**
-     * Get the old balue for the field that has changed
-     * @return {{}}
+     * Get the old value for the field that has changed
+     * @return {Object}
      */
     getOldValue: function() {
         return this.oldValue;
     },
 
     /**
-     * @constructor
      * @param {String} fieldName - Name of field on model that changed
      * @param {Object} newValue - New value on model
      * @param {Object} oldValue - Previous value on model

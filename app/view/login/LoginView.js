@@ -14,6 +14,10 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * Login view containing LoginPanel
+ */
 Ext.define("ExtJSCodeSample.view.login.LoginView", {
     extend: 'Ext.Container',
     alias: 'widget.loginView',

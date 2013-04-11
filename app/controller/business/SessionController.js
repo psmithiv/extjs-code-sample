@@ -14,6 +14,10 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * Business controller responsible for managing a users session/authentication.
+ */
 Ext.define('ExtJSCodeSample.controller.business.SessionController', {
     extend: 'Ext.app.Controller',
 
@@ -27,7 +31,9 @@ Ext.define('ExtJSCodeSample.controller.business.SessionController', {
     ],
 
     /**
-     * Controller initialization method
+     * Adds event listeners for SessionEvent
+     *
+     * @override
      */
     init: function() {
         this.application.addListener(ExtJSCodeSample.event.SessionEvent.LOGIN, this.loginEventHandler, this);
@@ -35,18 +41,16 @@ Ext.define('ExtJSCodeSample.controller.business.SessionController', {
     },
 
     /**
-     * Model representing the needed information to authenticate a user
-     *
      * @private
-     * {ExtJSCodeSample.model.UserCredentialsModel} userCredentials
+     * {ExtJSCodeSample.model.UserCredentialsModel} userCredentials - Model representing the needed information to authenticate a user
      */
     userCredentials: {},
 
     /**
-     * Establish session with backend
+     * Event handler to establish user session with the backend
      *
      * @private
-     * @param {ExtJSCodeSample.event.SessionEvent} event
+     * @param {ExtJSCodeSample.event.SessionEvent} event - Event containing UserCredentialModel used to authentication user
      */
     loginEventHandler: function(event) {
         this.userCredentials = event.getUserCredentials();
@@ -56,10 +60,10 @@ Ext.define('ExtJSCodeSample.controller.business.SessionController', {
     },
 
     /**
-     * Success event handler for establishing session with backend
+     * Sets UserDTO on ModelLocator, writes creds to cookie, and fires StateEvent.SET_INITIAL_STATE
      *
      * @private
-     * @param {ExtJSCodeSample.model.dto.UserDTO} user
+     * @param {ExtJSCodeSample.model.dto.UserDTO} user - UserDTO returned by server after successful login
      */
     loginSuccessHandler: function(user) {
         var sm = ExtJSCodeSample.model.ModelLocator.get('session');
@@ -76,17 +80,17 @@ Ext.define('ExtJSCodeSample.controller.business.SessionController', {
      * Fault event handler for establishing session with backend
      *
      * @private
-     * @param {Object} fault
+     * @param {Object} fault - Fault object
      */
     loginFaultHandler: function(fault) {
         //Stub method for when backend is in place
     },
 
     /**
-     * Terminate session with backend
+     * Event handler to terminate session with backend
      *
      * @private
-     * @param {ExtJSCodeSample.event.SessionEvent} event
+     * @param {ExtJSCodeSample.event.SessionEvent} event - SessionEvent to tell application to logout user
      */
     logoutEventHandler: function(event) {
         //Stub method for when backend is in place
@@ -105,7 +109,7 @@ Ext.define('ExtJSCodeSample.controller.business.SessionController', {
      * Fault event handler for terminating session with backend
      *
      * @private
-     * @param {Object} fault
+     * @param {Object} fault - Fault Object
      */
     logoutFaultHandler: function(fault) {
         //Stub method for when backend is in place
