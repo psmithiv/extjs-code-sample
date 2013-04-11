@@ -51,7 +51,7 @@ Ext.define('ExtJSCodeSample.controls.Marquee', {
     messages: [],
 
     /**
-     * Creates new DelayedTas to execute every n milliseconds
+     * Creates new DelayedTask to execute every n milliseconds
      */
     constructor: function() {
         this.callParent(arguments);

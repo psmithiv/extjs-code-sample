@@ -61,7 +61,10 @@ Ext.define('ExtJSCodeSample.controller.view.LoginViewController', {
     },
 
     /**
+     * Show view if event.getView() == ExtJSCodeSample.model.constants.Views.LOGIN
+     *
      * @override
+     * @param {ExtJSCodeSample.event.StateEvent} event - StateEvent of type STATE_CHANGED
      */
     applicationStateChangedHandler: function(event) {
         this.getLoginView().setVisible(event.getView() == ExtJSCodeSample.model.constants.Views.LOGIN);

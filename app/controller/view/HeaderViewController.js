@@ -79,7 +79,10 @@ Ext.define('ExtJSCodeSample.controller.view.HeaderViewController', {
     },
 
     /**
+     * Set the correct navigation button to selected based on event.getView()
+     *
      * @override
+     * @param {ExtJSCodeSample.event.StateEvent} event - StateEvent of type STATE_CHANGED
      */
     applicationStateChangedHandler: function(event) {
         switch(event.getView())
@@ -160,7 +163,7 @@ Ext.define('ExtJSCodeSample.controller.view.HeaderViewController', {
      * Locales changed event handler that sets the LocalesComboBox store to LocaleManager.locales
      *
      * @private
-     * @param {ExtJSCodeSample.event.LocaleEvent} event - LocaleEvent of type LOCALES_CHANGED
+     * @param {nineam.locale.event.LocaleEvent} event - LocaleEvent of type LOCALES_CHANGED
      */
     localesChangedEventHandler: function(event) {
         this.getLocalesComboBox().bindStore(nineam.locale.LocaleManager.getLocales(), true);
@@ -170,7 +173,7 @@ Ext.define('ExtJSCodeSample.controller.view.HeaderViewController', {
      * Selected locale changed event handler that sets the correct item in the locales ComboBox
      *
      * @private
-     * @param {ExtJSCodeSample.event.LocaleEvent} event - LocaleEvent of type LOCALE_CHANGED
+     * @param {nineam.locale.event.LocaleEvent} event - LocaleEvent of type LOCALE_CHANGED
      */
     localeChangedEventHandler: function(event) {
         this.getLocalesComboBox().setValue(nineam.locale.LocaleManager.getLocale());

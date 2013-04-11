@@ -21,11 +21,15 @@
 Ext.define('ExtJSCodeSample.event.DialogEvent', {
     statics: {
         /**
+         * Dispatch to show the Logout Dialog
+         *
          * @event
          */
         SHOW_LOGOUT_DIALOG: 'ExtJSCodeSample.event.DialogEvent.SHOW_LOGOUT_DIALOG',
 
         /**
+         * Dispatch to hide the Logout Dialog
+         *
          * @event
          */
         HIDE_LOGOUT_DIALOG: 'ExtJSCodeSample.event.DialogEvent.HIDE_LOGOUT_DIALOG'

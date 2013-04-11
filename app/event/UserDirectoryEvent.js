@@ -22,9 +22,32 @@ Ext.define('ExtJSCodeSample.event.UserDirectoryEvent', {
     requires: 'ExtJSCodeSample.model.dto.UserDTO',
 
     statics: {
+        /**
+         * Dispatch to persist a new user to the server
+         *
+         * @event
+         */
         CREATE_USER: 'ExtJSCodeSample.event.UserDirectoryEvent.CREATE_USER',
+
+        /**
+         * Dispatch to retrieve a collection of UserDTO's from the server
+         *
+         * @event
+         */
         READ_USERS: 'ExtJSCodeSample.event.UserDirectoryEvent.READ_USERS',
+
+        /**
+         * Dispatch to persist an updated user to the server
+         *
+         * @event
+         */
         UPDATE_USER: 'ExtJSCodeSample.event.UserDirectoryEvent.UPDATE_USER',
+
+        /**
+         * Dispatch to delete a user server side
+         *
+         * @event
+         */
         DELETE_USER: 'ExtJSCodeSample.event.UserDirectoryEvent.DELETE_USER'
     },
 

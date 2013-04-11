@@ -20,7 +20,18 @@
  */
 Ext.define('ExtJSCodeSample.event.SessionEvent', {
     statics: {
+        /**
+         * Dispatch to login a user
+         *
+         * @event
+         */
         LOGIN: 'ExtJSCodeSample.event.SessionEvent.LOGIN',
+
+        /**
+         * Dispatch to logout a user
+         *
+         * @event
+         */
         LOGOUT: 'ExtJSCodeSample.event.SessionEvent.LOGOUT'
     },
 

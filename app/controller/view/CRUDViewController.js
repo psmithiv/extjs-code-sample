@@ -75,7 +75,10 @@ Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', {
     },
 
     /**
+     * Show view if event.getView() == ExtJSCodeSample.model.constants.Views.CRUD
+     *
      * @override
+     * @param {ExtJSCodeSample.event.StateEvent} event - StateEvent of type STATE_CHANGED
      */
     applicationStateChangedHandler: function(event) {
         var view = this.getCrudView();

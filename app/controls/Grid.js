@@ -44,7 +44,7 @@ Ext.define('ExtJSCodeSample.controls.Grid', {
      * Adds selection change and data change listeners when setting store so that
      * selected item can be reset on data change event
      *
-     * @Override
+     * @override
      * @param {Ext.data.Store} store - Store to use to populate grid
      */
     bindStore: function(store) {
@@ -65,7 +65,7 @@ Ext.define('ExtJSCodeSample.controls.Grid', {
      *
      * @private
      * @param {ExtJSCodeSample.controls.Grid} scope
-     * @param {Ext.data.Model[]} selectedItem
+     * @param {Ext.data.Model|[]} selectedItem
      */
     selectionChangedEventHandler: function(scope, selectedItem) {
         this.selectedItem = selectedItem[0];

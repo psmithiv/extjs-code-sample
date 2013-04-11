@@ -21,6 +21,8 @@
 Ext.define('ExtJSCodeSample.data.event.ModelChangeEvent', {
     statics: {
         /**
+         * Dispatched when a property on an ObservableModel has changed
+         *
          * @event
          */
         CHANGED: 'ExtJSCodeSample.event.ModelChangeEvent.CHANGED'
@@ -40,7 +42,7 @@ Ext.define('ExtJSCodeSample.data.event.ModelChangeEvent', {
 
     /**
      * @private
-     * {Object} oldValue - The old value of the field that has chagned
+     * {Object} oldValue - The old value of the field that has changed
      */
     oldValue: {},
 
@@ -64,6 +66,7 @@ Ext.define('ExtJSCodeSample.data.event.ModelChangeEvent', {
 
     /**
      * Get the old value for the field that has changed
+     *
      * @return {Object}
      */
     getOldValue: function() {

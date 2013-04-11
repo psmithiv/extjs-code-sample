@@ -35,7 +35,7 @@ Ext.define('ExtJSCodeSample.data.ObservableModel', {
     * @param {Object} newValue - The value to place on the field
     * @param {Boolean} suppressChangeEvent - Wither or not to suppress the ModelChangeEvent
     *
-    * @return {{}}
+    * @return {Object}
     */
    set: function (fieldName, newValue, suppressChangeEvent) {
        var previousValue = this.get(fieldName);

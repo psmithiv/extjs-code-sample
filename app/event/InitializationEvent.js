@@ -21,6 +21,8 @@
 Ext.define('ExtJSCodeSample.event.InitializationEvent', {
     statics: {
         /**
+         * Dispatched when application launch is executed
+         *
          * @event
          */
         APP_READY: 'ExtJSCodeSample.event.InitializationEvent.APP_READY'

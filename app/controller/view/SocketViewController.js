@@ -31,7 +31,10 @@ Ext.define('ExtJSCodeSample.controller.view.SocketViewController', {
     }],
 
     /**
+     * Show view if event.getView() == ExtJSCodeSample.model.constants.Views.SOCKET
+     *
      * @override
+     * @param {ExtJSCodeSample.event.StateEvent} event - StateEvent of type STATE_CHANGED
      */
     applicationStateChangedHandler: function(event) {
         this.getSocketView().setVisible(event.getView() == ExtJSCodeSample.model.constants.Views.SOCKET);
