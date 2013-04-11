@@ -14,18 +14,16 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
-Ext.define('ExtJSCodeSample.store.UserDirectoryStore', function() {
-    return {
-        extend: 'ExtJSCodeSample.data.AbstractStore',
+Ext.define('ExtJSCodeSample.store.UserDirectoryStore', {
+    extend: 'ExtJSCodeSample.data.AbstractStore',
 
-        model: 'ExtJSCodeSample.model.dto.UserDTO',
+    model: 'ExtJSCodeSample.model.dto.UserDTO',
 
-        proxy: {
-            type: 'memory',
-            reader: {
-                type: 'json',
-                root: 'users'
-            }
+    proxy: {
+        type: 'memory',
+        reader: {
+            type: 'json',
+            root: 'users'
         }
     }
 });

@@ -14,28 +14,26 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
-Ext.define('ExtJSCodeSample.controller.view.MainViewController', function() {
-    return {
-        extend: 'ExtJSCodeSample.controller.view.AbstractViewController',
+Ext.define('ExtJSCodeSample.controller.view.MainViewController', {
+    extend: 'ExtJSCodeSample.controller.view.AbstractViewController',
 
-        requires: [
-            'ExtJSCodeSample.model.constants.Views'
-        ],
+    requires: [
+        'ExtJSCodeSample.model.constants.Views'
+    ],
 
-        refs: [{
-            selector: 'mainView',
-            ref: 'mainView'
-        }],
+    refs: [{
+        selector: 'mainView',
+        ref: 'mainView'
+    }],
 
-        init: function() {
-            this.callParent(arguments);
-        },
+    init: function() {
+        this.callParent(arguments);
+    },
 
-        /**
-         * @override
-         */
-        applicationStateChangedHandler: function(event) {
-            this.getMainView().setVisible(event.getView() != ExtJSCodeSample.model.constants.Views.LOGIN);
-        }
+    /**
+     * @override
+     */
+    applicationStateChangedHandler: function(event) {
+        this.getMainView().setVisible(event.getView() != ExtJSCodeSample.model.constants.Views.LOGIN);
     }
 });

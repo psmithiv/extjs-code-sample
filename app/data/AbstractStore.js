@@ -14,26 +14,24 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
-Ext.define('ExtJSCodeSample.data.AbstractStore', function() {
-    return {
-        extend: 'Ext.data.Store',
+Ext.define('ExtJSCodeSample.data.AbstractStore', {
+    extend: 'Ext.data.Store',
 
-        /**
-         * Update a model object on the store by replacing it with a new model
-         *
-         * @param {Object} model - model to replace existing model in store
-         * @param {String} property - property to use to find model to be replaced
-         */
-        update: function(model, property) {
-            property = property ? property : 'id';
+    /**
+     * Update a model object on the store by replacing it with a new model
+     *
+     * @param {Object} model - model to replace existing model in store
+     * @param {String} property - property to use to find model to be replaced
+     */
+    update: function(model, property) {
+        property = property ? property : 'id';
 
-            var index = this.find(property, model.get(property));
+        var index = this.find(property, model.get(property));
 
-            if(index < 0)
-                return;
+        if(index < 0)
+            return;
 
-            this.insert(index, model);
-            this.removeAt(index+1);
-        }
+        this.insert(index, model);
+        this.removeAt(index+1);
     }
 })

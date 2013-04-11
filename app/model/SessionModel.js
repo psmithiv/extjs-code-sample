@@ -14,13 +14,11 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
-Ext.define('ExtJSCodeSample.model.SessionModel', function() {
-    return {
-        extend: 'ExtJSCodeSample.data.ObservableModel',
+Ext.define('ExtJSCodeSample.model.SessionModel', {
+    extend: 'ExtJSCodeSample.data.ObservableModel',
 
-        fields: [
-            {name: 'authenticated', type: 'boolean', defaultValue: false},
-            {name: 'authenticatedUser', type:'ExtJSCodeSample.model.dto.UserDTO'}
-        ]
-    }
+    fields: [
+        {name: 'authenticated', type: 'boolean', defaultValue: false},
+        {name: 'authenticatedUser', type:'ExtJSCodeSample.model.dto.UserDTO'}
+    ]
 });

@@ -14,38 +14,53 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
-Ext.define('ExtJSCodeSample.event.StateEvent', function() {
-    var _view = '';
-    var _data = [];
+Ext.define('ExtJSCodeSample.event.StateEvent', {
+    statics: {
+        SET_INITIAL_STATE: 'ExtJSCodeSample.event.StateEvent.SET_INITIAL_STATE',
+        SET_STATE: 'ExtJSCodeSample.event.StateEvent.SET_STATE',
+        STATE_CHANGED: 'ExtJSCodeSample.event.StateEvent.STATE_CHANGED',
 
-    return {
-        statics: {
-            SET_INITIAL_STATE: 'ExtJSCodeSample.event.StateEvent.SET_INITIAL_STATE',
-            SET_STATE: 'ExtJSCodeSample.event.StateEvent.SET_STATE',
-            STATE_CHANGED: 'ExtJSCodeSample.event.StateEvent.STATE_CHANGED',
+        BROWSER_FORWARD: 'ExtJSCodeSample.event.StateEvent.BROWSER_FORWARD',
+        BROWSER_BACK: 'ExtJSCodeSample.event.StateEvent.BROWSER_BACK',
+        BROWSER_REFRESH: 'ExtJSCodeSample.event.StateEvent.BROWSER_REFRESH'
+    },
 
-            BROWSER_FORWARD: 'ExtJSCodeSample.event.StateEvent.BROWSER_FORWARD',
-            BROWSER_BACK: 'ExtJSCodeSample.event.StateEvent.BROWSER_BACK',
-            BROWSER_REFRESH: 'ExtJSCodeSample.event.StateEvent.BROWSER_REFRESH'
-        },
+    /**
+     * @private
+     * {String} view
+     */
+    view: '',
 
-        getView: function() {
-            return _view;
-        },
+    /**
+     *
+     * @return {String}
+     */
+    getView: function() {
+        return this.view;
+    },
 
-        getData: function() {
-            return _data;
-        },
+    /**
+     * @private
+     * {Array} data
+     */
+    data: [],
 
-        /**
-         *
-         * @param {String} view
-         * @param {Array} data
-         */
-        constructor: function(view, data)
-        {
-            _view = view;
-            _data = data;
-        }
+    /**
+     *
+     * @return {Array}
+     */
+    getData: function() {
+        return this.data;
+    },
+
+    /**
+     *
+     * @param {String} view
+     * @param {Array} data
+     */
+    constructor: function(view, data)
+    {
+        this.view = view;
+        this.data = data;
     }
 })

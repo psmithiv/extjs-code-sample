@@ -14,46 +14,64 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
-Ext.define('ExtJSCodeSample.data.event.ModelChangeEvent', function() {
-    var _fieldName = '';
-    var _newValue = {};
-    var _oldValue = {};
+Ext.define('ExtJSCodeSample.data.event.ModelChangeEvent', {
+    statics: {
+        CHANGED: 'ExtJSCodeSample.event.ModelChangeEvent.CHANGED'
+    },
 
-    return {
-        statics: {
-            CHANGED: 'ExtJSCodeSample.event.ModelChangeEvent.CHANGED'
-        },
+    /**
+     * @private
+     * {String} fieldName
+     */
+    fieldName: '',
 
-        /**
-         * Get the name of the field that has changed
-         *
-         * @return {string}
-         */
-        getFieldName: function() {
-            return _fieldName;
-        },
+    /**
+     * @private
+     * {Object} newValue
+     */
+    newValue: {},
 
-        /**
-         * Get the new value for the field that has changed
-         *
-         * @return {{}}
-         */
-        getNewValue: function() {
-            return _newValue;
-        },
+    /**
+     * @private
+     * {Object} oldValue
+     */
+    oldValue: {},
 
-        /**
-         * Get the old balue for the field that has changed
-         * @return {{}}
-         */
-        getOldValue: function() {
-            return _oldValue;
-        },
+    /**
+     * Get the name of the field that has changed
+     *
+     * @return {string}
+     */
+    getFieldName: function() {
+        return this.fieldName;
+    },
 
-        constructor: function(fieldName, newValue, oldValue) {
-            _fieldName = fieldName;
-            _newValue = newValue;
-            _oldValue = oldValue;
-        }
+    /**
+     * Get the new value for the field that has changed
+     *
+     * @return {{}}
+     */
+    getNewValue: function() {
+        return this.newValue;
+    },
+
+    /**
+     * Get the old balue for the field that has changed
+     * @return {{}}
+     */
+    getOldValue: function() {
+        return this.oldValue;
+    },
+
+    /**
+     * @constructor
+     * @param {String} fieldName - Name of field on model that changed
+     * @param {Object} newValue - New value on model
+     * @param {Object} oldValue - Previous value on model
+     */
+    constructor: function(fieldName, newValue, oldValue) {
+        this.fieldName = fieldName;
+        this.newValue = newValue;
+        this.oldValue = oldValue;
     }
 });

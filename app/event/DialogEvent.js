@@ -14,29 +14,37 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
-Ext.define('ExtJSCodeSample.event.DialogEvent', function() {
-    var _data = {};
-
-    return {
-        statics: {
-            SHOW_LOGOUT_DIALOG: 'ExtJSCodeSample.event.DialogEvent.SHOW_LOGOUT_DIALOG',
-            HIDE_LOGOUT_DIALOG: 'ExtJSCodeSample.event.DialogEvent.HIDE_LOGOUT_DIALOG'
-        },
+Ext.define('ExtJSCodeSample.event.DialogEvent', {
+    statics: {
+        /**
+         * @event
+         */
+        SHOW_LOGOUT_DIALOG: 'ExtJSCodeSample.event.DialogEvent.SHOW_LOGOUT_DIALOG',
 
         /**
-         * Getter for generic data property to pass values to DialogController
-         *
-         * @return {{}}
+         * @event
          */
-        getData: function() {
-            return _data;
-        },
+        HIDE_LOGOUT_DIALOG: 'ExtJSCodeSample.event.DialogEvent.HIDE_LOGOUT_DIALOG'
+    },
 
-        /**
-         * @param data
-         */
-        constructor: function(data) {
-            _data = data;
-        }
+    /**
+     * @private
+     */
+    data: {},
+
+    /**
+     * Getter for generic data property
+     *
+     * @return {Object}
+     */
+    getData: function() {
+        return this.data;
+    },
+
+    /**
+     * @param data
+     */
+    constructor: function(data) {
+        this.data = data;
     }
 })

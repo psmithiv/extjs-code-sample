@@ -14,10 +14,11 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
-Ext.define('ExtJSCodeSample.event.InitializationEvent', function() {
-    return {
-        statics: {
-            APP_READY: 'ExtJSCodeSample.event.InitializationEvent.APP_READY'
-        }
+Ext.define('ExtJSCodeSample.event.InitializationEvent', {
+    statics: {
+        /**
+         * @event
+         */
+        APP_READY: 'ExtJSCodeSample.event.InitializationEvent.APP_READY'
     }
 });

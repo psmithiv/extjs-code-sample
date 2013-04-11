@@ -14,25 +14,24 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
-Ext.define('ExtJSCodeSample.controller.view.AbstractViewController', function() {
-    return {
-        extend: 'Ext.app.Controller',
+Ext.define('ExtJSCodeSample.controller.view.AbstractViewController', {
+    extend: 'Ext.app.Controller',
 
-        requires: [
-            'ExtJSCodeSample.event.StateEvent'
-        ],
+    requires: [
+        'ExtJSCodeSample.event.StateEvent'
+    ],
 
-        init: function() {
-            this.application.addListener(ExtJSCodeSample.event.StateEvent.STATE_CHANGED, this.applicationStateChangedHandler, this);
-        },
+    init: function() {
+        this.application.addListener(ExtJSCodeSample.event.StateEvent.STATE_CHANGED, this.applicationStateChangedHandler, this);
+    },
 
-        /**
-         * Event handler for changes in application state (should be overridden by child class')
-         *
-         * @param {ExtJSCodeSample.event.StateEvent} event
-         */
-        applicationStateChangedHandler: function(event) {
+    /**
+     * Event handler for changes in application state (should be overridden by child class')
+     *
+     * @override
+     * @param {ExtJSCodeSample.event.StateEvent} event
+     */
+    applicationStateChangedHandler: function(event) {
 
-        }
     }
 })

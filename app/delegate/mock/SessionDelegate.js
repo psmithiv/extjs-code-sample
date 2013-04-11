@@ -14,47 +14,62 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
-Ext.define('ExtJSCodeSample.delegate.mock.SessionDelegate', function() {
-    var _success = null;
-    var _failure = null;
-    var _scope = null;
+Ext.define('ExtJSCodeSample.delegate.mock.SessionDelegate', {
+    requires: [
+        'Ext.Ajax',
+        'ExtJSCodeSample.model.dto.UserDTO'
+    ],
 
-    return {
-        requires: [
-            'Ext.Ajax',
-            'ExtJSCodeSample.model.dto.UserDTO'
-        ],
+    /**
+     * @private
+     */
+    success: null,
 
-        constructor: function(success, failure, scope) {
-            _success = success;
-            _failure = failure;
-            _scope = scope;
-        },
+    /**
+     * @private
+     */
+    failure: null,
 
-        /**
-         * Login to server
-         *
-         * @param {String} username
-         * @param {String} password
-         */
-        login: function(username, password) {
-            var response = "{" +
-                                "'success': true, " +
-                                "'authenticatedUser': {" +
-                                    "'username': '" + username + "', " +
-                                    "'name': 'Paul Smith', " +
-                                    "'phone': '917-674-9375', " +
-                                    "'email': 'paul.smith.iv@ninthavenuemedia.com', " +
-                                    "'notes': ''" +
-                                "}" +
-                            "}";
+    /**
+     * @private
+     */
+    scope: null,
 
-            if(!_success || !_scope)
-                return;
+    /**
+     * @constructor
+     * @param {Function} success - Function to call on successful Ajax call
+     * @param {Function} failure - Function to call on failed Ajax call
+     * @param {Object} scope -
+     */
+    constructor: function(success, failure, scope) {
+        this.success = success;
+        this.failure = failure;
+        this.scope = scope;
+    },
 
-            response = Ext.JSON.decode(response);
-            var userDTO = new ExtJSCodeSample.model.dto.UserDTO(response.authenticatedUser);
-            _success.call(_scope, userDTO);
-        }
+    /**
+     * Login to server
+     *
+     * @param {String} username
+     * @param {String} password
+     */
+    login: function(username, password) {
+        var response = "{" +
+                            "'success': true, " +
+                            "'authenticatedUser': {" +
+                                "'username': '" + username + "', " +
+                                "'name': 'Paul Smith', " +
+                                "'phone': '917-674-9375', " +
+                                "'email': 'paul.smith.iv@ninthavenuemedia.com', " +
+                                "'notes': ''" +
+                            "}" +
+                        "}";
+
+        if(!this.success || !this.scope)
+            return;
+
+        response = Ext.JSON.decode(response);
+        var userDTO = new ExtJSCodeSample.model.dto.UserDTO(response.authenticatedUser);
+        this.success.call(this.scope, userDTO);
     }
 });

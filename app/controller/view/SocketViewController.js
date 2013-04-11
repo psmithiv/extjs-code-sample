@@ -14,28 +14,26 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
-Ext.define('ExtJSCodeSample.controller.view.SocketViewController', function() {
-    return {
-        extend: 'ExtJSCodeSample.controller.view.AbstractViewController',
+Ext.define('ExtJSCodeSample.controller.view.SocketViewController', {
+    extend: 'ExtJSCodeSample.controller.view.AbstractViewController',
 
-        requires: [
-            'ExtJSCodeSample.model.constants.Views'
-        ],
+    requires: [
+        'ExtJSCodeSample.model.constants.Views'
+    ],
 
-        refs: [{
-            selector: 'socketView',
-            ref: 'socketView'
-        }],
+    refs: [{
+        selector: 'socketView',
+        ref: 'socketView'
+    }],
 
-        init: function() {
-            this.callParent(arguments);
-        },
+    init: function() {
+        this.callParent(arguments);
+    },
 
-        /**
-         * @override
-         */
-        applicationStateChangedHandler: function(event) {
-            this.getSocketView().setVisible(event.getView() == ExtJSCodeSample.model.constants.Views.SOCKET);
-        }
+    /**
+     * @override
+     */
+    applicationStateChangedHandler: function(event) {
+        this.getSocketView().setVisible(event.getView() == ExtJSCodeSample.model.constants.Views.SOCKET);
     }
 });

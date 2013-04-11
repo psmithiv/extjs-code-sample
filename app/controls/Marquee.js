@@ -14,68 +14,84 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
-Ext.define('ExtJSCodeSample.controls.Marquee', function() {
-    var task;
-    var currentIndex = 0;
-    var messages = [];
+Ext.define('ExtJSCodeSample.controls.Marquee', {
+    extend: 'Ext.form.Label',
+    alias: 'widget.marquee',
 
-    return {
-        extend: 'Ext.form.Label',
-        alias: 'widget.marquee',
+    requires: [
+        'Ext.util.DelayedTask',
+        'Ext.fx.Anim'
+    ],
 
-        requires: [
-            'Ext.util.DelayedTask',
-            'Ext.fx.Anim'
-        ],
+    /**
+     * How fast the display should update
+     */
+    changeInterval: 11000, //11sec
 
-        config: {
-            changeInterval: 11000 //11sec
-        },
+    /**
+     * @private
+     * {Ext.util.DelayedTask} tasks -
+     */
+    task: {},
 
-        constructor: function() {
-            this.callParent(arguments);
+    /**
+     * @private
+     * {int} currentIndex - Index of item in message array that is currently being displayed
+     */
+    currentIndex: 0,
 
-            task = new Ext.util.DelayedTask(this.changeMessage, this);
-        },
+    /**
+     * @private
+     * {Array} messages - Array of messages to display
+     */
+    messages: [],
 
-        /**
-         * Method to set label text.
-         * If typeof value == 'string: display value
-         * If value instanceof Array: rotate displaying values on set interval
-         *
-         * @param {String|Array} value
-         */
-        setText: function(value) {
-            if(typeof value == 'string') {
-                this.callParent([value]);
-                return;
-            }
+    /**
+     * @constructor
+     */
+    constructor: function() {
+        this.callParent(arguments);
 
-            if(value instanceof Array) {
-                messages = value;
-                this.callParent([messages[0]]);
-                task.delay(this.changeInterval);
-            }
-        },
+        this.task = new Ext.util.DelayedTask(this.changeMessage, this);
+    },
 
-        /**
-         * Method to change marquee text every n milliseconds
-         */
-        changeMessage: function() {
-            new Ext.fx.Anim({
-                                target: this,
-                                duration: 1000,
-                                from: {
-                                    opacity: 0
-                                },
-                                to: {
-                                    opacity: 1
-                                }
-                            });
-
-            currentIndex = currentIndex + 1 == messages.length ? 0 : currentIndex + 1;
-            this.setText(messages[currentIndex]);
-            task.delay(this.changeInterval);
+    /**
+     * Method to set label text.
+     * If typeof value == 'string: display value
+     * If value instanceof Array: rotate displaying values on set interval
+     *
+     * @param {String|Array} value
+     */
+    setText: function(value) {
+        if(typeof value == 'string') {
+            this.callParent([value]);
+            return;
         }
+
+        if(value instanceof Array) {
+            this.messages = value;
+            this.callParent([this.messages[0]]);
+            this.task.delay(this.changeInterval);
+        }
+    },
+
+    /**
+     * Method to change marquee text every n milliseconds
+     */
+    changeMessage: function() {
+        new Ext.fx.Anim({
+                            target: this,
+                            duration: 1000,
+                            from: {
+                                opacity: 0
+                            },
+                            to: {
+                                opacity: 1
+                            }
+                        });
+
+        this.currentIndex = this.currentIndex + 1 == this.messages.length ? 0 : this.currentIndex + 1;
+        this.setText(this.messages[this.currentIndex]);
+        this.task.delay(this.changeInterval);
     }
 });

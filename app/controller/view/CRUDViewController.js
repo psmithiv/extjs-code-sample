@@ -14,71 +14,149 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
-Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', function() {
+Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', {
+    extend: 'ExtJSCodeSample.controller.view.AbstractViewController',
+
+    requires: [
+        'ExtJSCodeSample.model.constants.Views',
+        'ExtJSCodeSample.event.UserDirectoryEvent',
+        'ExtJSCodeSample.view.crud.UserFormWindow'
+    ],
+
+    refs: [{
+        selector: 'crudView',
+        ref: 'crudView'
+    },{
+        selector: 'crudView grid[name=usersGrid]',
+        ref: 'userGrid'
+    },{
+        selector: 'userWindow',
+        ref: 'userFormWindow'
+    },{
+        selector: 'userWindow form',
+        ref: 'userForm'
+    }],
+
+    init: function() {
+        this.callParent(arguments);
+
+        this.control({
+            'crudView button[action=newUser]': {
+                click: this.newUserClickHandler
+            },
+
+            'crudView button[action=editUser]': {
+                click: this.editUserClickHandler
+            },
+
+            'crudView button[action=deleteUser]' : {
+                click: this.deleteUserClickHandler
+            },
+
+            'userWindow button[action=reset]' : {
+                click: this.resetUserFormClickHandler
+            },
+
+            'userWindow button[action=submit]' : {
+                click: this.submitUserFormClickHandler
+            }
+        });
+
+        ExtJSCodeSample.model.ModelLocator.addListener(ExtJSCodeSample.data.event.ModelChangeEvent.CHANGED, this.userDirectoryStoreChangeHandler, this);
+    },
+
+    /**
+     * @override
+     */
+    applicationStateChangedHandler: function(event) {
+        var view = this.getCrudView();
+        view.setVisible(event.getView() == ExtJSCodeSample.model.constants.Views.CRUD);
+
+        if(this.getUserFormWindow() && view.isHidden())
+            this.getUserFormWindow().hide();
+
+        if(!view.isHidden())
+            this.application.fireEvent(ExtJSCodeSample.event.UserDirectoryEvent.READ_USERS, {});
+    },
+
     /**
      * ModelLocator change event handler for setting store on CRUDView.grid
      *
+     * @private
      * @param {ExtJSCodeSample.data.event.ModelChangeEvent} event
      */
-    function userDirectoryStoreChangeHandler(event) {
-        if(event.getFieldName() != 'users')
-            return;
-
-        this.getUserGrid().bindStore(event.getNewValue());
-    }
+    userDirectoryStoreChangeHandler: function(event) {
+        if(event.getFieldName() == 'users')
+            this.getUserGrid().bindStore(event.getNewValue());
+    },
 
     /**
      * New user button click handler
+     *
+     * @private
      */
-    function newUserClickHandler() {
-        resetUserFormClickHandler.call(this);
+    newUserClickHandler: function() {
+        this.resetUserFormClickHandler();
+
         this.getUserForm().loadRecord(new ExtJSCodeSample.model.dto.UserDTO());
 
-        setUserFormWindowTitle.call(this, true);
+        this.setUserFormWindowTitle(true);
 
         this.getUserFormWindow().show();
-    }
+    },
 
     /**
      * Edit user button click handler
+     *
+     * @private
      */
-    function editUserClickHandler() {
+    editUserClickHandler: function() {
         var selectedUser = this.getUserGrid().getSelectionModel().getSelection()[0];
         this.getUserForm().loadRecord(selectedUser);
 
-        setUserFormWindowTitle.call(this, false);
+        this.setUserFormWindowTitle(false);
 
         this.getUserFormWindow().show();
-    }
+    },
 
     /**
      * Delete user button click handler
+     *
+     * @private
      */
-    function deleteUserClickHandler() {
+    deleteUserClickHandler: function() {
         var selectedUser = this.getUserGrid().getSelectionModel().getSelection()[0];
         var e = new ExtJSCodeSample.event.UserDirectoryEvent(selectedUser);
         this.application.fireEvent(ExtJSCodeSample.event.UserDirectoryEvent.DELETE_USER, e);
-    }
+    },
 
     /**
      * Set the form window title
      *
+     * @private
      * @param {Boolean} newUser
      */
-    function setUserFormWindowTitle(newUser) {
+    setUserFormWindowTitle: function(newUser) {
         var lm = nineam.locale.LocaleManager.getProperties();
         var title = newUser ?  lm.crud.window.title.new : lm.crud.window.title.edit;
         this.getUserFormWindow().setTitle(title);
-    }
+    },
 
     /**
      * Clear out the user form
+     *
+     * @private
      */
-    function resetUserFormClickHandler() {
+    resetUserFormClickHandler: function() {
         this.getUserForm().getForm().reset();
-    }
+    },
 
-    function submitUserFormClickHandler() {
+    /**
+     * User form submit button click handler
+     *
+     * @private
+     */
+    submitUserFormClickHandler: function() {
         this.getUserFormWindow().hide();
 
         var record = new ExtJSCodeSample.model.dto.UserDTO(this.getUserForm().getValues());
@@ -87,71 +165,5 @@ Ext.define('ExtJSCodeSample.controller.view.CRUDViewController', function() {
         var en = record.get('id') > 0 ? ExtJSCodeSample.event.UserDirectoryEvent.UPDATE_USER : ExtJSCodeSample.event.UserDirectoryEvent.CREATE_USER;
         var e = new ExtJSCodeSample.event.UserDirectoryEvent(record);
         this.application.fireEvent(en, e);
-    }
-
-    return {
-        extend: 'ExtJSCodeSample.controller.view.AbstractViewController',
-
-        requires: [
-            'ExtJSCodeSample.model.constants.Views',
-            'ExtJSCodeSample.event.UserDirectoryEvent',
-            'ExtJSCodeSample.view.crud.UserFormWindow'
-        ],
-
-        refs: [{
-            selector: 'crudView',
-            ref: 'crudView'
-        },{
-            selector: 'crudView grid[name=usersGrid]',
-            ref: 'userGrid'
-        },{
-            selector: 'userWindow',
-            ref: 'userFormWindow'
-        },{
-            selector: 'userWindow form',
-            ref: 'userForm'
-        }],
-
-        init: function() {
-            this.callParent(arguments);
-
-            this.control({
-                'crudView button[action=newUser]': {
-                    click: newUserClickHandler
-                },
-
-                'crudView button[action=editUser]': {
-                    click: editUserClickHandler
-                },
-
-                'crudView button[action=deleteUser]' : {
-                    click: deleteUserClickHandler
-                },
-
-                'userWindow button[action=reset]' : {
-                    click: resetUserFormClickHandler
-                },
-
-                'userWindow button[action=submit]' : {
-                    click: submitUserFormClickHandler
-                }
-            });
-
-            ExtJSCodeSample.model.ModelLocator.addListener(ExtJSCodeSample.data.event.ModelChangeEvent.CHANGED, userDirectoryStoreChangeHandler, this);
-        },
-
-        /**
-         * @override
-         */
-        applicationStateChangedHandler: function(event) {
-            var view = this.getCrudView();
-            view.setVisible(event.getView() == ExtJSCodeSample.model.constants.Views.CRUD);
-
-            if(this.getUserFormWindow() && view.isHidden())
-                this.getUserFormWindow().hide();
-
-            if(!view.isHidden())
-                this.application.fireEvent(ExtJSCodeSample.event.UserDirectoryEvent.READ_USERS, {});
-        }
     }
 });

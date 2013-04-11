@@ -14,62 +14,73 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
-Ext.define('ExtJSCodeSample.controller.business.DialogController', function() {
-    var logoutDialog = {};
+Ext.define('ExtJSCodeSample.controller.business.DialogController', {
+    extend: 'Ext.app.Controller',
+
+    requires: [
+        'Ext.History',
+        'ExtJSCodeSample.event.DialogEvent',
+        'ExtJSCodeSample.event.StateEvent',
+        'nineam.locale.LocaleManager'
+    ],
+
+    /**
+     * Object literal representing a dialog instance
+     *
+     * @private
+     * {{{Object} dialog, {Boolean} navForward}} - logoutDialog
+     */
+    logoutDialog: {},
+
+    /**
+     * Controller initialization method
+     */
+    init: function() {
+        this.application.addListener(ExtJSCodeSample.event.DialogEvent.SHOW_LOGOUT_DIALOG, this.showLogoutDialogEventHandler, this);
+        this.application.addListener(ExtJSCodeSample.event.DialogEvent.HIDE_LOGOUT_DIALOG, this.hideLogoutDialogEventHandler, this);
+    },
 
     /**
      * Show logout dialog event handler method
      *
+     * @private
      * @param {ExtJSCodeSample.event.DialogEvent} event
      */
-    function showLogoutDialogEventHandler(event) {
+    showLogoutDialogEventHandler: function(event) {
         var lm = nineam.locale.LocaleManager.getProperties().dialogs.logout;
 
         var dialog = Ext.Msg.show({
-                        title: lm.title,
-                        msg: lm.message,
-                        buttons: Ext.Msg.OKCANCEL,
-                        icon: Ext.Msg.QUESTION,
-                        fn: showLogoutDialogButtonClickHandler,
-                        scope: this
-                    });
+            title: lm.title,
+            msg: lm.message,
+            buttons: Ext.Msg.OKCANCEL,
+            icon: Ext.Msg.QUESTION,
+            fn: this.showLogoutDialogButtonClickHandler,
+            scope: this
+        });
 
-        logoutDialog = {dialog: dialog, navForward: event.data.navForward || false};
-    }
+        this.logoutDialog = {dialog: dialog, navForward: event.data.navForward || false};
+    },
 
     /**
      * Show logout button click handler
      *
+     * @private
      * @param {String} buttonId
      */
-    function showLogoutDialogButtonClickHandler(buttonId) {
+    showLogoutDialogButtonClickHandler: function(buttonId) {
         if(buttonId == 'ok')
             this.application.fireEvent(ExtJSCodeSample.event.StateEvent.BROWSER_REFRESH, {});
-        else if(buttonId == 'cancel' && logoutDialog.navForward)
+        else if(buttonId == 'cancel' && this.logoutDialog.navForward)
             this.application.fireEvent(ExtJSCodeSample.event.StateEvent.BROWSER_FORWARD, {});
-    }
+    },
 
     /**
      * Hide any dialogs that may be open
+     *
+     * @private
      */
-    function hideLogoutDialogEventHandler() {
-        if(logoutDialog.dialog && logoutDialog.dialog.isVisible())
-            logoutDialog.dialog.hide();
-    }
-
-    return {
-        extend: 'Ext.app.Controller',
-
-        requires: [
-            'Ext.History',
-            'ExtJSCodeSample.event.DialogEvent',
-            'ExtJSCodeSample.event.StateEvent',
-            'nineam.locale.LocaleManager'
-        ],
-
-        init: function() {
-            this.application.addListener(ExtJSCodeSample.event.DialogEvent.SHOW_LOGOUT_DIALOG, showLogoutDialogEventHandler, this);
-            this.application.addListener(ExtJSCodeSample.event.DialogEvent.HIDE_LOGOUT_DIALOG, hideLogoutDialogEventHandler, this);
-        }
+    hideLogoutDialogEventHandler: function() {
+        if(this.logoutDialog.dialog && logoutDialog.dialog.isVisible())
+            this.logoutDialog.dialog.hide();
     }
 });

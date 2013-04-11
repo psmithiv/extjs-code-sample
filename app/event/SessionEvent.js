@@ -14,25 +14,30 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
-Ext.define('ExtJSCodeSample.event.SessionEvent', function() {
-    var _userCredentials;
+Ext.define('ExtJSCodeSample.event.SessionEvent', {
+    statics: {
+        LOGIN: 'ExtJSCodeSample.event.SessionEvent.LOGIN',
+        LOGOUT: 'ExtJSCodeSample.event.SessionEvent.LOGOUT'
+    },
 
-    return {
-        statics: {
-            LOGIN: 'ExtJSCodeSample.event.SessionEvent.LOGIN',
-            LOGOUT: 'ExtJSCodeSample.event.SessionEvent.LOGOUT'
-        },
+    /**
+     * @private
+     * {ExtJSCodeSample.model.UserCredentialsModel} userCredentials
+     */
+    userCredentials: {},
 
-        getUserCredentials: function() {
-            return _userCredentials;
-        },
+    /**
+     * @return {ExtJSCodeSample.model.UserCredentialsModel}
+     */
+    getUserCredentials: function() {
+        return this.userCredentials;
+    },
 
-        /**
-         * @param {ExtJSCodeSample.model.UserCredentialsModel} userCredentials
-         */
-        constructor: function(userCredentials)
-        {
-            _userCredentials = userCredentials;
-        }
+    /**
+     * @param {ExtJSCodeSample.model.UserCredentialsModel} userCredentials
+     */
+    constructor: function(userCredentials)
+    {
+        this.userCredentials = userCredentials;
     }
 })

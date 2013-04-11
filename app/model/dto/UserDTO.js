@@ -14,17 +14,15 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
-Ext.define('ExtJSCodeSample.model.dto.UserDTO', function() {
-    return {
-        extend: 'ExtJSCodeSample.data.ObservableModel',
+Ext.define('ExtJSCodeSample.model.dto.UserDTO', {
+    extend: 'ExtJSCodeSample.data.ObservableModel',
 
-        fields: [
-            {name: 'id', type: 'int'},
-            {name: 'username', type: 'string'},
-            {name: 'name', type: 'string'},
-            {name: 'phone', type: 'string'},
-            {name: 'email', type: 'string'},
-            {name: 'notes', type: 'string'}
-        ]
-    }
+    fields: [
+        {name: 'id', type: 'int'},
+        {name: 'username', type: 'string'},
+        {name: 'name', type: 'string'},
+        {name: 'phone', type: 'string'},
+        {name: 'email', type: 'string'},
+        {name: 'notes', type: 'string'}
+    ]
 });

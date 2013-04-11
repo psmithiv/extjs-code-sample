@@ -14,89 +14,100 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
-Ext.define('ExtJSCodeSample.controller.business.SessionController', function() {
-    var userCredentials;
+Ext.define('ExtJSCodeSample.controller.business.SessionController', {
+    extend: 'Ext.app.Controller',
+
+    requires: [
+        'ExtJSCodeSample.event.SessionEvent',
+        'ExtJSCodeSample.event.StateEvent',
+        'ExtJSCodeSample.delegate.mock.SessionDelegate',
+        'ExtJSCodeSample.data.event.ModelChangeEvent',
+        'ExtJSCodeSample.model.ModelLocator',
+        'ExtJSCodeSample.controller.business.PersistenceController'
+    ],
+
+    /**
+     * Controller initialization method
+     */
+    init: function() {
+        this.application.addListener(ExtJSCodeSample.event.SessionEvent.LOGIN, this.loginEventHandler, this);
+        this.application.addListener(ExtJSCodeSample.event.SessionEvent.LOGOUT, this.logoutEventHandler, this);
+    },
+
+    /**
+     * Model representing the needed information to authenticate a user
+     *
+     * @private
+     * {ExtJSCodeSample.model.UserCredentialsModel} userCredentials
+     */
+    userCredentials: {},
 
     /**
      * Establish session with backend
      *
+     * @private
      * @param {ExtJSCodeSample.event.SessionEvent} event
      */
-    function loginEventHandler(event) {
-        userCredentials = event.getUserCredentials();
+    loginEventHandler: function(event) {
+        this.userCredentials = event.getUserCredentials();
 
-        var authDelegate = new ExtJSCodeSample.delegate.mock.SessionDelegate(loginSuccessHandler, loginFaultHandler, this);
-        authDelegate.login(userCredentials.get('username'), userCredentials.get('password'));
-    }
+        var authDelegate = new ExtJSCodeSample.delegate.mock.SessionDelegate(this.loginSuccessHandler, this.loginFaultHandler, this);
+        authDelegate.login(this.userCredentials.get('username'), this.userCredentials.get('password'));
+    },
 
     /**
      * Success event handler for establishing session with backend
      *
+     * @private
      * @param {ExtJSCodeSample.model.dto.UserDTO} user
      */
-    function loginSuccessHandler(user) {
+    loginSuccessHandler: function(user) {
         var sm = ExtJSCodeSample.model.ModelLocator.get('session');
         sm.set('authenticated', true);
         sm.set('authenticatedUser', user);
 
-        if(userCredentials.get('rememberMe'))
-        {
-            ExtJSCodeSample.controller.business.PersistenceController.setCredentials(userCredentials);
-        }
+        if(this.userCredentials.get('rememberMe'))
+            ExtJSCodeSample.controller.business.PersistenceController.setCredentials(this.userCredentials);
 
         this.application.fireEvent(ExtJSCodeSample.event.StateEvent.SET_INITIAL_STATE);
-    }
+    },
 
     /**
      * Fault event handler for establishing session with backend
      *
+     * @private
      * @param {Object} fault
      */
-    function loginFaultHandler(fault) {
+    loginFaultHandler: function(fault) {
         //Stub method for when backend is in place
-    }
+    },
 
     /**
      * Terminate session with backend
      *
+     * @private
      * @param {ExtJSCodeSample.event.SessionEvent} event
      */
-    function logoutEventHandler(event) {
+    logoutEventHandler: function(event) {
         //Stub method for when backend is in place
-    }
+    },
 
     /**
      * Success event handler for terminating session with backend
      *
+     * @private
      */
-    function logoutSuccessHandler() {
+    logoutSuccessHandler: function() {
         //Stub method for when backend is in place
-    }
+    },
 
     /**
      * Fault event handler for terminating session with backend
      *
+     * @private
      * @param {Object} fault
      */
-    function logoutFaultHandler(fault) {
+    logoutFaultHandler: function(fault) {
         //Stub method for when backend is in place
-    }
-
-    return {
-        extend: 'Ext.app.Controller',
-
-        requires: [
-            'ExtJSCodeSample.event.SessionEvent',
-            'ExtJSCodeSample.event.StateEvent',
-            'ExtJSCodeSample.delegate.mock.SessionDelegate',
-            'ExtJSCodeSample.data.event.ModelChangeEvent',
-            'ExtJSCodeSample.model.ModelLocator',
-            'ExtJSCodeSample.controller.business.PersistenceController'
-        ],
-
-        init: function() {
-            this.application.addListener(ExtJSCodeSample.event.SessionEvent.LOGIN, loginEventHandler, this);
-            this.application.addListener(ExtJSCodeSample.event.SessionEvent.LOGOUT, logoutEventHandler, this);
-        }
     }
 })

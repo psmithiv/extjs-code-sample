@@ -14,65 +14,71 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
-Ext.define('ExtJSCodeSample.controls.Grid', function() {
-    var _selectedItem;
+Ext.define('ExtJSCodeSample.controls.Grid', {
+    extend: 'Ext.grid.Panel',
+    alias: 'widget.grid',
+
+    config: {
+        maintainSelection: false,
+        maintainSelectionProperty: 'id'
+    },
+
+    /**
+     * @private
+     * {Object} selectedItem - The currently selected item
+     */
+    selectedItem: null,
+
+    /**
+     * Adds selection change and data change listeners when setting store so that
+     * selected item can be reset on data change event
+     *
+     * @Override
+     * @param {Ext.data.Store} store
+     */
+    bindStore: function(store) {
+        this.callParent([store]);
+
+        if(!this.getMaintainSelection())
+            return;
+
+        this.addListener('selectionchange', this.selectionChangedEventHandler, this);
+
+        store.addListener('datachanged', this.storeDataChangedEventHandler, this);
+        this.setSelection(this.selectedItem);
+    },
 
     /**
      * Grid selection change event handler to persist selected item so that it can
      * later be reset when the sore dispatches a data change event
      *
+     * @private
      * @param {ExtJSCodeSample.controls.Grid} scope
      * @param {Ext.data.Model[]} selectedItem
      */
-    function selectionChangedEventHandler(scope, selectedItem) {
-        _selectedItem = selectedItem[0];
-    }
-
+    selectionChangedEventHandler: function(scope, selectedItem) {
+        this.selectedItem = selectedItem[0];
+    },
+    
     /**
      * Resets the selected item when the Store dispatches the data changed event
+     *
+     * @private
      */
-    function storeDataChangedEventHandler() {
-        setSelection.call(this, _selectedItem);
-    }
-
+    storeDataChangedEventHandler: function() {
+        this.setSelection(this.selectedItem);
+    },
+    
     /**
      * Sets the selected record
      *
+     * @private
      * @param {Ext.data.Model} item
      */
-    function setSelection(item) {
+    setSelection: function(item) {
         var selectionField = this.getMaintainSelectionProperty();
-
+    
         var itemIndex = item ? this.getStore().find(selectionField, item.get(selectionField)) : 0;
         this.getSelectionModel().select(itemIndex);
-    }
-
-    return {
-        extend: 'Ext.grid.Panel',
-        alias: 'widget.grid',
-
-        config: {
-            maintainSelection: false,
-            maintainSelectionProperty: 'id'
-        },
-
-        /**
-         * Adds selection change and data change listeners when setting store so that
-         * selected item can be reset on data change event
-         *
-         * @Override
-         * @param {Ext.data.Store} store
-         */
-        bindStore: function(store) {
-            this.callParent([store]);
-
-            if(!this.getMaintainSelection())
-                return;
-
-            this.addListener('selectionchange', selectionChangedEventHandler, this);
-
-            store.addListener('datachanged', storeDataChangedEventHandler, this);
-            setSelection.call(this, _selectedItem);
-        }
     }
 });

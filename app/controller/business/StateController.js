@@ -14,7 +14,29 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
-Ext.define('ExtJSCodeSample.controller.business.StateController', function() {
+Ext.define('ExtJSCodeSample.controller.business.StateController', {
+    extend: 'Ext.app.Controller',
+
+    requires: [
+        'Ext.util.History',
+        'ExtJSCodeSample.event.StateEvent',
+        'ExtJSCodeSample.event.DialogEvent',
+        'ExtJSCodeSample.model.constants.Views',
+        'ExtJSCodeSample.model.ModelLocator'
+    ],
+
+    init: function() {
+        this.application.addListener(ExtJSCodeSample.event.StateEvent.SET_INITIAL_STATE, this.setInitialStateEventHandler, this);
+        this.application.addListener(ExtJSCodeSample.event.StateEvent.SET_STATE, this.setStateEventHandler, this);
+
+        this.application.addListener(ExtJSCodeSample.event.StateEvent.BROWSER_BACK, this.browserBackEventHandler, this);
+        this.application.addListener(ExtJSCodeSample.event.StateEvent.BROWSER_FORWARD, this.browserForwardEventHandler, this);
+        this.application.addListener(ExtJSCodeSample.event.StateEvent.BROWSER_REFRESH, this.browserRefreshEventHandler, this);
+
+        Ext.History.init();
+        Ext.History.addListener("change", this.urlHistoryChangeHandler, this);
+    },
+
     /**
      * Event handler to set the initial state of the application post startup/login
      *
@@ -22,56 +44,66 @@ Ext.define('ExtJSCodeSample.controller.business.StateController', function() {
      *      1. View in URL hash
      *      2. View in cookie (todo)
      *      3. Default view
+     *
+     * @private
      */
-    function setInitialStateEventHandler() {
+    setInitialStateEventHandler: function() {
         var hash = Ext.History.getHash();
         if(hash)
         {
-            urlHistoryChangeHandler.call(this, hash);
+            this.urlHistoryChangeHandler(hash);
             return;
         }
 
         var e = new ExtJSCodeSample.event.StateEvent(ExtJSCodeSample.model.constants.Views.CRUD, {});
         this.application.fireEvent(ExtJSCodeSample.event.StateEvent.SET_STATE, e);
-    }
+    },
 
     /**
      * Event handler to update the browser hash and in turn update the application state
      *
+     * @private
      * @param {ExtJSCodeSample.event.StateEvent} event
      */
-    function setStateEventHandler(event) {
+    setStateEventHandler: function(event) {
         var hash = Ext.JSON.encode({view: event.getView(), data: event.getData()});
         Ext.History.setHash(hash);
-    }
+    },
 
     /**
-     * event handler to navigate one item back in browser history
+     * Event handler to navigate one item back in browser history
+     *
+     * @private
      */
-    function browserBackEventHandler() {
+    browserBackEventHandler: function() {
         Ext.History.back();
-    }
+    },
 
     /**
      * Event handler to navigate one item forward in browser history
+     *
+     * @private
      */
-    function browserForwardEventHandler() {
+    browserForwardEventHandler: function() {
         Ext.History.forward();
-    }
+    },
 
     /**
      * Event handler to refresh web browser
+     *
+     * @private
      */
-    function browserRefreshEventHandler() {
+    browserRefreshEventHandler: function() {
         location.reload();
-    }
+    },
 
     /**
      * Event handler to update application state when browser hash changes
      *
-     * @param {String} hash
+     * @private
+     * @param {String} hash - Hash string from browser url
      */
-    function urlHistoryChangeHandler(hash) {
+    urlHistoryChangeHandler: function(hash) {
         var authenticated = ExtJSCodeSample.model.ModelLocator.get('session').get('authenticated');
         if(!authenticated)
             return;
@@ -86,28 +118,4 @@ Ext.define('ExtJSCodeSample.controller.business.StateController', function() {
             this.application.fireEvent(ExtJSCodeSample.event.DialogEvent.SHOW_LOGOUT_DIALOG, {data: {navForward:true} });
         }
     }
-
-    return {
-        extend: 'Ext.app.Controller',
-
-        requires: [
-            'Ext.util.History',
-            'ExtJSCodeSample.event.StateEvent',
-            'ExtJSCodeSample.event.DialogEvent',
-            'ExtJSCodeSample.model.constants.Views',
-            'ExtJSCodeSample.model.ModelLocator'
-        ],
-
-        init: function() {
-            this.application.addListener(ExtJSCodeSample.event.StateEvent.SET_INITIAL_STATE, setInitialStateEventHandler, this);
-            this.application.addListener(ExtJSCodeSample.event.StateEvent.SET_STATE, setStateEventHandler, this);
-
-            this.application.addListener(ExtJSCodeSample.event.StateEvent.BROWSER_BACK, browserBackEventHandler, this);
-            this.application.addListener(ExtJSCodeSample.event.StateEvent.BROWSER_FORWARD, browserForwardEventHandler, this);
-            this.application.addListener(ExtJSCodeSample.event.StateEvent.BROWSER_REFRESH, browserRefreshEventHandler, this);
-
-            Ext.History.init();
-            Ext.History.addListener("change", urlHistoryChangeHandler, this);
-        }
-    }
-})
+});

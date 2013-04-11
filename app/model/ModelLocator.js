@@ -14,26 +14,24 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
-Ext.define('ExtJSCodeSample.model.ModelLocator', function() {
-    return {
-        extend: 'ExtJSCodeSample.data.ObservableModel',
+Ext.define('ExtJSCodeSample.model.ModelLocator', {
+    extend: 'ExtJSCodeSample.data.ObservableModel',
 
-        requires: [
-            'ExtJSCodeSample.model.SessionModel'
-        ],
+    requires: [
+        'ExtJSCodeSample.model.SessionModel'
+    ],
 
-        singleton: true,
+    singleton: true,
 
-        fields: [
-            {name: 'session', type: 'ExtJSCodeSample.model.SessionModel'},
-            {name: 'usersList', type: 'Ext.Store'}
-        ],
+    fields: [
+        {name: 'session', type: 'ExtJSCodeSample.model.SessionModel'},
+        {name: 'usersList', type: 'Ext.Store'}
+    ],
 
-        constructor: function() {
-            this.callParent(arguments);
+    constructor: function() {
+        this.callParent(arguments);
 
-            //We cannot set a fields defaultValue to a complex object, so we do it here
-            this.set('session', new ExtJSCodeSample.model.SessionModel(), true);
-        }
+        //We cannot set a fields defaultValue to a complex object, so we do it here
+        this.set('session', new ExtJSCodeSample.model.SessionModel(), true);
     }
 });

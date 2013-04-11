@@ -14,29 +14,35 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
-Ext.define('ExtJSCodeSample.event.UserDirectoryEvent', function() {
-    var user = {};
+Ext.define('ExtJSCodeSample.event.UserDirectoryEvent', {
+    requires: 'ExtJSCodeSample.model.dto.UserDTO',
 
-    return {
-        requires: 'ExtJSCodeSample.model.dto.UserDTO',
+    statics: {
+        CREATE_USER: 'ExtJSCodeSample.event.UserDirectoryEvent.CREATE_USER',
+        READ_USERS: 'ExtJSCodeSample.event.UserDirectoryEvent.READ_USERS',
+        UPDATE_USER: 'ExtJSCodeSample.event.UserDirectoryEvent.UPDATE_USER',
+        DELETE_USER: 'ExtJSCodeSample.event.UserDirectoryEvent.DELETE_USER'
+    },
 
-        statics: {
-            CREATE_USER: 'ExtJSCodeSample.event.UserDirectoryEvent.CREATE_USER',
-            READ_USERS: 'ExtJSCodeSample.event.UserDirectoryEvent.READ_USERS',
-            UPDATE_USER: 'ExtJSCodeSample.event.UserDirectoryEvent.UPDATE_USER',
-            DELETE_USER: 'ExtJSCodeSample.event.UserDirectoryEvent.DELETE_USER'
-        },
+    /**
+     * @private
+     * {ExtJSCodeSample.model.dto.UserDTO} user
+     */
+    user: {},
 
-        getUser: function() {
-            return this.user
-        },
+    /**
+     *
+     * @return {ExtJSCodeSample.model.dto.UserDTO}
+     */
+    getUser: function() {
+        return this.user
+    },
 
-        /**
-         * @param {ExtJSCodeSample.model.dto.UserDTO} user
-         */
-        constructor: function(user)
-        {
-            this.user = user;
-        }
+    /**
+     * @param {ExtJSCodeSample.model.dto.UserDTO} user
+     */
+    constructor: function(user)
+    {
+        this.user = user;
     }
 });

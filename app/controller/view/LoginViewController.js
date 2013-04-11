@@ -14,88 +14,96 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
-Ext.define('ExtJSCodeSample.controller.view.LoginViewController', function() {
+Ext.define('ExtJSCodeSample.controller.view.LoginViewController', {
+    extend: 'ExtJSCodeSample.controller.view.AbstractViewController',
+
+    requires: [
+        'ExtJSCodeSample.event.StateEvent',
+        'ExtJSCodeSample.model.constants.Views',
+        'ExtJSCodeSample.controller.business.PersistenceController',
+        'ExtJSCodeSample.model.UserCredentialsModel'
+    ],
+
+    refs: [{
+        selector: 'loginView',
+        ref: 'loginView'
+    },{
+        selector: 'loginPanel.form',
+        ref: 'loginForm'
+    }],
+
+    /**
+     * Controller initialization method
+     */
+    init: function() {
+        this.callParent(arguments);
+
+        this.control({
+            'loginPanel button[action=clearLogin]': {
+                click: this.resetClickHandler
+            },
+
+            'loginPanel button[action=login]': {
+                click: this.loginClickHandler,
+                render: this.setFormValues
+            },
+
+            'loginPanel checkbox[name=rememberMe]': {
+                change: this.rememberMeChangeHandler
+            }
+        });
+    },
+
+    /**
+     * @override
+     */
+    applicationStateChangedHandler: function(event) {
+        this.getLoginView().setVisible(event.getView() == ExtJSCodeSample.model.constants.Views.LOGIN);
+    },
+
     /**
      * Reset form by clearing out input fields
+     *
+     * @private
      */
-    function resetClickHandler() {
+    resetClickHandler: function() {
         this.getLoginForm().getForm().reset();
-    };
+    },
 
     /**
      * Collect input from loginPanel.form and dispatch SessionEvent.LOGIN
+     *
+     * @private
      */
-    function loginClickHandler() {
+    loginClickHandler: function() {
         var values = this.getLoginForm().getValues();
         values.rememberMe = values.rememberMe == 'on'; //convert 'on' to true else false
 
         var record = new ExtJSCodeSample.model.UserCredentialsModel(values);
         var e = new ExtJSCodeSample.event.SessionEvent(record);
         this.application.fireEvent(ExtJSCodeSample.event.SessionEvent.LOGIN, e);
-    };
+    },
 
     /**
      * Once the last button of the form has rendered, set the form field values
+     *
+     * @private
      */
-    function setFormValues() {
+    setFormValues: function() {
         var u = ExtJSCodeSample.controller.business.PersistenceController.getCredentials();
         u = u.get('rememberMe') ? u : new ExtJSCodeSample.model.UserCredentialsModel();
         this.getLoginForm().loadRecord(u);
-    }
+    },
 
     /**
      * Remember me checkbox click handler.
      *
+     * @private
      * @param {Ext.CheckBox} target
      * @param {Boolean} value
      */
-    function rememberMeChangeHandler(target, value) {
+    rememberMeChangeHandler: function(target, value) {
         if(!value)
             ExtJSCodeSample.controller.business.PersistenceController.clearCredentials();
-    }
-
-    return {
-        extend: 'ExtJSCodeSample.controller.view.AbstractViewController',
-
-        requires: [
-            'ExtJSCodeSample.event.StateEvent',
-            'ExtJSCodeSample.model.constants.Views',
-            'ExtJSCodeSample.controller.business.PersistenceController',
-            'ExtJSCodeSample.model.UserCredentialsModel'
-        ],
-
-        refs: [{
-            selector: 'loginView',
-            ref: 'loginView'
-        },{
-            selector: 'loginPanel.form',
-            ref: 'loginForm'
-        }],
-
-        init: function() {
-            this.callParent(arguments);
-
-            this.control({
-                'loginPanel button[action=clearLogin]': {
-                    click: resetClickHandler
-                },
-
-                'loginPanel button[action=login]': {
-                    click: loginClickHandler,
-                    render: setFormValues
-                },
-
-                'loginPanel checkbox[name=rememberMe]': {
-                    change: rememberMeChangeHandler
-                }
-            });
-        },
-
-        /**
-         * @override
-         */
-        applicationStateChangedHandler: function(event) {
-            this.getLoginView().setVisible(event.getView() == ExtJSCodeSample.model.constants.Views.LOGIN);
-        }
     }
 });

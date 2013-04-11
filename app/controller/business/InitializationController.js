@@ -14,20 +14,40 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
-Ext.define('ExtJSCodeSample.controller.business.InitializationController', function() {
+Ext.define('ExtJSCodeSample.controller.business.InitializationController', {
+    extend: 'Ext.app.Controller',
+
+    requires: [
+        'nineam.locale.store.LocalesStore',
+        'nineam.locale.event.LocaleEvent',
+        'ExtJSCodeSample.event.InitializationEvent',
+        'ExtJSCodeSample.controller.business.PersistenceController'
+    ],
+
+    /**
+     * Controller initialization method
+     */
+    init: function() {
+        this.application.addListener(ExtJSCodeSample.event.InitializationEvent.APP_READY, this.initApplicationEventHandler, this);
+    },
+
     /**
      * Initialize application event handler
+     *
+     * @private
      */
-    function initApplicationEventHandler() {
-        initLocaleManager();
-    }
+    initApplicationEventHandler: function() {
+        this.initLocaleManager();
+    },
 
     /**
      * Initialize LocaleManager by setting locales and selected locale
+     *
+     * @private
      */
-    function initLocaleManager() {
+    initLocaleManager: function() {
         var lm = nineam.locale.LocaleManager;
-        lm.addListener(nineam.locale.event.LocaleEvent.INITIALIZED, localeManagerInitializedEventHandler, this);
+        lm.addListener(nineam.locale.event.LocaleEvent.INITIALIZED, this.localeManagerInitializedEventHandler, this);
 
         var locales = new nineam.locale.store.LocalesStore({
             data: [
@@ -40,27 +60,14 @@ Ext.define('ExtJSCodeSample.controller.business.InitializationController', funct
         var locale = lm.getPersistedLocale();
         locale = locale ? locale : 'en_us';
         lm.setLocale(locale);
-    }
+    },
 
     /**
      * LocaleManager initialized event handler
+     *
+     * @private
      */
-    function localeManagerInitializedEventHandler() {
+    localeManagerInitializedEventHandler: function() {
         Ext.getBody().unmask();
-    }
-
-    return {
-        extend: 'Ext.app.Controller',
-
-        requires: [
-            'nineam.locale.store.LocalesStore',
-            'nineam.locale.event.LocaleEvent',
-            'ExtJSCodeSample.event.InitializationEvent',
-            'ExtJSCodeSample.controller.business.PersistenceController'
-        ],
-
-        init: function() {
-            this.application.addListener(ExtJSCodeSample.event.InitializationEvent.APP_READY, initApplicationEventHandler, this)
-        }
     }
 });

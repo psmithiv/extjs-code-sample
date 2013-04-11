@@ -14,14 +14,12 @@
  You should have received a copy of the GNU General Public License
  along with extjs-code-sample.  If not, see <http://www.gnu.org/licenses/>.
 */
-Ext.define('ExtJSCodeSample.model.UserCredentialsModel', function() {
-   return {
-       extend: 'Ext.data.Model',
+Ext.define('ExtJSCodeSample.model.UserCredentialsModel', {
+   extend: 'Ext.data.Model',
 
-       fields: [
-           {name: 'username', type: 'string'},
-           {name: 'password', type: 'string'},
-           {name: 'rememberMe', type: 'boolean'}
-       ]
-   }
+   fields: [
+       {name: 'username', type: 'string'},
+       {name: 'password', type: 'string'},
+       {name: 'rememberMe', type: 'boolean'}
+   ]
 });
