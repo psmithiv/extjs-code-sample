@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/*
+ Copyright (c) 2013 [ninth avenue media, LLC] (mailto: paul.smith.iv@ninthavenuemedia.com)
+
+ extjs-code-sample is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ extjs-code-sample is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with extjs-code-sample.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+*/
+
+<span id='ExtJSCodeSample-controller-business-SessionController'>/**
+</span> * Business controller responsible for managing a users session/authentication.
+ */
+Ext.define('ExtJSCodeSample.controller.business.SessionController', {
+    extend: 'Ext.app.Controller',
+
+    requires: [
+        'ExtJSCodeSample.event.SessionEvent',
+        'ExtJSCodeSample.event.StateEvent',
+        'ExtJSCodeSample.delegate.mock.SessionDelegate',
+        'ExtJSCodeSample.data.event.ModelChangeEvent',
+        'ExtJSCodeSample.model.ModelLocator',
+        'ExtJSCodeSample.controller.business.PersistenceController'
+    ],
+
+<span id='ExtJSCodeSample-controller-business-SessionController-method-init'>    /**
+</span>     * Adds event listeners for SessionEvent
+     *
+     * @override
+     */
+    init: function() {
+        this.application.addListener(ExtJSCodeSample.event.SessionEvent.LOGIN, this.loginEventHandler, this);
+        this.application.addListener(ExtJSCodeSample.event.SessionEvent.LOGOUT, this.logoutEventHandler, this);
+    },
+
+<span id='ExtJSCodeSample-controller-business-SessionController-property-userCredentials'>    /**
+</span>     * @private
+     * {ExtJSCodeSample.model.UserCredentialsModel} userCredentials - Model representing the needed information to authenticate a user
+     */
+    userCredentials: {},
+
+<span id='ExtJSCodeSample-controller-business-SessionController-method-loginEventHandler'>    /**
+</span>     * Event handler to establish user session with the backend
+     *
+     * @private
+     * @param {ExtJSCodeSample.event.SessionEvent} event - Event containing UserCredentialModel used to authentication user
+     */
+    loginEventHandler: function(event) {
+        this.userCredentials = event.getUserCredentials();
+
+        var authDelegate = new ExtJSCodeSample.delegate.mock.SessionDelegate(this.loginSuccessHandler, this.loginFaultHandler, this);
+        authDelegate.login(this.userCredentials.get('username'), this.userCredentials.get('password'));
+    },
+
+<span id='ExtJSCodeSample-controller-business-SessionController-method-loginSuccessHandler'>    /**
+</span>     * Sets UserDTO on ModelLocator, writes creds to cookie, and fires StateEvent.SET_INITIAL_STATE
+     *
+     * @private
+     * @param {ExtJSCodeSample.model.dto.UserDTO} user - UserDTO returned by server after successful login
+     */
+    loginSuccessHandler: function(user) {
+        var sm = ExtJSCodeSample.model.ModelLocator.get('session');
+        sm.set('authenticated', true);
+        sm.set('authenticatedUser', user);
+
+        if(this.userCredentials.get('rememberMe'))
+            ExtJSCodeSample.controller.business.PersistenceController.setCredentials(this.userCredentials);
+
+        this.application.fireEvent(ExtJSCodeSample.event.StateEvent.SET_INITIAL_STATE);
+    },
+
+<span id='ExtJSCodeSample-controller-business-SessionController-method-loginFaultHandler'>    /**
+</span>     * Fault event handler for establishing session with backend
+     *
+     * @private
+     * @param {Object} fault - Fault object
+     */
+    loginFaultHandler: function(fault) {
+        //Stub method for when backend is in place
+    },
+
+<span id='ExtJSCodeSample-controller-business-SessionController-method-logoutEventHandler'>    /**
+</span>     * Event handler to terminate session with backend
+     *
+     * @private
+     * @param {ExtJSCodeSample.event.SessionEvent} event - SessionEvent to tell application to logout user
+     */
+    logoutEventHandler: function(event) {
+        //Stub method for when backend is in place
+    },
+
+<span id='ExtJSCodeSample-controller-business-SessionController-method-logoutSuccessHandler'>    /**
+</span>     * Success event handler for terminating session with backend
+     *
+     * @private
+     */
+    logoutSuccessHandler: function() {
+        //Stub method for when backend is in place
+    },
+
+<span id='ExtJSCodeSample-controller-business-SessionController-method-logoutFaultHandler'>    /**
+</span>     * Fault event handler for terminating session with backend
+     *
+     * @private
+     * @param {Object} fault - Fault Object
+     */
+    logoutFaultHandler: function(fault) {
+        //Stub method for when backend is in place
+    }
+})</pre>
+</body>
+</html>

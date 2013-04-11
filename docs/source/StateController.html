@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/*
+ Copyright (c) 2013 [ninth avenue media, LLC] (mailto: paul.smith.iv@ninthavenuemedia.com)
+
+ extjs-code-sample is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ extjs-code-sample is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with extjs-code-sample.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+*/
+
+<span id='ExtJSCodeSample-controller-business-StateController'>/**
+</span> * Business controller responsible for maintaining state of the application by listening
+ * for various state events(StateEvent.SET_INITIAL_STATE, StateEvent.SET_STATE), updating
+ * the browser url, and in turn dispatching the state changed event (StateEvent.STATE_CHANGED).
+ * Also watches browser hash to determine if LogoutDialog should be shown/hidden.
+ */
+Ext.define('ExtJSCodeSample.controller.business.StateController', {
+    extend: 'Ext.app.Controller',
+
+    requires: [
+        'Ext.util.History',
+        'ExtJSCodeSample.event.StateEvent',
+        'ExtJSCodeSample.event.DialogEvent',
+        'ExtJSCodeSample.model.constants.Views',
+        'ExtJSCodeSample.model.ModelLocator'
+    ],
+
+<span id='ExtJSCodeSample-controller-business-StateController-method-init'>    /**
+</span>     * Adds event listeners for StateEvent and Ext.History.CHANGE events
+     *
+     * @override
+     */
+    init: function() {
+        this.application.addListener(ExtJSCodeSample.event.StateEvent.SET_INITIAL_STATE, this.setInitialStateEventHandler, this);
+        this.application.addListener(ExtJSCodeSample.event.StateEvent.SET_STATE, this.setStateEventHandler, this);
+
+        this.application.addListener(ExtJSCodeSample.event.StateEvent.BROWSER_BACK, this.browserBackEventHandler, this);
+        this.application.addListener(ExtJSCodeSample.event.StateEvent.BROWSER_FORWARD, this.browserForwardEventHandler, this);
+        this.application.addListener(ExtJSCodeSample.event.StateEvent.BROWSER_REFRESH, this.browserRefreshEventHandler, this);
+
+        Ext.History.init();
+        Ext.History.addListener(&quot;change&quot;, this.urlHistoryChangeHandler, this);
+    },
+
+<span id='ExtJSCodeSample-controller-business-StateController-method-setInitialStateEventHandler'>    /**
+</span>     * Event handler to set the initial state of the application post startup/login
+     *
+     * NAVIGATE TO:
+     *      1. View in URL hash
+     *      2. View in cookie (todo)
+     *      3. Default view
+     *
+     * @private
+     */
+    setInitialStateEventHandler: function() {
+        var hash = Ext.History.getHash();
+        if(hash)
+        {
+            this.urlHistoryChangeHandler(hash);
+            return;
+        }
+
+        var e = new ExtJSCodeSample.event.StateEvent(ExtJSCodeSample.model.constants.Views.CRUD, {});
+        this.application.fireEvent(ExtJSCodeSample.event.StateEvent.SET_STATE, e);
+    },
+
+<span id='ExtJSCodeSample-controller-business-StateController-method-setStateEventHandler'>    /**
+</span>     * Event handler to update the browser hash and in turn update the application state
+     *
+     * @private
+     * @param {ExtJSCodeSample.event.StateEvent} event - StateEvent containing data to use when updating browser hash
+     */
+    setStateEventHandler: function(event) {
+        var hash = Ext.JSON.encode({view: event.getView(), data: event.getData()});
+        Ext.History.setHash(hash);
+    },
+
+<span id='ExtJSCodeSample-controller-business-StateController-method-browserBackEventHandler'>    /**
+</span>     * Event handler to navigate one item back in browser history
+     *
+     * @private
+     */
+    browserBackEventHandler: function() {
+        Ext.History.back();
+    },
+
+<span id='ExtJSCodeSample-controller-business-StateController-method-browserForwardEventHandler'>    /**
+</span>     * Event handler to navigate one item forward in browser history
+     *
+     * @private
+     */
+    browserForwardEventHandler: function() {
+        Ext.History.forward();
+    },
+
+<span id='ExtJSCodeSample-controller-business-StateController-method-browserRefreshEventHandler'>    /**
+</span>     * Event handler to refresh web browser
+     *
+     * @private
+     */
+    browserRefreshEventHandler: function() {
+        location.reload();
+    },
+
+<span id='ExtJSCodeSample-controller-business-StateController-method-urlHistoryChangeHandler'>    /**
+</span>     * Event handler to update application state when browser hash changes
+     *
+     * @private
+     * @param {String} hash - Hash string from browser url
+     */
+    urlHistoryChangeHandler: function(hash) {
+        var authenticated = ExtJSCodeSample.model.ModelLocator.get('session').get('authenticated');
+        if(!authenticated)
+            return;
+
+        if(hash) {
+            this.application.fireEvent(ExtJSCodeSample.event.DialogEvent.HIDE_LOGOUT_DIALOG, {});
+
+            var obj = Ext.JSON.decode(unescape(hash));
+            var e = new ExtJSCodeSample.event.StateEvent(obj.view, obj.data);
+            this.application.fireEvent(ExtJSCodeSample.event.StateEvent.STATE_CHANGED, e);
+        } else {
+            this.application.fireEvent(ExtJSCodeSample.event.DialogEvent.SHOW_LOGOUT_DIALOG, {data: {navForward:true} });
+        }
+    }
+});</pre>
+</body>
+</html>

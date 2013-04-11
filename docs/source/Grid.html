@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/*
+ Copyright (c) 2013 [ninth avenue media, LLC] (mailto: paul.smith.iv@ninthavenuemedia.com)
+
+ extjs-code-sample is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ extjs-code-sample is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with extjs-code-sample.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+*/
+
+<span id='ExtJSCodeSample-controls-Grid'>/**
+</span> * Custom Grid control that allows for easily maintaining the selectedItem when calling bindStore
+ */
+Ext.define('ExtJSCodeSample.controls.Grid', {
+    extend: 'Ext.grid.Panel',
+    alias: 'widget.grid',
+
+    config: {
+<span id='ExtJSCodeSample-controls-Grid-cfg-maintainSelection'>        /**
+</span>         * @cfg {Boolean} maintainSelection - Wither or not the grid should maintain the selectedItem when calling bindStore
+         */
+        maintainSelection: false,
+
+<span id='ExtJSCodeSample-controls-Grid-cfg-maintainSelectionProperty'>        /**
+</span>         * @cfg {String} maintainSelectionProperty - The object property to use when 'resetting' the selectedItem
+         */
+        maintainSelectionProperty: 'id'
+    },
+
+<span id='ExtJSCodeSample-controls-Grid-property-selectedItem'>    /**
+</span>     * @private
+     * {Object} selectedItem - The currently selected item
+     */
+    selectedItem: null,
+
+<span id='ExtJSCodeSample-controls-Grid-method-bindStore'>    /**
+</span>     * Adds selection change and data change listeners when setting store so that
+     * selected item can be reset on data change event
+     *
+     * @override
+     * @param {Ext.data.Store} store - Store to use to populate grid
+     */
+    bindStore: function(store) {
+        this.callParent([store]);
+
+        if(!this.getMaintainSelection())
+            return;
+
+        this.addListener('selectionchange', this.selectionChangedEventHandler, this);
+
+        store.addListener('datachanged', this.storeDataChangedEventHandler, this);
+        this.setSelection(this.selectedItem);
+    },
+
+<span id='ExtJSCodeSample-controls-Grid-method-selectionChangedEventHandler'>    /**
+</span>     * Grid selection change event handler to persist selected item so that it can
+     * later be reset when the sore dispatches a data change event
+     *
+     * @private
+     * @param {ExtJSCodeSample.controls.Grid} scope
+     * @param {Ext.data.Model|[]} selectedItem
+     */
+    selectionChangedEventHandler: function(scope, selectedItem) {
+        this.selectedItem = selectedItem[0];
+    },
+    
+<span id='ExtJSCodeSample-controls-Grid-method-storeDataChangedEventHandler'>    /**
+</span>     * Resets the selected item when the Store dispatches the data changed event
+     *
+     * @private
+     */
+    storeDataChangedEventHandler: function() {
+        this.setSelection(this.selectedItem);
+    },
+    
+<span id='ExtJSCodeSample-controls-Grid-method-setSelection'>    /**
+</span>     * Sets the selected record
+     *
+     * @private
+     * @param {Ext.data.Model} item
+     */
+    setSelection: function(item) {
+        var selectionField = this.getMaintainSelectionProperty();
+    
+        var itemIndex = item ? this.getStore().find(selectionField, item.get(selectionField)) : 0;
+        this.getSelectionModel().select(itemIndex);
+    }
+});</pre>
+</body>
+</html>

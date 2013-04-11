@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/*
+ Copyright (c) 2013 [ninth avenue media, LLC] (mailto: paul.smith.iv@ninthavenuemedia.com)
+
+ extjs-code-sample is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ extjs-code-sample is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with extjs-code-sample.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+*/
+
+<span id='ExtJSCodeSample-event-StateEvent'>/**
+</span> * Event for changing appliation state
+ */
+Ext.define('ExtJSCodeSample.event.StateEvent', {
+    statics: {
+<span id='ExtJSCodeSample-event-StateEvent-static-event-SET_INITIAL_STATE'>        /**
+</span>         * Dispatched on application startup to set the initial application state
+         *
+         * @event
+         */
+        SET_INITIAL_STATE: 'ExtJSCodeSample.event.StateEvent.SET_INITIAL_STATE',
+
+<span id='ExtJSCodeSample-event-StateEvent-static-event-SET_STATE'>        /**
+</span>         * Dispatch to change to a new application state
+         *
+         * @event
+         */
+        SET_STATE: 'ExtJSCodeSample.event.StateEvent.SET_STATE',
+
+<span id='ExtJSCodeSample-event-StateEvent-static-event-STATE_CHANGED'>        /**
+</span>         * Dispatched after the browsers url hash has changed so that the application can set it's self to the new state
+         *
+         * @event
+         */
+        STATE_CHANGED: 'ExtJSCodeSample.event.StateEvent.STATE_CHANGED',
+
+<span id='ExtJSCodeSample-event-StateEvent-static-event-BROWSER_FORWARD'>        /**
+</span>         * Dispatch to have the browser move forward one item in the browser history
+         *
+         * @event
+         */
+        BROWSER_FORWARD: 'ExtJSCodeSample.event.StateEvent.BROWSER_FORWARD',
+
+<span id='ExtJSCodeSample-event-StateEvent-static-event-BROWSER_BACK'>        /**
+</span>         * Dispatch to have the browser move back one item in the browser history
+         *
+         * @event
+         */
+        BROWSER_BACK: 'ExtJSCodeSample.event.StateEvent.BROWSER_BACK',
+
+<span id='ExtJSCodeSample-event-StateEvent-static-event-BROWSER_REFRESH'>        /**
+</span>         * Dispatch to have the browser refresh the current page
+         *
+         * @event
+         */
+        BROWSER_REFRESH: 'ExtJSCodeSample.event.StateEvent.BROWSER_REFRESH'
+    },
+
+<span id='ExtJSCodeSample-event-StateEvent-property-view'>    /**
+</span>     * @private
+     * {String} view - The current application view
+     */
+    view: '',
+
+<span id='ExtJSCodeSample-event-StateEvent-method-getView'>    /**
+</span>     * Getter method for view
+     *
+     * @return {String}
+     */
+    getView: function() {
+        return this.view;
+    },
+
+<span id='ExtJSCodeSample-event-StateEvent-property-data'>    /**
+</span>     * @private
+     * {Array} data - Data to use for current view
+     */
+    data: [],
+
+<span id='ExtJSCodeSample-event-StateEvent-method-getData'>    /**
+</span>     * Getter method for data
+     *
+     * @return {Array}
+     */
+    getData: function() {
+        return this.data;
+    },
+
+<span id='ExtJSCodeSample-event-StateEvent-method-constructor'>    /**
+</span>     * @param {String} view - The current application view
+     * @param {Array} data - Data to use for current view
+     */
+    constructor: function(view, data)
+    {
+        this.view = view;
+        this.data = data;
+    }
+})</pre>
+</body>
+</html>

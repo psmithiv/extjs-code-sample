@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/*
+ Copyright (c) 2013 [ninth avenue media, LLC] (mailto: paul.smith.iv@ninthavenuemedia.com)
+
+ extjs-code-sample is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ extjs-code-sample is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with extjs-code-sample.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+*/
+
+<span id='ExtJSCodeSample-delegate-mock-UserDirectoryDelegate'>/**
+</span> * Mock delegate for making user directory CRUD calls
+ */
+Ext.define('ExtJSCodeSample.delegate.mock.UserDirectoryDelegate', {
+    requires: [
+        'ExtJSCodeSample.store.UserDirectoryStore'
+    ],
+
+<span id='ExtJSCodeSample-delegate-mock-UserDirectoryDelegate-property-success'>    /**
+</span>     * @private
+     * {Function} success - Function to call after successful Ajax call
+     */
+    success: {},
+
+<span id='ExtJSCodeSample-delegate-mock-UserDirectoryDelegate-property-failure'>    /**
+</span>     * @private
+     * {Function} failure - Function to call after failed Ajax call
+     */
+    failure: {},
+
+<span id='ExtJSCodeSample-delegate-mock-UserDirectoryDelegate-property-scope'>    /**
+</span>     * @private
+     * {Object} scope - Scope to execute success/failure methods within
+     */
+    scope: {},
+
+<span id='ExtJSCodeSample-delegate-mock-UserDirectoryDelegate-property-readUsersResponse'>    /**
+</span>     * @private
+     * {String} readUsersResponse - Mock read users response data
+     */
+    readUsersResponse: &quot;{&quot; +
+                            &quot;'success': true, &quot; +
+                            &quot;'users': [{&quot; +
+                                &quot;'id': 100, &quot; +
+                                &quot;'username': 'psmithiv', &quot; +
+                                &quot;'name': 'Paul Smith', &quot; +
+                                &quot;'phone': '555-555-5555', &quot; +
+                                &quot;'email': 'email@ninthavenuemedia.com', &quot; +
+                                &quot;'notes': 'Daddy'&quot; +
+                            &quot;},{&quot; +
+                                &quot;'id': 101, &quot; +
+                                &quot;'username': 'ksmithiv', &quot; +
+                                &quot;'name': 'Karla Smith', &quot; +
+                                &quot;'phone': '555-555-5555', &quot; +
+                                &quot;'email': 'email@ninthavenuemedia.com', &quot; +
+                                &quot;'notes': 'Mommy'&quot; +
+                            &quot;},{&quot; +
+                                &quot;'id': 102, &quot; +
+                                &quot;'username': 'ajsmith', &quot; +
+                                &quot;'name': 'Alana Smith', &quot; +
+                                &quot;'phone': '555-555-5555', &quot; +
+                                &quot;'email': 'email@ninthavenuemedia.com', &quot; +
+                                &quot;'notes': 'Daughter'&quot; +
+                            &quot;},{&quot; +
+                                &quot;'id': 103, &quot; +
+                                &quot;'username': 'atsmith', &quot; +
+                                &quot;'name': 'Aiden Smith', &quot; +
+                                &quot;'phone': '555-555-5555', &quot; +
+                                &quot;'email': 'email@ninthavenuemedia.com', &quot; +
+                                &quot;'notes': 'Son'&quot; +
+                            &quot;}]&quot; +
+                        &quot;}&quot;,
+
+<span id='ExtJSCodeSample-delegate-mock-UserDirectoryDelegate-method-constructor'>    /**
+</span>     * @param {Function} success - Method to call after successful Ajax call
+     * @param {Function} failure - Method to call after failed Ajax call
+     * @param {Object} scope - The scope within which to execute a success/failure method call
+     */
+    constructor: function(success, failure, scope) {
+        this.success = success;
+        this.failure = failure;
+        this.scope = scope;
+    },
+
+<span id='ExtJSCodeSample-delegate-mock-UserDirectoryDelegate-method-createUser'>    /**
+</span>     * Save new user to server
+     *
+     * @param {ExtJSCodeSample.model.dto.UserDTO} user - UserDTO to be saved
+     */
+    createUser: function(user) {
+        if(!this.success || !this.scope)
+            return;
+
+        user.set('id', Math.floor(Math.random() * 1000 + 1));
+        this.success.call(this.scope, user);
+    },
+
+<span id='ExtJSCodeSample-delegate-mock-UserDirectoryDelegate-method-readUsers'>    /**
+</span>     * Get list of users from server
+     */
+    readUsers: function() {
+        if(!this.success || !this.scope)
+            return;
+
+        var data = ExtJSCodeSample.model.ModelLocator.get('users');
+        if(!data)
+            data = new ExtJSCodeSample.store.UserDirectoryStore({data: Ext.JSON.decode(this.readUsersResponse)});
+
+        this.success.call(this.scope, data);
+    },
+
+<span id='ExtJSCodeSample-delegate-mock-UserDirectoryDelegate-method-updateUser'>    /**
+</span>     * Call server to update user
+     *
+     * @param {ExtJSCodeSample.model.dto.UserDTO} user - UserDTO to update server side
+     */
+    updateUser: function(user) {
+        if(!this.success || !this.scope)
+            return;
+
+        this.success.call(this.scope, user);
+    },
+
+<span id='ExtJSCodeSample-delegate-mock-UserDirectoryDelegate-method-deleteUser'>    /**
+</span>     * Notify server to delete user
+     *
+     * @param {ExtJSCodeSample.model.dto.UserDTO} user - UserDTO to be deleted server side
+     */
+    deleteUser: function(user) {
+        if(!this.success || !this.scope)
+            return;
+
+        this.success.call(this.scope, user)
+    }
+});</pre>
+</body>
+</html>
